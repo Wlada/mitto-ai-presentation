@@ -36,10 +36,10 @@ The presentation is **30 minutes**, audience is a **mixed technical team**
 | Frontend | Angular (latest stable) + Angular Material + Router |
 | Backend | Node.js + Express + TypeScript |
 | Storage | In-memory (no database) |
-| Frontend tests | Jest (jest-preset-angular) |
-| Backend tests | Jest + Supertest |
+| Frontend tests | Vitest (built-in via `@angular/build:unit-test`, Angular 21 default) |
+| Backend tests | Vitest + Supertest |
 | E2E | Playwright |
-| Coverage | Jest built-in (`--coverage`) |
+| Coverage | Vitest built-in (`--coverage`, v8 provider) |
 | Workspace | npm workspaces |
 | Language across the stack | TypeScript |
 

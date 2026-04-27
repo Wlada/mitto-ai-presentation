@@ -1,4 +1,4 @@
-import type { FeedbackInput, FeedbackType } from '../types/feedback.js';
+import { isFeedbackType, type FeedbackInput, type FeedbackType } from '../types/feedback.js';
 
 export interface ValidationError {
   field: string;
@@ -8,12 +8,6 @@ export interface ValidationError {
 export type ValidationResult =
   | { ok: true; value: FeedbackInput }
   | { ok: false; errors: ValidationError[] };
-
-const FEEDBACK_TYPES: readonly FeedbackType[] = ['question', 'comment', 'suggestion'];
-
-function isFeedbackType(value: unknown): value is FeedbackType {
-  return typeof value === 'string' && (FEEDBACK_TYPES as readonly string[]).includes(value);
-}
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);

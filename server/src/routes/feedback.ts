@@ -1,13 +1,7 @@
 import { Router } from 'express';
 import { validateFeedback } from '../validators/feedback.js';
 import { feedbackService } from '../services/feedback.service.js';
-import type { FeedbackType } from '../types/feedback.js';
-
-const FEEDBACK_TYPES: readonly FeedbackType[] = ['question', 'comment', 'suggestion'];
-
-function isFeedbackType(value: unknown): value is FeedbackType {
-  return typeof value === 'string' && (FEEDBACK_TYPES as readonly string[]).includes(value);
-}
+import { isFeedbackType } from '../types/feedback.js';
 
 export const feedbackRouter = Router();
 

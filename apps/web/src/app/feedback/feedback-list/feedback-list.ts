@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -8,6 +8,7 @@ import { startWith, switchMap } from 'rxjs/operators';
 
 import { FeedbackService } from '../feedback.service';
 import { FEEDBACK_TYPES, FeedbackEntry, FeedbackType } from '../feedback.types';
+import { relativeTime } from '../relative-time';
 
 @Component({
   selector: 'app-feedback-list',
@@ -151,7 +152,7 @@ import { FEEDBACK_TYPES, FeedbackEntry, FeedbackType } from '../feedback.types';
     `,
   ],
 })
-export class FeedbackList implements OnInit {
+export class FeedbackList {
   private readonly service = inject(FeedbackService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly refresh$ = new Subject<void>();
@@ -162,22 +163,28 @@ export class FeedbackList implements OnInit {
   protected readonly filter = signal<FeedbackType | null>(null);
   protected readonly error = signal<string | null>(null);
 
-  ngOnInit(): void {
+  protected readonly displayName = (name?: string) => name?.trim() || 'Anonymous';
+  protected readonly relativeTime = relativeTime;
+
+  constructor() {
     // Background poll + filter-triggered refresh share one switchMap, so an
     // older in-flight response can never overwrite a newer one.
     merge(interval(3000).pipe(startWith(0)), this.refresh$)
       .pipe(
         switchMap(() => {
-          this.loading.set(true);
+          this.error.set(null);
           return this.service.list(this.filter() ?? undefined);
         }),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
         next: (data) => {
-          this.entries.set(data);
+          // Skip the signal write when ids and length match — keeps the
+          // template stable so background polls don't re-render every 3s.
+          if (!sameEntries(this.entries(), data)) {
+            this.entries.set(data);
+          }
           this.loading.set(false);
-          this.error.set(null);
         },
         error: () => {
           this.loading.set(false);
@@ -188,26 +195,15 @@ export class FeedbackList implements OnInit {
 
   protected onFilter(value: FeedbackType | null): void {
     this.filter.set(value);
+    this.loading.set(true);
     this.refresh$.next();
   }
+}
 
-  protected displayName(name?: string): string {
-    return name?.trim() || 'Anonymous';
+function sameEntries(a: readonly FeedbackEntry[], b: readonly FeedbackEntry[]): boolean {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i].id !== b[i].id) return false;
   }
-
-  protected relativeTime(iso: string): string {
-    const then = new Date(iso).getTime();
-    if (Number.isNaN(then)) {
-      return '';
-    }
-    const diffSec = Math.max(0, Math.floor((Date.now() - then) / 1000));
-    if (diffSec < 5) return 'just now';
-    if (diffSec < 60) return `${diffSec} seconds ago`;
-    const min = Math.floor(diffSec / 60);
-    if (min < 60) return `${min} minute${min === 1 ? '' : 's'} ago`;
-    const hr = Math.floor(min / 60);
-    if (hr < 24) return `${hr} hour${hr === 1 ? '' : 's'} ago`;
-    const day = Math.floor(hr / 24);
-    return `${day} day${day === 1 ? '' : 's'} ago`;
-  }
+  return true;
 }

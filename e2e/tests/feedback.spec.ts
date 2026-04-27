@@ -1,15 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-const API = 'http://localhost:3000/api/feedback';
-
 test.describe('Audience Q&A flow', () => {
+  // Serial + unique message payloads keep tests independent without a reset endpoint.
   test.describe.configure({ mode: 'serial' });
-
-  test.beforeEach(async ({ request }) => {
-    // Best-effort cleanup; the API does not expose a destructive reset, so we
-    // rely on test ordering (serial) and unique payloads to avoid collisions.
-    await request.get(API).catch(() => undefined);
-  });
 
   test('feedback page loads with form and list', async ({ page }) => {
     await page.goto('/feedback');

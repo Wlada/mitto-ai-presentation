@@ -18,7 +18,8 @@ export class FeedbackService {
     const filtered = filter?.type
       ? this.entries.filter((entry) => entry.type === filter.type)
       : [...this.entries];
-    return filtered.sort((a, b) => (a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0));
+    // ISO 8601 timestamps sort lexicographically; localeCompare keeps it terse.
+    return filtered.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
 
   clear(): void {

@@ -30,12 +30,9 @@ import { RouterLink } from '@angular/router';
   styles: [
     `
       :host { display: block; }
-      .slide { max-width: 800px; }
-      h1 { font-size: 36px; line-height: 1.2; margin: 0 0 16px; font-weight: 700; }
+      h1 { margin: 0 0 16px; }
       h2 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; color: var(--mitto-fg); }
-      .lead { font-size: 18px; color: var(--mitto-muted); margin: 0 0 16px; line-height: 1.5; }
-      ul { font-size: 17px; line-height: 1.8; padding-left: 1.25rem; margin: 0; }
-      li { margin-bottom: 8px; }
+      .lead { margin: 0 0 16px; }
       .cta { margin-top: 24px; }
       .cta mat-icon { margin-right: 6px; }
     `,

@@ -124,11 +124,12 @@ export class FeedbackForm {
     this.submitting.set(true);
     this.form.disable({ emitEvent: false });
 
-    const raw = this.form.getRawValue();
+    const { name, type, message } = this.form.getRawValue();
+    const trimmedName = name.trim();
     const input: FeedbackInput = {
-      type: raw.type,
-      message: raw.message.trim(),
-      ...(raw.name?.trim() ? { name: raw.name.trim() } : {}),
+      type,
+      message: message.trim(),
+      ...(trimmedName ? { name: trimmedName } : {}),
     };
 
     this.service.submit(input).subscribe({

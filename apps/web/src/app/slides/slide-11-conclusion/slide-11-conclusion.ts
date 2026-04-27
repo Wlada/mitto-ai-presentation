@@ -32,8 +32,6 @@ import { RouterLink } from '@angular/router';
   styles: [
     `
       :host { display: block; }
-      .slide { max-width: 800px; }
-      h1 { font-size: 36px; line-height: 1.2; margin: 0 0 24px; font-weight: 700; }
       h2 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
       .takeaway {
         font-size: 20px;
@@ -43,8 +41,6 @@ import { RouterLink } from '@angular/router';
         padding-left: 16px;
         border-left: 3px solid var(--mitto-accent);
       }
-      ul { font-size: 17px; line-height: 1.8; padding-left: 1.25rem; margin: 0; }
-      li { margin-bottom: 8px; }
       .cta { margin-top: 24px; }
       .cta mat-icon { margin-right: 6px; }
       .thanks {

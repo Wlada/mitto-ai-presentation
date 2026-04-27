@@ -45,8 +45,7 @@ export class SlideService {
     if (n < 1 || n > this.total()) {
       return;
     }
-    const index = n - 1;
-    this.currentIndex.set(index);
+    this.currentIndex.set(n - 1);
     this.router.navigate(['/slides', n]);
   }
 

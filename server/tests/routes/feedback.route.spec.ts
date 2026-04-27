@@ -1,11 +1,17 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import request from 'supertest';
 import { createApp } from '../../src/app.js';
 import { feedbackService } from '../../src/services/feedback.service.js';
 
 describe('feedback routes', () => {
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-04-27T10:00:00.000Z'));
     feedbackService.clear();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   describe('POST /api/feedback', () => {
@@ -56,7 +62,7 @@ describe('feedback routes', () => {
     it('returns all entries sorted desc', async () => {
       const app = createApp();
       await request(app).post('/api/feedback').send({ type: 'question', message: 'first' });
-      await new Promise((r) => setTimeout(r, 5));
+      vi.advanceTimersByTime(1000);
       await request(app).post('/api/feedback').send({ type: 'comment', message: 'second' });
 
       const res = await request(app).get('/api/feedback');

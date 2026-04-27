@@ -1,4 +1,5 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -7,11 +8,13 @@ import { SLIDES, SlideMeta } from './slide.config';
 @Injectable({ providedIn: 'root' })
 export class SlideService {
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly slides: readonly SlideMeta[] = SLIDES;
   readonly total = computed(() => this.slides.length);
   readonly currentIndex = signal<number>(0);
-  readonly currentSlide = computed(() => this.slides[this.currentIndex()]);
+  // Fallback to slide 0 prevents a runtime crash if currentIndex ever drifts out of range.
+  readonly currentSlide = computed(() => this.slides[this.currentIndex()] ?? this.slides[0]);
   readonly currentNumber = computed(() => this.currentIndex() + 1);
   readonly canGoNext = computed(() => this.currentIndex() < this.total() - 1);
   readonly canGoPrev = computed(() => this.currentIndex() > 0);
@@ -19,7 +22,10 @@ export class SlideService {
   constructor() {
     this.syncFromUrl(this.router.url);
     this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef),
+      )
       .subscribe((e) => this.syncFromUrl(e.urlAfterRedirects));
   }
 

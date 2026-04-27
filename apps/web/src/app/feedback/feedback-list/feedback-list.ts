@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { interval } from 'rxjs';
+import { Subject, interval, merge } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
 import { FeedbackService } from '../feedback.service';
@@ -47,7 +47,7 @@ import { FEEDBACK_TYPES, FeedbackEntry, FeedbackType } from '../feedback.types';
         @for (entry of entries(); track entry.id) {
           <mat-card appearance="outlined" class="entry">
             <div class="entry-head">
-              <span class="who">{{ entry.name?.trim() ? entry.name : 'Anonymous' }}</span>
+              <span class="who">{{ displayName(entry.name) }}</span>
               <span class="badge" [attr.data-type]="entry.type">{{ entry.type }}</span>
               <span class="time">{{ relativeTime(entry.createdAt) }}</span>
             </div>
@@ -154,6 +154,7 @@ import { FEEDBACK_TYPES, FeedbackEntry, FeedbackType } from '../feedback.types';
 export class FeedbackList implements OnInit {
   private readonly service = inject(FeedbackService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly refresh$ = new Subject<void>();
 
   protected readonly types = FEEDBACK_TYPES;
   protected readonly entries = signal<FeedbackEntry[]>([]);
@@ -162,9 +163,10 @@ export class FeedbackList implements OnInit {
   protected readonly error = signal<string | null>(null);
 
   ngOnInit(): void {
-    interval(3000)
+    // Background poll + filter-triggered refresh share one switchMap, so an
+    // older in-flight response can never overwrite a newer one.
+    merge(interval(3000).pipe(startWith(0)), this.refresh$)
       .pipe(
-        startWith(0),
         switchMap(() => {
           this.loading.set(true);
           return this.service.list(this.filter() ?? undefined);
@@ -186,18 +188,11 @@ export class FeedbackList implements OnInit {
 
   protected onFilter(value: FeedbackType | null): void {
     this.filter.set(value);
-    this.loading.set(true);
-    this.service.list(value ?? undefined).subscribe({
-      next: (data) => {
-        this.entries.set(data);
-        this.loading.set(false);
-        this.error.set(null);
-      },
-      error: () => {
-        this.loading.set(false);
-        this.error.set('Could not load feedback.');
-      },
-    });
+    this.refresh$.next();
+  }
+
+  protected displayName(name?: string): string {
+    return name?.trim() || 'Anonymous';
   }
 
   protected relativeTime(iso: string): string {

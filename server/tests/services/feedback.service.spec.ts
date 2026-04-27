@@ -1,11 +1,17 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { FeedbackService } from '../../src/services/feedback.service.js';
 
 describe('FeedbackService', () => {
   let service: FeedbackService;
 
   beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-04-27T10:00:00.000Z'));
     service = new FeedbackService();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it('add returns an entry with id and ISO createdAt', () => {
@@ -21,11 +27,11 @@ describe('FeedbackService', () => {
     expect(entry.name).toBe('Eve');
   });
 
-  it('list returns entries sorted by createdAt descending', async () => {
+  it('list returns entries sorted by createdAt descending', () => {
     const a = service.add({ type: 'question', message: 'first' });
-    await new Promise((r) => setTimeout(r, 5));
+    vi.advanceTimersByTime(1000);
     const b = service.add({ type: 'comment', message: 'second' });
-    await new Promise((r) => setTimeout(r, 5));
+    vi.advanceTimersByTime(1000);
     const c = service.add({ type: 'suggestion', message: 'third' });
 
     const list = service.list();
@@ -36,11 +42,11 @@ describe('FeedbackService', () => {
     expect(service.list()).toEqual([]);
   });
 
-  it('list filters by type', async () => {
+  it('list filters by type', () => {
     service.add({ type: 'question', message: 'q1' });
-    await new Promise((r) => setTimeout(r, 2));
+    vi.advanceTimersByTime(1);
     service.add({ type: 'comment', message: 'c1' });
-    await new Promise((r) => setTimeout(r, 2));
+    vi.advanceTimersByTime(1);
     service.add({ type: 'question', message: 'q2' });
 
     const questions = service.list({ type: 'question' });

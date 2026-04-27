@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
       <ul>
         <li>Frontend: Angular 21 + Material, signals, zoneless</li>
         <li>Backend: Node + Express + TypeScript, in-memory storage</li>
-        <li>Tests: Jest, Playwright</li>
+        <li>Tests: Vitest (unit + integration), Playwright (e2e), Supertest (HTTP)</li>
       </ul>
     </section>
   `,

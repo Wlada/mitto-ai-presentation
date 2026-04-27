@@ -91,7 +91,7 @@ materially improve navigation.
 | Command | What it does |
 |---------|--------------|
 | `npm install` | Install all workspace dependencies |
-| `npm run dev` | Run Angular and Express concurrently (frontend on :4200, backend on :3000) |
+| `npm run dev` | Run Angular and Express concurrently (frontend on :4300, backend on :3000) |
 | `npm run dev:web` | Run only Angular |
 | `npm run dev:server` | Run only Express |
 | `npm run build` | Build all workspaces for production |

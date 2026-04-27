@@ -15,7 +15,7 @@ presentation itself and serves as the **live demo target** the agent works on.
 
 ```bash
 npm install            # installs all workspaces
-npm run dev            # runs frontend (:4200) and backend (:3000) concurrently
+npm run dev            # runs frontend (:4300) and backend (:3000) concurrently
 npm test               # unit + integration tests across workspaces
 npm run e2e            # Playwright end-to-end tests
 npm run coverage       # full coverage report

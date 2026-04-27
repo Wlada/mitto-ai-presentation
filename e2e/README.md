@@ -31,7 +31,7 @@ npx playwright install
 ## Running tests
 
 The `playwright.config.ts` `webServer` block starts `npm run dev` in the repo
-root automatically and waits for `http://localhost:4200`. You do not need to
+root automatically and waits for `http://localhost:4300`. You do not need to
 start the dev server manually.
 
 ### From the repo root

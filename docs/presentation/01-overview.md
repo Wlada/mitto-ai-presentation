@@ -1,0 +1,114 @@
+# Presentation Overview
+
+> One-page mental model of the entire presentation. Read first.
+
+---
+
+## The whole thing in one sentence
+
+A 30-minute talk that demonstrates Claude Code's full-stack feature delivery
+workflow on a presentation app that itself renders the slides.
+
+## Audience
+
+Mixed technical team — developers, QA, tech leads. Some familiar with AI
+tools, most not familiar with Claude Code specifically.
+
+## Goals
+
+1. **Evaluation** — give them enough to decide whether to adopt Claude Code
+2. **Education** — show what's realistic, including limits
+
+We are not selling. We are not promoting autonomy. We are showing a
+controlled engineering process.
+
+## The central message
+
+> The value isn't agent autonomy. It's a faster, controlled cycle where the
+> developer stays the owner.
+
+## Time budget
+
+| Block | Minutes | Content |
+|-------|---------|---------|
+| Intro + concept | 0–6 | Slides 1-4 |
+| Setup demo task | 6–9 | Slides 5-7, repo tour |
+| Live demo | 9–18 | Brainstorm → plan → dispatch → cut |
+| Pre-built result | 18–25 | Diff, code reviewer, tests, coverage |
+| Limits + Q&A | 25–30 | Slides 8-11 |
+
+## The "meta" trick
+
+The application that renders the slides IS the application the agent works on.
+Audience sees this when:
+- Slide 5 mentions "the slides you're seeing right now"
+- The browser address bar shows `/slides/N`
+- The same `/feedback` route they see in slides becomes the demo target
+- After the cut, `git checkout demo-finished` gives them the working feature
+  in the same browser
+
+This is one trick that pays off three times: it explains the architecture,
+gives the live demo a coherent target, and makes the "leave a question"
+button at the end real.
+
+## What's in the repo
+
+```
+mitto-ai-presentation/
+├── CLAUDE.md                  # ⭐ Show this on slide 5
+├── README.md
+├── apps/web/                  # Angular app with slides + features
+├── server/                    # Express backend
+├── e2e/                       # Playwright tests
+└── docs/
+    ├── plans/                 # Design + plan-first artifacts
+    ├── presentation/          # ⭐ All your prep is here
+    └── setup/                 # How to bootstrap and rebuild
+```
+
+## The 7 documents
+
+In `docs/presentation/`:
+
+| File | Read it… | Use it… |
+|------|----------|---------|
+| `01-overview.md` | Now | Mental model |
+| `02-slide-content.md` | Week 2 | Source of truth for slide text |
+| `03-presenter-cheatsheet.md` | Every rehearsal | Print and keep next to laptop |
+| `04-prepared-prompts.md` | Every rehearsal | Copy-paste during live demo |
+| `05-fallback-plan.md` | Before each rehearsal | Reflexive recovery |
+| `06-rehearsal-checklist.md` | Now, then weekly | Stay on track |
+
+In `docs/plans/`:
+
+| File | What it is |
+|------|------------|
+| `2026-04-27-presentation-design.md` | Validated design from brainstorm |
+| `(others)` | Plan documents the agent writes during the live demo |
+
+## Two branches
+
+- `main` — slides + scaffold + docs. **You start here for the live demo.**
+- `demo-finished` — `main` + the full Q&A feature. **You switch here at minute 18.**
+
+## Two terminals
+
+- Terminal 1: `npm run dev` (keeps frontend + backend running)
+- Terminal 2: `claude` (your Claude Code session)
+
+## Two screens (recommended)
+
+- Main screen: browser + terminal (audience sees this)
+- Side screen: cheatsheet + prepared prompts (only you see this)
+
+If you only have one screen, print the cheatsheet on paper.
+
+## When to start preparing
+
+The week-by-week plan is in `06-rehearsal-checklist.md`. The short version:
+
+- 4 weeks out: this doc exists, you're aligned
+- 3 weeks out: slides have real content, demo polished
+- 2 weeks out: rehearsals start; first live run by Wednesday
+- 1 week out: backups recorded, rehearsal video reviewed
+- Day of: pre-show checklist, deep breath, you've got this

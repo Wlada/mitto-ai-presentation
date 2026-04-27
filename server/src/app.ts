@@ -5,7 +5,7 @@ import { healthRouter } from './routes/index.js';
 export function createApp(): Application {
   const app = express();
 
-  app.use(cors({ origin: 'http://localhost:4200' }));
+  app.use(cors({ origin: ['http://localhost:4300', 'http://localhost:4200'] }));
   app.use(express.json());
 
   app.use('/api/health', healthRouter);

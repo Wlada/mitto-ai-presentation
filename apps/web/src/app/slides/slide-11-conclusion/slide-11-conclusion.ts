@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-slide-11-conclusion',
   standalone: true,
+  imports: [MatButtonModule, MatIconModule, RouterLink],
   template: `
     <section class="slide">
       <h1>Conclusion and next steps</h1>
@@ -16,6 +20,12 @@ import { Component } from '@angular/core';
         <li>Use plan-mode before any change touches code</li>
         <li>Run a code-reviewer subagent on your next PR</li>
       </ul>
+      <p class="cta">
+        <a mat-stroked-button color="primary" routerLink="/feedback">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <span>Leave a question or comment</span>
+        </a>
+      </p>
       <p class="thanks">Thank you.</p>
     </section>
   `,
@@ -35,6 +45,8 @@ import { Component } from '@angular/core';
       }
       ul { font-size: 17px; line-height: 1.8; padding-left: 1.25rem; margin: 0; }
       li { margin-bottom: 8px; }
+      .cta { margin-top: 24px; }
+      .cta mat-icon { margin-right: 6px; }
       .thanks {
         margin-top: 48px;
         font-size: 22px;

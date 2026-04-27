@@ -1,6 +1,6 @@
 import express, { type Application, type NextFunction, type Request, type Response } from 'express';
 import cors from 'cors';
-import { healthRouter } from './routes/index.js';
+import { healthRouter, feedbackRouter } from './routes/index.js';
 
 export function createApp(): Application {
   const app = express();
@@ -9,6 +9,7 @@ export function createApp(): Application {
   app.use(express.json());
 
   app.use('/api/health', healthRouter);
+  app.use('/api/feedback', feedbackRouter);
 
   app.use((_req: Request, res: Response) => {
     res.status(404).json({ error: { message: 'Not Found' } });

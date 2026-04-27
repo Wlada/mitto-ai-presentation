@@ -21,10 +21,7 @@ import { Component } from '@angular/core';
   styles: [
     `
       :host { display: block; }
-      .slide { max-width: 800px; }
-      h1 { font-size: 36px; line-height: 1.2; margin: 0 0 24px; font-weight: 700; }
-      .lead { font-size: 18px; color: var(--mitto-muted); margin: 0 0 32px; line-height: 1.5; }
-      ol { font-size: 17px; line-height: 1.8; padding-left: 1.5rem; margin: 0; }
+      ol { padding-left: 1.5rem; }
       li { margin-bottom: 12px; }
       strong { color: var(--mitto-fg); font-weight: 600; }
     `,

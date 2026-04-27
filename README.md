@@ -8,7 +8,7 @@ presentation itself and serves as the **live demo target** the agent works on.
 
 - **Frontend:** Angular 21 + Angular Material
 - **Backend:** Node.js + Express + TypeScript
-- **Tests:** Jest (unit + integration), Playwright (e2e), Supertest (HTTP)
+- **Tests:** Vitest (unit + integration), Playwright (e2e), Supertest (HTTP)
 - **Workspace:** npm workspaces
 
 ## Quick start

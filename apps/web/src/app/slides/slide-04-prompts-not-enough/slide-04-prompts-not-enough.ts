@@ -18,15 +18,6 @@ import { Component } from '@angular/core';
       </ul>
     </section>
   `,
-  styles: [
-    `
-      :host { display: block; }
-      .slide { max-width: 800px; }
-      h1 { font-size: 36px; line-height: 1.2; margin: 0 0 24px; font-weight: 700; }
-      .lead { font-size: 18px; color: var(--mitto-muted); margin: 0 0 32px; line-height: 1.5; }
-      ul { font-size: 17px; line-height: 1.8; padding-left: 1.25rem; margin: 0; }
-      li { margin-bottom: 8px; }
-    `,
-  ],
+  styles: [':host { display: block; }'],
 })
 export class Slide04PromptsNotEnough {}

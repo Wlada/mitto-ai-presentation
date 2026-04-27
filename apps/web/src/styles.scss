@@ -80,3 +80,36 @@ pre {
   padding: 1rem;
   overflow-x: auto;
 }
+
+// Shared slide typography. Each slide component used to repeat these rules
+// inline; centralizing them keeps the component files focused on content.
+.slide {
+  max-width: 800px;
+}
+
+.slide h1 {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 24px;
+  font-weight: 700;
+}
+
+.slide .lead {
+  font-size: 18px;
+  color: var(--mitto-muted);
+  margin: 0 0 32px;
+  line-height: 1.5;
+}
+
+.slide ul,
+.slide ol {
+  font-size: 17px;
+  line-height: 1.8;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.slide li {
+  margin-bottom: 8px;
+}
+

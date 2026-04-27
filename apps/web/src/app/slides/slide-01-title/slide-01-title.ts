@@ -15,9 +15,6 @@ import { Component } from '@angular/core';
       :host {
         display: block;
       }
-      .slide {
-        max-width: 800px;
-      }
       .title-slide {
         padding-top: 64px;
       }

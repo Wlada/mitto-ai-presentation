@@ -1,0 +1,33 @@
+{
+  "name": "mitto-ai-presentation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude Code in Practice — presentation app and live demo target",
+  "workspaces": [
+    "apps/web",
+    "server",
+    "e2e"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,server -c blue,green \"npm run dev:web\" \"npm run dev:server\"",
+    "dev:web": "npm --workspace apps/web run start",
+    "dev:server": "npm --workspace server run dev",
+    "build": "npm --workspace apps/web run build && npm --workspace server run build",
+    "test": "npm --workspaces --if-present run test",
+    "test:web": "npm --workspace apps/web run test",
+    "test:server": "npm --workspace server run test",
+    "e2e": "npm --workspace e2e run test",
+    "e2e:ci": "npm --workspace e2e run test:ci",
+    "coverage": "npm --workspaces --if-present run coverage",
+    "lint": "npm --workspaces --if-present run lint",
+    "format": "prettier --write \"**/*.{ts,html,scss,json,md}\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.9.0"
+  }
+}

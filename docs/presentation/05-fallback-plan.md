@@ -25,15 +25,15 @@ working `git diff` and a passing test suite.
         ┌──────────────┴──────────────┐
         Yes                            No
         │                              │
-   Is Claude Code              Restart in Terminal 2:
-   responding to prompts?      `npm run dev`
-        │                              │
-   ┌────┴────┐                  Wait 10 seconds.
-   Yes       No                 If still nothing,
-   │         │                  skip live entirely:
-   │         Has it been > 30s? `git checkout demo-finished`
-   │         │
-   │     Type into chat:        and proceed with Phase 4.
+   Is Claude Code              Refresh the browser tab on
+   responding to prompts?      the LIVE URL — it's deployed,
+        │                      not local, so it should still
+   ┌────┴────┐                  work even if local dies.
+   Yes       No                 │
+   │         │                  Skip Phase 3 dispatch entirely
+   │         Has it been > 30s? and proceed to Phase 4
+   │         │                  using the live URL.
+   │     Type into chat:
    │     `Are you still
    │      working? If stuck,
    │      stop and summarize.`
@@ -68,33 +68,48 @@ questions and it wants more.
 
 **Action:**
 - Say (English): *"In the interest of time, here's what this would have produced."*
-- Type: `git checkout demo-finished`
-- Refresh browser. Continue to Phase 4 directly.
+- Shift focus from terminal to the browser tab on the live URL.
+- Continue to Phase 4 directly. The live URL is already on
+  `demo-finished` — finished feature is right there.
 
-### Scenario 4 — Dev server crashes mid-demo
+### Scenario 4 — Local dev server crashes mid-demo (only matters if you opened a local tab)
 
-**Symptom:** Browser shows "site unreachable" or compile error in terminal.
+**Symptom:** Local browser tab shows "site unreachable" or compile
+error in terminal.
 
 **Action:**
-- In a fresh terminal: `npm run dev`
-- Wait 15-20 seconds for both servers to come up
-- If after 30 seconds it's still broken, **abandon live demo**: open the
-  pre-recorded screencast from `docs/presentation/backup/feedback-demo.mp4`
-  (you'll record this in week 4)
+- The live URL still works (it's deployed, not local). Switch to that tab
+  on the projector.
+- Optionally, in a fresh terminal: `npm run dev` and wait 15-20s.
+- If you never had a local tab open, this scenario doesn't apply.
 
-### Scenario 5 — Tests fail unexpectedly on `demo-finished`
+### Scenario 5 — Live URL itself is unreachable
 
-**Symptom:** `npm test` shows red.
+**Symptom:** `https://presentation.vladimirbujanovic.com` times out or
+shows Render's cold-start splash longer than ~30s.
+
+**Action:**
+- First request after 15 min idle = ~30s cold start. **Wait, don't panic.**
+  `npm run preshow` warm-up should have prevented this — but if it didn't,
+  acknowledge: *"first request waking the free-tier service, give it 30
+  seconds."*
+- If still down after 60s, fall back to local: in terminal,
+  `git checkout demo-finished && npm run dev`, open
+  `http://localhost:4300`. Slower setup but works offline.
+
+### Scenario 6 — Tests fail unexpectedly when running live
+
+**Symptom:** `npm test` shows red mid-demo.
 
 **Action:**
 - Don't panic. Don't read the failing test out loud.
-- Say: *"I had this passing yesterday — let me show you the test report
+- Say: *"I had this passing in pre-show — let me show you the test report
   instead."*
-- Open `coverage/index.html` from a previous successful run (you'll save one
-  to `docs/presentation/backup/coverage-snapshot/` in week 4)
-- Continue to slide 8
+- Open `coverage/index.html` from `docs/presentation/backup/` (recorded
+  in week 4) or screenshot fallback.
+- Continue to slide 9.
 
-### Scenario 6 — Playwright browser doesn't open
+### Scenario 7 — Playwright browser doesn't open
 
 **Symptom:** `npm run e2e` errors out.
 
@@ -102,14 +117,6 @@ questions and it wants more.
 - Show the screenshot at `docs/presentation/backup/playwright-pass.png`
   (recorded in week 4)
 - Say: *"The Playwright run takes about 30 seconds. Here's what it produces."*
-
-### Scenario 7 — `git checkout demo-finished` fails (uncommitted changes)
-
-**Symptom:** Git complains about uncommitted local changes.
-
-**Action:**
-- `git stash` then `git checkout demo-finished`
-- Don't try to recover the stash mid-demo. Worry about it later.
 
 ### Scenario 8 — You forget what to say next
 
@@ -187,8 +194,8 @@ the recovery:
 
 | Drill | Trigger |
 |-------|---------|
-| Drill 1 | Kill the backend mid-demo: `pkill -f "tsx watch"` |
-| Drill 2 | Skip Phase 3 entirely: jump straight to `git checkout demo-finished` after Slide 7 |
+| Drill 1 | Disconnect Wi-Fi mid-Phase 3: prove you can fall back to local `git checkout demo-finished && npm run dev` and finish |
+| Drill 2 | Skip Phase 3 entirely: jump straight to the live URL on slide 8 after Slide 7, narrate as if dispatch finished |
 | Drill 3 | Fail a test on purpose: temporarily break a validator, run `npm test`, recover |
 
 Practice the recovery 3 times. Then it's reflex.

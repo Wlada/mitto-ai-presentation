@@ -6,6 +6,10 @@ the slides** of the presentation itself and serves as the **live demo target**
 the agent works on. The audience watches the same Angular components evolve
 during the talk.
 
+**Live demo:** <https://presentation.vladimirbujanovic.com> (deployed from
+`demo-finished` to Render free tier; first request after 15 min idle has a
+~30 s cold start — the [pre-show script](./scripts/pre-show.sh) warms it up).
+
 ## Stack
 
 | Layer | Choice |
@@ -109,15 +113,24 @@ changes, then commit the new PNGs.
 
 ## Branches
 
-- **`main`** — slides + scaffold + docs. The presenter starts the demo here.
-- **`demo-finished`** — `main` + the full Audience Q&A feature with tests.
-  The presenter switches here after the live agent dispatch (around minute 18
-  of the talk) to show the finished result.
+- **`main`** — slides + scaffold + docs. The presenter's local working
+  copy stays on this branch for the entire talk. Claude Code runs the
+  live agent flow (brainstorm → plan → dispatch) here — the agent sees a
+  fresh repo without the Q&A feature, so the brainstorm questions are
+  meaningful.
+- **`demo-finished`** — `main` + the full Audience Q&A feature with
+  tests. **This is the branch deployed at the live URL.** The audience
+  sees the finished state on the live URL throughout the talk; no
+  `git checkout` happens mid-demo.
 
 ```
-main             ◄── presenter starts here
-└─ demo-finished ◄── + Audience Q&A feature (switch here at minute 18)
+main             ◄── local: presenter runs Claude Code here
+└─ demo-finished ◄── deployed: serves the live URL the audience sees
 ```
+
+When the live agent flow finishes (around minute 18), the presenter just
+shifts focus from the terminal to the browser tab on the live URL —
+already showing the finished result — instead of swapping local branches.
 
 ## Ports
 
@@ -148,6 +161,7 @@ specific list of fixes.
 - [Presentation design](./docs/plans/2026-04-27-presentation-design.md)
 - [Repo setup guide](./docs/setup/01-repo-setup.md)
 - [How to write a CLAUDE.md for any repo](./docs/setup/02-claude-md-template.md)
+- [Deployment to Render + Cloudflare DNS](./docs/setup/04-deployment.md)
 - [Slide content (audience-facing text)](./docs/presentation/02-slide-content.md)
 - [Presenter cheatsheet](./docs/presentation/03-presenter-cheatsheet.md)
 - [Prepared prompts (live demo)](./docs/presentation/04-prepared-prompts.md)

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-slide-10-team-model',
+  selector: 'app-slide-11-team-model',
   standalone: true,
   template: `
     <section class="slide">
@@ -37,4 +37,4 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class Slide10TeamModel {}
+export class Slide11TeamModel {}

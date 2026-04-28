@@ -48,22 +48,27 @@ export const SLIDE_ROUTES: Routes = [
       {
         path: '8',
         loadComponent: () =>
-          import('./slide-08-what-works/slide-08-what-works').then((m) => m.Slide08WhatWorks),
+          import('./slide-08-results/slide-08-results').then((m) => m.Slide08Results),
       },
       {
         path: '9',
         loadComponent: () =>
-          import('./slide-09-limits/slide-09-limits').then((m) => m.Slide09Limits),
+          import('./slide-09-what-works/slide-09-what-works').then((m) => m.Slide09WhatWorks),
       },
       {
         path: '10',
         loadComponent: () =>
-          import('./slide-10-team-model/slide-10-team-model').then((m) => m.Slide10TeamModel),
+          import('./slide-10-limits/slide-10-limits').then((m) => m.Slide10Limits),
       },
       {
         path: '11',
         loadComponent: () =>
-          import('./slide-11-conclusion/slide-11-conclusion').then((m) => m.Slide11Conclusion),
+          import('./slide-11-team-model/slide-11-team-model').then((m) => m.Slide11TeamModel),
+      },
+      {
+        path: '12',
+        loadComponent: () =>
+          import('./slide-12-conclusion/slide-12-conclusion').then((m) => m.Slide12Conclusion),
       },
       { path: '', redirectTo: '1', pathMatch: 'full' },
     ],

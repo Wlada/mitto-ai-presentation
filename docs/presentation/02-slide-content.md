@@ -167,7 +167,35 @@ to a finished result.
 
 ---
 
-## Slide 8 — What agents do well
+## Slide 8 — Results (What that produced)
+
+```
+What that produced
+
+The same workflow, finished and committed.
+Numbers below are from the actual test runs on this repo.
+
+Commands                              Results
+  npm test         # 36 web + 32       72 tests passing
+                     server unit/      95%+ backend coverage
+                     integration       70%+ frontend coverage
+  npm run e2e      # 4 Playwright      4 e2e in 13s
+                     tests (live UI)
+  npm run coverage # HTML reports
+                     under coverage/
+
+Read the diff with `git diff main..demo-finished --stat`.
+```
+
+**Speaker notes (SR):**
+- *"Ovo su realni brojevi sa ovog repoa. Možeš ih sad videti u terminalu."*
+- *"Komande su iste one koje vaš tim već zna — npm test, npm run e2e."*
+- *"Coverage nije cilj, ali je signal da agent nije preskočio testove."*
+- 60-90 sekundi. Pređi na slajd 9 (What agents do well) kad si pokazao komande u terminalu.
+
+---
+
+## Slide 9 — What agents do well
 
 ```
 Where agents earn their keep
@@ -188,7 +216,7 @@ The pattern: bounded, well-shaped problems.
 
 ---
 
-## Slide 9 — Limits and risks
+## Slide 10 — Limits and risks
 
 ```
 Where it can go wrong
@@ -210,7 +238,7 @@ Mitigation: small scope, plan-first, mandatory review.
 
 ---
 
-## Slide 10 — Recommended team model
+## Slide 11 — Recommended team model
 
 ```
 How a team should use this
@@ -232,7 +260,7 @@ Treat yourself as the senior.
 
 ---
 
-## Slide 11 — Conclusion
+## Slide 12 — Conclusion
 
 ```
 Takeaway
@@ -264,4 +292,4 @@ Thank you.
 - **Don't read the slide.** Glance at it, then look at the audience.
 - **Move on quickly from intro.** Most of the value is in slides 4-7 (concept + live).
 - **If you forget what to say — pause.** Silence reads as confidence. Filler words don't.
-- **Time check at slide 8.** If past 22 min, skip slide 10 and go straight to conclusion.
+- **Time check at slide 9.** If past 22 min, skip slide 11 and go straight to conclusion.

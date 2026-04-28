@@ -64,6 +64,24 @@ function countTests(specGlobRoots) {
   return total;
 }
 
+import { execSync } from 'node:child_process';
+
+function countPlaywrightTests(e2eDir) {
+  if (!existsSync(e2eDir)) return 0;
+  try {
+    const out = execSync('npx playwright test --list 2>&1', {
+      cwd: e2eDir,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    const match = out.match(/Total:\s+(\d+)\s+tests/);
+    if (match) return Number(match[1]);
+  } catch {
+    // Fall through to spec-file count.
+  }
+  return 0;
+}
+
 function walk(dir, visit) {
   for (const entry of readdirSync(dir)) {
     if (entry === 'node_modules' || entry.startsWith('.')) continue;
@@ -80,7 +98,10 @@ const serverCoverage = summariseCoverage(join(repoRoot, 'server/coverage/coverag
 
 const webTests = countTests([join(repoRoot, 'apps/web/src')]);
 const serverTests = countTests([join(repoRoot, 'server/src'), join(repoRoot, 'server/tests')]);
-const e2eTests = countTests([join(repoRoot, 'e2e/tests')]);
+// Playwright dynamic test generation (e.g. `for` loops) is not visible to a
+// regex over spec files; ask Playwright itself for the real count.
+const e2eTests =
+  countPlaywrightTests(join(repoRoot, 'e2e')) || countTests([join(repoRoot, 'e2e/tests')]);
 
 const generatedAt = new Date().toISOString().slice(0, 10);
 

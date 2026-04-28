@@ -14,9 +14,9 @@ export interface Results {
 export const RESULTS: Results = {
   "webTests": 36,
   "serverTests": 32,
-  "e2eTests": 4,
+  "e2eTests": 18,
   "totalUnitTests": 68,
-  "webCoverage": 83,
+  "webCoverage": 84,
   "serverCoverage": 95,
   "generatedAt": "2026-04-28"
 } as const;

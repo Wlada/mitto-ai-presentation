@@ -197,7 +197,19 @@ Claude reads it before every interaction."
 
 # PHASE 4 — Result and review (18:30 — 25:00)
 
-## Diff and code (18:30 — 21:00)
+## Slide 8 (Results) — 18:30 to 19:30
+
+**Switch back to slides:** browser, → to slide 8
+
+**Say:**
+> "Same workflow, finished and committed. These numbers come straight from the
+> repo: 72 tests passing, 95%+ backend coverage, 70%+ frontend, 4 e2e in 13s."
+
+> "Same commands your team already knows — `npm test`, `npm run e2e`."
+
+**Then run them live in the terminal so the audience sees green.**
+
+## Diff and code (19:30 — 21:00)
 
 **Do (in terminal):**
 ```bash
@@ -254,9 +266,9 @@ open server/coverage/index.html
 
 # PHASE 5 — Limits and conclusion (25:00 — 30:00)
 
-## Slide 8 (What works) — 25:00 to 26:00
+## Slide 9 (What works) — 25:00 to 26:00
 
-**Switch back to slides:** browser, → to slide 8
+**Switch back to slides:** browser, → to slide 9
 
 **Say:**
 > "What you saw earlier — those are the patterns where agents shine.
@@ -264,7 +276,7 @@ open server/coverage/index.html
 
 **Press →**
 
-## Slide 9 (Limits) — 26:00 to 27:30 — **CRITICAL FOR CREDIBILITY**
+## Slide 10 (Limits) — 26:00 to 27:30 — **CRITICAL FOR CREDIBILITY**
 
 **Say:**
 > "Where it can go wrong. Wrong assumptions made silently. Diffs bigger than
@@ -278,7 +290,7 @@ open server/coverage/index.html
 
 **Press →**
 
-## Slide 10 (Team model) — 27:30 to 28:30
+## Slide 11 (Team model) — 27:30 to 28:30
 
 **Say:**
 > "How a team should use this. Agent makes the plan, human approves. Agent
@@ -289,7 +301,7 @@ open server/coverage/index.html
 
 **Press →**
 
-## Slide 11 (Conclusion) — 28:30 to 30:00
+## Slide 12 (Conclusion) — 28:30 to 30:00
 
 **Say:**
 > "The takeaway: the value isn't agent autonomy. It's a faster, controlled
@@ -314,8 +326,8 @@ If you run over, cut in this order:
 | 7:30 entering Phase 2 | Slide 5 deep dive (just point at the file, don't read) |
 | 18:00 still in Phase 3 | The dispatch wait — paste Prompt 5 immediately |
 | 22:00 entering tests | Skip code-reviewer subagent |
-| 24:00 entering coverage | Skip coverage section, jump to Slide 8 |
-| 28:00 still on limits | Combine Slide 10 + 11 in 60 seconds |
+| 24:00 entering coverage | Skip coverage section, jump to Slide 9 |
+| 28:00 still on limits | Combine Slide 11 + 12 in 60 seconds |
 
 # Total recovery rule
 
@@ -335,5 +347,5 @@ the dispatch detail if you're confident.
 - **Don't apologize.** Skipping = "Let me move on", not "Sorry about that".
 - **Don't read the slide.** Look at the audience.
 - **Hands away from face.** Don't touch your nose / glasses.
-- **One sip of water at slide 5.** And one at slide 9. Don't drink mid-sentence.
+- **One sip of water at slide 5.** And one at slide 10. Don't drink mid-sentence.
 - **Last 30 seconds:** smile. Thank them. Pause for applause / silence.

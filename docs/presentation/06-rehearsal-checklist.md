@@ -10,7 +10,7 @@
 - [x] Repo scaffolded, builds, tests pass
 - [x] CLAUDE.md written
 - [x] Demo-finished branch with Q&A feature
-- [x] Slide 1-11 placeholders rendering
+- [x] Slide 1-12 placeholders rendering
 - [x] All design docs in `docs/`
 
 If anything above is **not** checked, finish Week 1 before moving on.
@@ -33,6 +33,8 @@ If anything above is **not** checked, finish Week 1 before moving on.
       see in the other within 3-4 seconds)
 - [ ] Verify error states (submit empty form, server down, etc.)
 - [ ] Verify slide 6 "Try the demo feature" link works on `demo-finished`
+- [ ] Run `npm run results:refresh` and open Slide 8 in the browser; confirm
+      the test counts and coverage percentages look right
 
 ### Saturday — Read-through (1 hour)
 - [ ] Read `02-slide-content.md` aloud, slide by slide. Time each one.
@@ -84,6 +86,10 @@ Record once, save permanently:
       `docs/presentation/backup/playwright-pass.png`
 - [ ] Snapshot of `coverage/` directory:
       `docs/presentation/backup/coverage-snapshot/` (zip if large)
+- [ ] Verify visual regression baselines pass at projector resolution:
+      run `npm run e2e` once on the actual screen you'll present from. If
+      diffs appear, re-baseline with
+      `npm --workspace e2e run test -- --update-snapshots` and commit.
 
 These are your safety net. If anything fails live, you show these instead.
 

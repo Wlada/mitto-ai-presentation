@@ -143,7 +143,22 @@ questions and it wants more.
 > slide listed what doesn't. I picked a feature shape the agent is good at —
 > the same way I'd hand a junior a well-shaped task."*
 
-### Scenario 10 — The QR code / link link from slide 11 doesn't work
+### Scenario 10a — Visual regression snapshot test fails the morning of the demo
+
+**Symptom:** `npm run e2e` reports diffs in `slides-visual.spec.ts`. Usually
+caused by a font-rendering tweak, a Material theme bump, or a logo recolor.
+
+**Action:**
+- Run: `npm --workspace e2e run test -- --update-snapshots`
+- Open the diff under `e2e/test-results/` and visually confirm the new
+  baselines look correct (logo present, brand pink still pink, no broken
+  layout).
+- Commit the regenerated snapshots before going on stage.
+- If something *does* look broken, do not commit — fall back to the previous
+  baseline by `git checkout e2e/tests/slides-visual.spec.ts-snapshots/` and
+  fix the underlying styling instead.
+
+### Scenario 10 — The QR code / link from slide 12 doesn't work
 
 **Symptom:** Audience can't reach your local /feedback page.
 
@@ -174,8 +189,8 @@ If you reach Slide 8 past minute 22, do **all** of these in sequence:
 
 1. Skip the code-reviewer subagent demo
 2. Skip `npm run coverage` — just say "coverage is at 80%+"
-3. Combine Slide 10 + 11 into one minute
-4. **Do not skip Slide 9 (Limits).** It's the credibility anchor.
+3. Combine Slide 11 (Team model) + 12 (Conclusion) into one minute
+4. **Do not skip Slide 10 (Limits).** It's the credibility anchor.
 
 ---
 

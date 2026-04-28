@@ -103,16 +103,20 @@ npm test
 npm run coverage
 # expect: server 80%+, web 70%+
 
-# 4. E2E pass
+# 4. E2E pass (functional + visual regression)
 npm run e2e
 
-# 5. Manual smoke
+# 5. Refresh Slide 8 numbers from this run's coverage
+npm run results:refresh
+
+# 6. Manual smoke
 npm run dev
 open http://localhost:4300/feedback
 # Submit a question. See it appear in the list.
+# Then open http://localhost:4300/slides/8 and confirm the live numbers.
 ```
 
-If all five pass, `demo-finished` is rehearsal-ready.
+If all six pass, `demo-finished` is rehearsal-ready.
 
 ## Pre-rehearsal cleanup
 

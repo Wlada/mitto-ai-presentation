@@ -54,4 +54,31 @@ test.describe('Audience Q&A flow', () => {
     await page.getByLabel('Message').fill('Quick comment');
     await expect(submit).toBeEnabled();
   });
+
+  test('full demo flow: slide CTA → submit → back to source slide', async ({ page }) => {
+    // Land on the demo-task slide where the audience CTA lives.
+    await page.goto('/slides/6');
+    await expect(page).toHaveURL(/\/slides\/6$/);
+
+    // Click the slide's CTA link into the feature.
+    await page.getByRole('link', { name: /try the demo feature/i }).click();
+    await expect(page).toHaveURL(/\/feedback$/);
+
+    // Submit a unique entry to prove the full flow works end-to-end.
+    const uniqueMessage = `slide-cta flow ${Date.now()}`;
+    await page.getByLabel('Name (optional)').fill('Slide CTA Tester');
+    await page.getByRole('combobox', { name: 'Type' }).click();
+    await page
+      .getByRole('listbox', { name: 'Type', exact: true })
+      .getByRole('option', { name: 'comment', exact: true })
+      .click();
+    await page.getByLabel('Message').fill(uniqueMessage);
+    await page.getByRole('button', { name: /submit/i }).click();
+    await expect(page.getByText(/thanks for your feedback/i)).toBeVisible({ timeout: 5000 });
+
+    // The back arrow should return to the source slide, not /slides/1.
+    await page.getByRole('link', { name: /back to slide 6/i }).click();
+    await expect(page).toHaveURL(/\/slides\/6$/);
+    await expect(page.getByRole('heading', { name: /today's demo task/i })).toBeVisible();
+  });
 });

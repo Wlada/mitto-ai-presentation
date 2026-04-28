@@ -20,10 +20,8 @@ import { Component } from '@angular/core';
       }
       h1 {
         font-size: 40px;
-        line-height: 1.15;
         margin: 0 0 16px;
-        font-weight: 700;
-        color: var(--mitto-fg);
+        letter-spacing: normal;
       }
       .subtitle {
         font-size: 20px;

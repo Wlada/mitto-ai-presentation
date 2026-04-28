@@ -25,12 +25,14 @@ import { Component } from '@angular/core';
       .pairs .agent { color: var(--mitto-fg); font-weight: 600; }
       .pairs .human { color: var(--mitto-muted); }
       .takeaway {
-        margin-top: 32px;
+        margin: 32px 0 0;
+        padding: 0 0 0 16px;
         font-size: 20px;
         line-height: 1.5;
         color: var(--mitto-fg);
-        padding-left: 16px;
+        background: transparent;
         border-left: 3px solid var(--mitto-accent);
+        border-radius: 0;
       }
     `,
   ],

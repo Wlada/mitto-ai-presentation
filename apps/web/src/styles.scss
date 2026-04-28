@@ -1,18 +1,28 @@
 @use '@angular/material' as mat;
 
-// Mitto-inspired theme: clean, minimal, navy + white.
+// Mitto theme. Magenta gets us closest to Mitto pink (#FC0079); the exact
+// brand pink is then forced via mat-sys token overrides below.
 html {
   color-scheme: light;
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
+        primary: mat.$magenta-palette,
+        tertiary: mat.$violet-palette,
       ),
       typography: Inter,
       density: 0,
     )
   );
+
+  // Pin the primary surface to the exact Mitto pink so mat-flat-button
+  // color="primary" and friends match the brand badge / accent borders.
+  --mat-sys-primary: #fc0079;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #ffd9e8;
+  --mat-sys-on-primary-container: #1f0047;
+  --mat-sys-secondary: #1f0047;
+  --mat-sys-on-secondary: #ffffff;
 }
 
 :root {

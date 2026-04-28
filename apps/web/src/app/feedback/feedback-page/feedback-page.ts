@@ -13,11 +13,17 @@ import { FeedbackList } from '../feedback-list/feedback-list';
   imports: [FeedbackForm, FeedbackList, MatButtonModule, MatIconModule, RouterLink],
   template: `
     <section class="page">
+      <a
+        mat-icon-button
+        routerLink="/slides/1"
+        class="back"
+        aria-label="Back to slides"
+        title="Back to slides"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+
       <header class="page-header">
-        <a mat-stroked-button routerLink="/slides/1" class="back">
-          <mat-icon>arrow_back</mat-icon>
-          <span>Back to slides</span>
-        </a>
         <h1>
           <span class="title-text">Audience Q&amp;A</span>
           <span class="title-underline" aria-hidden="true"></span>
@@ -39,47 +45,55 @@ import { FeedbackList } from '../feedback-list/feedback-list';
         display: block;
         min-height: 100vh;
         background:
-          linear-gradient(to bottom, var(--mitto-surface), var(--mitto-bg) 160px),
+          linear-gradient(to bottom, var(--mitto-surface), var(--mitto-bg) 200px),
           var(--mitto-bg);
       }
       .page {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 32px 24px 64px;
-      }
-      .page-header {
-        margin-bottom: 32px;
+        padding: 24px 24px 64px;
+        position: relative;
       }
       .back {
-        margin-bottom: 16px;
         color: var(--mitto-fg);
-        border-radius: 999px;
+        background: var(--mitto-bg);
+        border: 1px solid var(--mitto-divider);
+        transition:
+          color 160ms ease,
+          border-color 160ms ease,
+          background 160ms ease;
       }
-      .back mat-icon {
-        margin-right: 4px;
+      .back:hover {
+        color: var(--mitto-accent);
+        border-color: var(--mitto-accent);
+      }
+      .page-header {
+        margin: 28px 0 40px;
       }
       h1 {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0 0 8px;
-        font-size: 28px;
+        margin: 0 0 12px;
+        font-size: 32px;
         font-weight: 700;
         color: var(--mitto-fg);
         line-height: 1.2;
+        letter-spacing: -0.01em;
+      }
+      .title-text {
+        display: block;
       }
       .title-underline {
         display: block;
-        width: 48px;
+        width: 56px;
         height: 4px;
-        margin-top: 8px;
+        margin-top: 12px;
         background: var(--mitto-accent);
         border-radius: 2px;
       }
       .subtitle {
         margin: 0;
         color: var(--mitto-muted);
-        font-size: 14px;
+        font-size: 15px;
+        max-width: 60ch;
       }
       .grid {
         display: grid;

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subject, interval, merge } from 'rxjs';
@@ -15,7 +14,7 @@ import { relativeTime } from '../relative-time';
   selector: 'app-feedback-list',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, MatChipsModule, MatIconModule, MatProgressSpinnerModule],
+  imports: [MatCardModule, MatIconModule, MatProgressSpinnerModule],
   template: `
     <div class="list-wrap">
       <div class="header">
@@ -28,17 +27,28 @@ import { relativeTime } from '../relative-time';
         }
       </div>
 
-      <mat-chip-listbox
-        class="filters"
-        [value]="filter()"
-        (change)="onFilter($event.value)"
-        aria-label="Filter feedback by type"
-      >
-        <mat-chip-option [value]="null" [selected]="filter() === null">All</mat-chip-option>
+      <div class="filters" role="group" aria-label="Filter feedback by type">
+        <button
+          type="button"
+          class="filter-pill"
+          [class.active]="filter() === null"
+          [attr.aria-pressed]="filter() === null"
+          (click)="onFilter(null)"
+        >
+          All
+        </button>
         @for (t of types; track t) {
-          <mat-chip-option [value]="t" [selected]="filter() === t">{{ t }}</mat-chip-option>
+          <button
+            type="button"
+            class="filter-pill"
+            [class.active]="filter() === t"
+            [attr.aria-pressed]="filter() === t"
+            (click)="onFilter(t)"
+          >
+            {{ t }}
+          </button>
         }
-      </mat-chip-listbox>
+      </div>
 
       @if (error(); as err) {
         <p class="error">{{ err }}</p>
@@ -97,10 +107,49 @@ import { relativeTime } from '../relative-time';
         height: 20px;
         color: var(--mitto-accent);
       }
+
       .filters {
         display: flex;
         flex-wrap: wrap;
+        gap: 6px;
+        padding: 4px;
+        background: var(--mitto-bg);
+        border: 1px solid var(--mitto-divider);
+        border-radius: 999px;
+        align-self: flex-start;
       }
+      .filter-pill {
+        appearance: none;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1;
+        padding: 7px 14px;
+        border: none;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--mitto-muted);
+        text-transform: capitalize;
+        cursor: pointer;
+        transition:
+          color 140ms ease,
+          background 140ms ease,
+          box-shadow 140ms ease;
+      }
+      .filter-pill:hover:not(.active) {
+        color: var(--mitto-fg);
+        background: var(--mitto-surface);
+      }
+      .filter-pill:focus-visible {
+        outline: 2px solid var(--mitto-accent);
+        outline-offset: 2px;
+      }
+      .filter-pill.active {
+        background: var(--mitto-accent);
+        color: #ffffff;
+        box-shadow: 0 1px 2px rgba(252, 0, 121, 0.2);
+      }
+
       .entries {
         display: flex;
         flex-direction: column;

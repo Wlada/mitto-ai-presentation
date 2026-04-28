@@ -5,19 +5,30 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>What Claude Code is (in practice)</h1>
-      <p class="lead">
-        A terminal-based agent that runs in your repo, reads your project context, and uses tools
-        — not autocomplete in an editor.
-      </p>
+      <h1>Claude Code, in practice</h1>
+      <p class="lead">A local CLI agent that:</p>
       <ul>
-        <li>Orchestrator — plans and executes multi-step work</li>
-        <li>Skills — reusable workflows (brainstorm, plan, review)</li>
-        <li>Subagents — parallel workers with their own context</li>
-        <li>CLAUDE.md — project conventions the agent always sees</li>
+        <li>reads your repo</li>
+        <li>edits your files</li>
+        <li>runs your commands</li>
+        <li>follows project-specific rules</li>
       </ul>
+      <p class="closing">
+        Works in your terminal. No cloud sync.<br />
+        You decide what runs, what lands.
+      </p>
     </section>
   `,
-  styles: [':host { display: block; }'],
+  styles: [
+    `
+      :host { display: block; }
+      .closing {
+        margin-top: 32px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--mitto-fg);
+      }
+    `,
+  ],
 })
 export class Slide03WhatIsClaudeCode {}

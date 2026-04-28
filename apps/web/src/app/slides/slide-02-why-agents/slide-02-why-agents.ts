@@ -5,18 +5,29 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>Why AI coding agents in our workflow</h1>
-      <p class="lead">
-        Agents shorten the path from idea to working, tested code — without removing the developer
-        from the loop.
-      </p>
+      <h1>Why we're talking about this</h1>
       <ul>
-        <li>Faster iteration on routine, well-scoped tasks</li>
-        <li>Consistency in plan, code shape, and tests</li>
-        <li>Frees engineers to focus on design and judgement</li>
+        <li>Faster understanding of unfamiliar code</li>
+        <li>Faster scaffolding and boilerplate</li>
+        <li>Tests written alongside code, not after</li>
+        <li>Developer stays the reviewer and owner</li>
       </ul>
+      <p class="closing">
+        <strong>Not: replace the engineer.</strong><br />
+        <strong>Yes: shorter cycle, with control.</strong>
+      </p>
     </section>
   `,
-  styles: [':host { display: block; }'],
+  styles: [
+    `
+      :host { display: block; }
+      .closing {
+        margin-top: 32px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--mitto-fg);
+      }
+    `,
+  ],
 })
 export class Slide02WhyAgents {}

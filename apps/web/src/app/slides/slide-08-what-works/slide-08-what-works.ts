@@ -5,19 +5,29 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>What agents do well</h1>
-      <p class="lead">
-        Where the cost-benefit is clearly positive — repeatable, well-scoped engineering work.
-      </p>
+      <h1>Where agents earn their keep</h1>
       <ul>
-        <li>CRUD endpoints, validators, and matching tests</li>
-        <li>Form components with consistent shape across pages</li>
-        <li>Refactors that follow a clear mechanical rule</li>
-        <li>Test scaffolding and fixture setup</li>
-        <li>Documentation that mirrors the code</li>
+        <li>Scaffolding new features along existing patterns</li>
+        <li>Writing tests for predictable code paths</li>
+        <li>Wiring components, routes, services</li>
+        <li>Refactoring repetitive structures</li>
+        <li>Exploring unfamiliar code (read-only)</li>
       </ul>
+      <p class="closing">
+        The pattern: <strong>bounded, well-shaped problems.</strong>
+      </p>
     </section>
   `,
-  styles: [':host { display: block; }'],
+  styles: [
+    `
+      :host { display: block; }
+      .closing {
+        margin-top: 32px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--mitto-fg);
+      }
+    `,
+  ],
 })
 export class Slide08WhatWorks {}

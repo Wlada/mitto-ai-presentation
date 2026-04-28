@@ -15,7 +15,11 @@
 - [ ] Browser zoom set so audience can read code (cmd+= a few times)
 - [ ] Terminal font size large (cmd+= a few times)
 - [ ] Checkout `main` branch: `git checkout main`
-- [ ] Run `npm run results:refresh` — regenerates Slide 8 numbers from current coverage
+- [ ] Run `npm run preshow` — one-shot preflight (branch, working tree, ports,
+      deps, slide-8 freshness, all tests). Exits **READY TO PRESENT** or
+      **NOT READY** with a fix list.
+- [ ] (Or, if you only want the slide-8 numbers refreshed:
+      `npm run results:refresh`)
 - [ ] In Terminal 1: `npm run dev` — verify both servers start (web :4300, server :3000)
 - [ ] In Terminal 2: keep ready for `claude` invocation
 - [ ] Open browser to `http://localhost:4300/slides/1`
@@ -152,11 +156,12 @@ Claude reads it before every interaction."
 **Show:** Slide 7
 
 **Say:**
-> "These are the 5 steps. Watch what happens when I trigger them."
+> "These are the 6 steps of the workflow. Watch what happens when I trigger them."
 
-> "I'll let you see the first 3 — brainstorm, plan, dispatch. Then I'll cut
-> early, because steps 4 and 5 take longer than you have patience for. I ran
-> the same workflow yesterday — I'll show you that result."
+> "I'll let you see the first 3 live on `main` — brainstorm, plan, execute.
+> Step 3 finishes the code in 5–10 minutes, so we'll cut and switch to the
+> finished branch. Steps 4, 5, and 6 — simplify, review, document — I'll
+> then run live on top of the finished result."
 
 **Do:** Switch to terminal with Claude Code
 
@@ -167,30 +172,33 @@ Claude reads it before every interaction."
 ## The live block — 9:30 to 18:30
 
 **This is the part you've practiced 3+ times.** Use the prompts in
-`04-prepared-prompts.md`.
+`04-prepared-prompts.md`. **Live block covers Prompts 1–4** (workflow
+steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 
-### Phase A: Brainstorm (9:30 — 12:30)
+### Phase A: Brainstorm — workflow step 1 (9:30 — 12:30)
 - **Paste Prompt 1** (brainstorming trigger)
-- **Say while it loads (~5s):** *"Brainstorming skill. It will ask me
-  questions instead of guessing."*
+- **Say while it loads (~5s):** *"Brainstorming skill, step 1 of the
+  workflow. It will ask me questions instead of guessing."*
 - **Answer 4-6 questions.** Reference the prompt doc for sample answers.
 - **Talk between answers** — *"This is the kind of question a senior would ask
   before starting work."*
 
-### Phase B: Plan (12:30 — 14:30)
-- **Paste Prompt 3** (move to writing-plans)
-- **Say:** *"It's writing a real plan document. Survives the conversation."*
+### Phase B: Plan — workflow step 2 (12:30 — 14:30)
+- **Paste Prompt 2** (move to writing-plans)
+- **Say:** *"Step 2. It's writing a real plan document. Survives the
+  conversation."*
 - Wait for the plan file to appear
 
-### Phase C: Dispatch (14:30 — 16:30)
-- **Paste Prompt 4** (subagent dispatch)
-- **Say:** *"Each subagent is independent — backend, frontend, tests. They run
-  in parallel."*
+### Phase C: Execute via subagents — workflow step 3 (14:30 — 16:30)
+- **Paste Prompt 3** (subagent dispatch)
+- **Say:** *"Step 3 — execute. Each subagent is independent — backend,
+  frontend, tests. They run in parallel because the work is multi-layer."*
 - Wait until you see the task list dispatched
 
 ### Phase D: Cut and switch (16:30 — 18:30)
-- **Speak Prompt 5** *"This would now run for 5-10 minutes. To respect your
-  time, here's what I produced yesterday."*
+- **Speak Prompt 4** *"This would now run for 5-10 minutes. To respect your
+  time, here's what I produced yesterday — and we'll then run steps 4, 5,
+  and 6 live on top of it."*
 - **Type:** `git checkout demo-finished`
 - **Refresh browser** at /feedback
 
@@ -212,7 +220,7 @@ Claude reads it before every interaction."
 
 **Then run them live in the terminal so the audience sees green.**
 
-## Diff and code (19:30 — 21:00)
+## Diff + tests (19:30 — 20:45)
 
 **Do (in terminal):**
 ```bash
@@ -224,34 +232,35 @@ git diff main..demo-finished --stat
 > outside the scope of the task."
 
 **Do:**
-- Open `server/src/validators/feedback.ts` in VS Code
-- Show 30 seconds of clean code
-- *"This goes through PR review like any other code. It's not magic, it's
-  reviewable."*
+- Open `server/src/validators/feedback.ts` in VS Code (~30 seconds)
+- *"Reviewable like any other code."*
+- Run `npm test` in terminal — wait for green (~5s)
 
-## Code-reviewer subagent (21:00 — 22:30) — OPTIONAL if time permits
+## Prompt 5 — `/simplify` — workflow step 4 (20:45 — 21:45)
 
-- **Paste Prompt 6** (code-reviewer)
-- **Say:** *"This is a different Claude. Independent review, like a senior
-  colleague. Could be your pre-PR step."*
+- **Paste Prompt 5** (`/simplify` over the diff)
+- **Say:** *"Step 4 of the workflow. Skill scans the new code for redundant
+  helpers, dead state, premature abstractions. We run it after the code
+  exists, not before."*
+- Show whatever it flags. If it flags nothing, say so — that's also a
+  signal.
 
-## Tests (22:30 — 24:00)
+## Prompt 6 — `code-reviewer` — workflow step 5 (21:45 — 23:00)
 
-**Do (in terminal 1):**
-```bash
-npm test
-```
-Wait for green. Should be ~5 seconds.
+- **Paste Prompt 6** (code-reviewer subagent against plan + CLAUDE.md)
+- **Say:** *"Step 5. Different Claude — didn't write this code. Reads the
+  plan, the conventions, and the diff. Senior-engineer review, the kind
+  you'd do before opening a PR."*
+- Read 1–2 of its findings to the audience.
 
-**Do (in terminal 2):**
-```bash
-npm run e2e
-```
-Playwright opens browser, walks through Q&A flow.
+## Prompt 7 — Documentation update — workflow step 6 (23:00 — 24:00) — OPTIONAL
 
-**Say:**
-> "All written by the agent through subagents. 68 unit and integration tests,
-> plus 4 functional and 12 visual regression Playwright tests."
+**This is the first thing to skip when running over.** If past 23:30,
+go straight to Coverage / Slide 9.
+
+- **Paste Prompt 7** (proposed doc patch)
+- **Say:** *"Step 6. Closes the loop — docs written after the code, in the
+  same commit, stay accurate. In production we'd apply this patch."*
 
 ## Coverage (24:00 — 25:00)
 
@@ -327,8 +336,9 @@ If you run over, cut in this order:
 | If past... | Then skip... |
 |------------|--------------|
 | 7:30 entering Phase 2 | Slide 5 deep dive (just point at the file, don't read) |
-| 18:00 still in Phase 3 | The dispatch wait — paste Prompt 5 immediately |
-| 22:00 entering tests | Skip code-reviewer subagent |
+| 18:00 still in Phase 3 | The dispatch wait — speak Prompt 4 immediately |
+| 22:30 entering simplify | Skip Prompt 7 (docs update) outright |
+| 23:30 still on review | Skip Prompt 7 outright; jump to coverage |
 | 24:00 entering coverage | Skip coverage section, jump to Slide 9 |
 | 28:00 still on limits | Combine Slide 11 + 12 in 60 seconds |
 

@@ -13,6 +13,7 @@
     "dev:web": "npm --workspace apps/web run start",
     "dev:server": "npm --workspace server run dev",
     "build": "npm --workspace apps/web run build && npm --workspace server run build",
+    "start": "npm --workspace server run start",
     "test": "npm --workspace apps/web run test && npm --workspace server run test",
     "test:web": "npm --workspace apps/web run test",
     "test:server": "npm --workspace server run test",
@@ -21,7 +22,7 @@
     "e2e:ci": "npm --workspace e2e run test:ci",
     "e2e:install": "npx --workspace e2e playwright install --with-deps chromium",
     "coverage": "npm --workspace apps/web run coverage && npm --workspace server run coverage",
-    "results:refresh": "(npm run coverage || true) && node scripts/refresh-results.mjs",
+    "results:refresh": "(npm --workspace apps/web run coverage || true) && (npm --workspace server run coverage || true) && node scripts/refresh-results.mjs",
     "preshow": "./scripts/pre-show.sh",
     "lint": "npm --workspaces --if-present run lint",
     "format": "prettier --write \"**/*.{ts,html,scss,json,md}\""
@@ -31,7 +32,7 @@
     "prettier": "^3.3.3"
   },
   "engines": {
-    "node": ">=22.12.0",
+    "node": "22.x",
     "npm": ">=10.9.0"
   }
 }

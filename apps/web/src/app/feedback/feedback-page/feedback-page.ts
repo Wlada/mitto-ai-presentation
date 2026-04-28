@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 import { FeedbackForm } from '../feedback-form/feedback-form';
 import { FeedbackList } from '../feedback-list/feedback-list';
+import { SlideService } from '../../slides/slide.service';
 
 @Component({
   selector: 'app-feedback-page',
@@ -15,10 +16,10 @@ import { FeedbackList } from '../feedback-list/feedback-list';
     <section class="page">
       <a
         mat-icon-button
-        routerLink="/slides/1"
+        [routerLink]="['/slides', slides.currentNumber()]"
         class="back"
-        aria-label="Back to slides"
-        title="Back to slides"
+        [attr.aria-label]="'Back to slide ' + slides.currentNumber()"
+        [title]="'Back to slide ' + slides.currentNumber()"
       >
         <mat-icon>arrow_back</mat-icon>
       </a>
@@ -109,4 +110,6 @@ import { FeedbackList } from '../feedback-list/feedback-list';
     `,
   ],
 })
-export class FeedbackPage {}
+export class FeedbackPage {
+  protected readonly slides = inject(SlideService);
+}

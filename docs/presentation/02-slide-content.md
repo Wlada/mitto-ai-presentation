@@ -84,6 +84,9 @@ The fix:
   CLAUDE.md   →  permanent project rules
   Skills      →  reusable workflows
   Subagents   →  parallel, specialized work
+
+  …driven by a disciplined 6-step workflow:
+  brainstorm → plan → execute → simplify → review → document
 ```
 
 **Speaker notes (SR):**
@@ -147,19 +150,23 @@ The task we'll give to the agent
 ```
 What the agent will do
 
-  1.  Brainstorm the feature  (asks me questions)
-  2.  Write the plan          (commits to a doc)
-  3.  Dispatch subagents      (parallel work)
-  4.  Run tests               (verifies its own output)
-  5.  Summarize               (reports what changed)
+  1.  Brainstorm   (asks me questions)
+  2.  Plan         (writes a doc to docs/plans/)
+  3.  Execute      (subagents in parallel, or main agent)
+  4.  Simplify     (/simplify on the result)
+  5.  Review       (code-reviewer subagent)
+  6.  Document     (CLAUDE.md, README, docs/)
 
 You'll see steps 1–3 live.
-Steps 4–5 take longer; we'll jump
-to a finished result.
+Step 3 takes 5–10 minutes to finish, so
+we'll cut and switch to demo-finished.
+Steps 4–6 then run live on top of the
+finished result.
 ```
 
 **Speaker notes (SR):**
-- Pre nego što kreneš sa live: *"Ovih 5 koraka su skill-ovi unutar Claude Code-a. Ne moja izmišljotina, ne magic — workflow patern."*
+- Pre nego što kreneš sa live: *"Ovih 6 koraka su skill-ovi i pattern unutar Claude Code-a — definisani u `CLAUDE.md` ovog repoa. Ne moja izmišljotina, ne magic — kanonski workflow."*
+- Naglasi: *"Steps 1, 2, i 3 ćete da vidite uživo na `main`. Onda secam — switchujemo na `demo-finished` gde već postoji rezultat. Steps 4 (simplify), 5 (code-reviewer), i 6 (docs) puštam uživo nad gotovim kodom."*
 - Bukvalno objasni: *"Sad kucam jedan prompt. Vidite šta se dešava."*
 - Idi na cheatsheet stranicu — sledeći deo je live, ne slajdovi.
 
@@ -194,6 +201,7 @@ Live numbers on this slide come from
 
 **Speaker notes (SR):**
 - *"Ovo su realni brojevi sa ovog repoa, generisani pre demoa skriptom `npm run results:refresh`. Možeš ih i sad pokrenuti uživo u terminalu."*
+- *"Komande i brojevi koje vidite ovde su izlaz onog istog 6-step workflowa koji ste upravo videli — brainstorm, plan, execute — ali izvršenog do kraja na `demo-finished`. Sada ćemo da pustimo i steps 4, 5 i 6 nad ovim rezultatom."*
 - *"Komande su iste one koje vaš tim već zna — npm test, npm run e2e."*
 - *"E2E ima dve familije: 4 funkcionalna testa i 12 visual regression testova koji slikaju svaki slajd i porede sa baseline-om."*
 - *"Coverage nije cilj, ali je signal da agent nije preskočio testove."*

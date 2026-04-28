@@ -166,6 +166,18 @@ caused by a font-rendering tweak, a Material theme bump, or a logo recolor.
 - Take questions verbally. The audience came for the talk, not the gimmick.
 - Don't spend more than 30 seconds debugging the link in front of them.
 
+### Scenario 11 — Prompt 5 (`/simplify`) or Prompt 6 (`code-reviewer`) hangs
+
+**Symptom:** No output for 30+ seconds after pasting Prompt 5 or Prompt 6
+on `demo-finished`.
+
+**Action:**
+- **Just skip.** The audience already saw the diff and a green test run —
+  the workflow story is intact without these two steps.
+- Say: *"Steps 4 and 5 of the workflow look like this in normal use. We've
+  already seen the result they verify, so let's keep moving."*
+- Continue to the coverage section / Slide 9. Do not retry.
+
 ---
 
 ## Pre-rehearsal recovery drill
@@ -187,10 +199,13 @@ Practice the recovery 3 times. Then it's reflex.
 
 If you reach Slide 8 past minute 22, do **all** of these in sequence:
 
-1. Skip the code-reviewer subagent demo
-2. Skip `npm run coverage` — just say "coverage is at 80%+"
-3. Combine Slide 11 (Team model) + 12 (Conclusion) into one minute
-4. **Do not skip Slide 10 (Limits).** It's the credibility anchor.
+1. **Skip Prompt 7 (docs update) first** — it's the cheapest cut, no
+   visible loss to the audience
+2. Skip Prompt 6 (code-reviewer subagent) next
+3. Skip Prompt 5 (`/simplify`) if still over
+4. Skip `npm run coverage` — just say "coverage is at 80%+"
+5. Combine Slide 11 (Team model) + 12 (Conclusion) into one minute
+6. **Do not skip Slide 10 (Limits).** It's the credibility anchor.
 
 ---
 

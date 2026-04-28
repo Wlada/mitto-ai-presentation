@@ -55,6 +55,23 @@ This is one trick that pays off three times: it explains the architecture,
 gives the live demo a coherent target, and makes the "leave a question"
 button at the end real.
 
+## The workflow
+
+Every non-trivial change in this repo flows through a six-step cycle,
+defined canonically in `CLAUDE.md`:
+
+1. **Brainstorm** — `/superpowers:brainstorming`
+2. **Plan** — `/superpowers:writing-plans` (writes to `docs/plans/`)
+3. **Execute** — `/superpowers:subagent-driven-development` (parallel) or
+   the main agent (single-layer)
+4. **Simplify** — `/simplify` skill
+5. **Review** — `code-reviewer` subagent
+6. **Document** — update `CLAUDE.md`, `README.md`, `docs/`
+
+The Audience Q&A feature on `demo-finished` was built end-to-end with this
+workflow. The reproducible recipe — Prompts 1 through 7 — lives in
+`04-prepared-prompts.md`.
+
 ## What's in the repo
 
 ```

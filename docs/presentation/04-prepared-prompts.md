@@ -32,28 +32,52 @@ project context in its first response).
 
 ---
 
-## Prompt 1 — Feature request via brainstorming skill
+## Workflow at a glance
+
+This repo's canonical workflow is a six-step cycle, defined in `CLAUDE.md`.
+Every non-trivial change goes through:
+
+1. **Brainstorm** — `/superpowers:brainstorming`
+2. **Plan** — `/superpowers:writing-plans` (writes to `docs/plans/`)
+3. **Execute** — `/superpowers:subagent-driven-development` (parallel,
+   preferred for multi-layer work) **or** continue in the main agent
+   (preferred for single-layer, tightly-coupled work)
+4. **Simplify** — `/simplify` skill on the changed code
+5. **Review** — `code-reviewer` subagent against the plan and conventions
+6. **Document** — update `CLAUDE.md`, `README.md`, and `docs/`
+
+The Audience Q&A feature on `demo-finished` was built end-to-end with this
+exact workflow. The prompts below reproduce it.
+
+**Live vs. pre-built split:**
+- **Steps 1–3** (Prompts 1–3) run live on `main`.
+- After Prompt 4 (the planned cut) you switch to `demo-finished`.
+- **Steps 4–6** (Prompts 5–7) run live on `demo-finished` against the
+  finished result.
+
+---
+
+## Live demo prompts (steps 1–3, executed live on `main`)
+
+### Prompt 1 — Brainstorm (workflow step 1)
 
 **When:** Slide 7, immediately after you say "let me actually run it now."
 
 **Paste this:**
 
-```
+```text
 /superpowers:brainstorming I want to add an Audience Q&A feature to this
 presentation app. Users should be able to submit questions, comments, or
 suggestions, and view them in a near real-time list. Help me design and
 plan this end-to-end (frontend, backend, validation, tests).
 ```
 
-**What you say while it loads (5-10 seconds):**
-> *"This is the brainstorming skill. Instead of guessing my requirements,
-> it's going to ask me questions. Watch what it picks up."*
+**What you say while it loads (5–10 seconds):**
+> *"This is the brainstorming skill — workflow step 1. Instead of guessing
+> my requirements, it's going to ask me one question at a time. Watch what
+> it picks up."*
 
----
-
-## Prompt 2 — Brainstorming answers (you respond to its questions)
-
-The skill will ask 4-6 questions. **Have ready answers** so you don't stumble.
+The skill will ask 4–6 questions. **Have ready answers** so you don't stumble.
 Sample answers (the actual questions may differ — adapt):
 
 **If asked about feedback types:**
@@ -82,53 +106,56 @@ Sample answers (the actual questions may differ — adapt):
 
 ---
 
-## Prompt 3 — Move to plan writing
+### Prompt 2 — Move to plan (workflow step 2)
 
-**When:** Brainstorming feels done (3-5 questions answered).
+**When:** Brainstorming feels done (3–5 questions answered).
 
 **Paste this:**
 
-```
+```text
 That's enough context. Please use /superpowers:writing-plans to write the
 plan to docs/plans/, then we'll dispatch subagents to implement it.
 ```
 
 **What you say while it writes:**
-> *"It's writing a plan document — actual file in the repo. This survives the
-> conversation. If I close my terminal, the plan is still there. That's a
-> deliberate part of the workflow."*
+> *"Step 2 — it's writing a plan document, an actual file in the repo.
+> This survives the conversation. If I close my terminal, the plan is
+> still there. New sessions can pick it up. That's a deliberate part of
+> the workflow."*
 
 ---
 
-## Prompt 4 — Dispatch subagents
+### Prompt 3 — Execute via subagents (workflow step 3)
 
 **When:** The plan document is written and you can see it.
 
 **Paste this:**
 
-```
+```text
 Now use /superpowers:subagent-driven-development to dispatch parallel
 subagents for this plan. Run all independent tasks in parallel.
 ```
 
 **What you say while subagents start:**
-> *"Each subagent is an independent Claude instance with one focused task —
-> backend, frontend form, frontend list, integration tests, e2e. They run in
-> parallel. I won't wait for them to finish — I just want you to see the
-> dispatch pattern."*
+> *"Step 3 — execute. This feature touches backend, two frontend
+> components, and tests, so we go parallel. Each subagent is an
+> independent Claude instance with one focused task. The main agent
+> would be the right choice for a single-layer change — but here we
+> want the fan-out."*
 
 ---
 
-## Prompt 5 — Stop and switch (the planned cut)
+### Prompt 4 — STOP and switch to `demo-finished`
 
 **When:** All subagents have started and the task list is visible. **Don't
-wait for them to complete** — that takes 5-10 minutes you don't have.
+wait for them to complete** — that takes 5–10 minutes you don't have.
 
 **Speak this** (don't type — say it to the audience):
 
 > *"Okay — this would now run for about 5 to 10 minutes while the subagents
 > finish their work. To respect your time, I ran this exact workflow
-> yesterday. Let me show you the result."*
+> yesterday. Let me show you the result, and then we'll run steps 4, 5,
+> and 6 of the workflow live on top of it."*
 
 **Then in a new terminal tab, run:**
 
@@ -138,51 +165,80 @@ git checkout demo-finished
 
 If Claude Code asks about the running subagents, say in chat:
 
-```
+```text
 Stop the running subagents — I'll show the pre-built result instead.
 ```
 
 ---
 
-## Prompt 6 — Code reviewer subagent (post-result)
+## Post-result prompts (steps 4–6, executed live on `demo-finished`)
 
-**When:** After Slide 8 (Results), once you have shown the diff and run tests, ~minute 22.
+These run against the finished feature. The audience has already seen the
+diff and a green test run, so the workflow story is intact even if any of
+these stalls.
+
+### Prompt 5 — Simplify pass (workflow step 4)
+
+**When:** After Slide 8 (Results) and the live `npm test` / `git diff`,
+~minute 21.
 
 **Paste this:**
 
-```
-Use the code-reviewer subagent to review the changes between main and
-demo-finished. Focus on: scope discipline, test coverage, and anything
-a senior reviewer would flag.
+```text
+/simplify Look at the diff between main and demo-finished. Focus on the
+new feedback feature: server/src/routes/, server/src/services/,
+server/src/validators/, and apps/web/src/app/feedback/. Flag duplicated
+code, dead helpers, premature abstractions, redundant state, and one-shot
+wrappers. Apply small fixes inline; flag judgement calls.
 ```
 
-**What you say:**
-> *"This is a different Claude — it didn't write this code. It reviews like a
-> senior engineer. In a real workflow, this is a step you'd run before opening
-> a PR."*
-
-**Note:** This is optional. **Skip if past 23 minutes.**
+**What you say while it scans:**
+> *"Step 4 — simplify. After the code exists, this skill looks for things
+> the agent over-built. We run it after, not before, because premature
+> simplification deletes things you actually need."*
 
 ---
 
-## Prompt 7 — `/simplify` bonus (only if time permits)
+### Prompt 6 — Code review (workflow step 5)
 
-**When:** Only if you're at minute 24 or earlier with everything else done.
-
-**Setup before the demo:** Have a deliberately cluttered version of one file
-(e.g., `feedbackService.ts` with redundant variables, unnecessary helpers).
+**When:** Right after Prompt 5 completes, ~minute 22.
 
 **Paste this:**
 
-```
-/simplify Look at server/src/services/feedback.service.ts and remove
-unnecessary complexity. Keep behavior identical. Show the diff.
+```text
+Use the code-reviewer subagent to review the changes between main and
+demo-finished against the plan in docs/plans/ and the conventions in
+CLAUDE.md. Focus on: scope discipline, test coverage, validation
+correctness, and anything a senior reviewer would flag.
 ```
 
 **What you say:**
-> *"30 second bonus — `/simplify` is one of the skills you can install. It
-> doesn't change behavior, just removes noise. Useful as a 'cleanup' step
-> after generation."*
+> *"Step 5 — review. This is a different Claude. It didn't write this code.
+> It reads the plan, the conventions, and the diff, then reviews like a
+> senior engineer. In a real workflow, this is the step you run before
+> opening the PR."*
+
+---
+
+### Prompt 7 — Documentation update (workflow step 6, optional)
+
+**When:** Only if you're at minute 24 or earlier with everything else done.
+**This is the first thing to cut when running over.**
+
+**Paste this:**
+
+```text
+Look at the diff between main and demo-finished. Identify anything that
+would change CLAUDE.md, README.md, or docs/ — new commands, new scripts,
+new conventions, or behavior the audience or future contributors need to
+know. Show me a proposed doc patch. Don't apply it yet.
+```
+
+**What you say:**
+> *"Step 6 — document. Docs written before the code lie. Docs written
+> after the code, in the same commit, stay accurate. In production we'd
+> apply this patch; today we just show that the workflow loops back to
+> docs."*
 
 ---
 
@@ -190,13 +246,13 @@ unnecessary complexity. Keep behavior identical. Show the diff.
 
 ### If brainstorming gets stuck or repeats itself:
 
-```
+```text
 Skip the remaining questions. Use what you have to write the plan now.
 ```
 
 ### If a subagent fails:
 
-```
+```text
 Don't worry about that subagent — proceed with the others. We'll see the
 result either way.
 ```
@@ -214,12 +270,15 @@ the browser.
 
 ## Prompt timing summary
 
-| Prompt | Slide / Moment | Approx. Time |
-|--------|----------------|--------------|
-| 1 — Brainstorm trigger | After slide 7, ~10:30 | 30s typing + 1m for skill to engage |
-| 2 — Answers | During brainstorm | 2-3 min total of Q&A |
-| 3 — To plan | When brainstorm complete | 1-2 min for plan to write |
-| 4 — Dispatch | When plan visible | 1-2 min for subagent dispatch |
-| 5 — Stop and switch | When task list shows | <30s |
-| 6 — Code reviewer | Post-result, ~22min | 1 min |
-| 7 — Simplify (optional) | Bonus, ~24min | 30s |
+Aligned to the 6-step workflow. Prompts 1–3 run live on `main`; Prompt 4
+is the cut; Prompts 5–7 run live on `demo-finished`.
+
+| Prompt | Workflow step | Slide / Moment | Approx. Time |
+|--------|---------------|----------------|--------------|
+| 1 — Brainstorm | 1 — Brainstorm | After slide 7, ~10:30 | 30s typing + 2–3 min Q&A |
+| 2 — Move to plan | 2 — Plan | Brainstorm complete, ~13:00 | 1–2 min for plan to write |
+| 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:30 | 1–2 min for dispatch fan-out |
+| 4 — STOP and switch | (cut) | Task list shown, ~16:30 | <30s |
+| 5 — `/simplify` | 4 — Simplify | After diff + tests, ~21:00 | 1 min |
+| 6 — `code-reviewer` | 5 — Review | Right after Prompt 5, ~22:00 | 1–2 min |
+| 7 — Doc update | 6 — Document | Bonus, ~24:00 | 30–60s — **cut first** |

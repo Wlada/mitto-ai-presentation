@@ -22,11 +22,24 @@
 }
 
 .brand {
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  font-size: 14px;
-  color: var(--mitto-fg);
   justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 4px;
+  transition: opacity 120ms ease;
+}
+
+.brand:hover {
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+.brand img {
+  display: block;
+  height: 27px;
+  width: auto;
 }
 
 .slide-title {

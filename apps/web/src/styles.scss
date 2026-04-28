@@ -16,12 +16,15 @@ html {
 }
 
 :root {
+  // Mitto brand palette (mitto.ch).
   --mitto-bg: #ffffff;
-  --mitto-fg: #0a1f44;
-  --mitto-muted: #5a6a85;
-  --mitto-accent: #1f3a8a;
-  --mitto-divider: #e5e9f2;
-  --mitto-surface: #f8f9fc;
+  --mitto-fg: #1f0047;
+  --mitto-fg-soft: #4a3870;
+  --mitto-muted: #6a5e85;
+  --mitto-accent: #fc0079;
+  --mitto-accent-soft: rgba(252, 0, 121, 0.08);
+  --mitto-divider: #ece6f3;
+  --mitto-surface: #f7f4fb;
 }
 
 * {

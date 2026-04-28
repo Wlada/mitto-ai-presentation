@@ -27,8 +27,8 @@ describe('SlideLayout', () => {
     await fixture.whenStable();
 
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.querySelector('.brand')?.textContent).toContain('MITTO');
-    expect(el.querySelector('.counter')?.textContent).toContain('1 /');
+    expect(el.querySelector('.brand img')?.getAttribute('alt')).toBe('Mitto');
+    expect(el.querySelector('.counter')?.textContent).toMatch(/^1\s*\/\s*\d+$/);
   });
 
   it('disables the previous button at the first slide', async () => {

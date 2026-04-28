@@ -49,11 +49,19 @@ Every non-trivial change goes through:
 The Audience Q&A feature on `demo-finished` was built end-to-end with this
 exact workflow. The prompts below reproduce it.
 
-**Live vs. pre-built split:**
-- **Steps 1–3** (Prompts 1–3) run live on `main`.
-- After Prompt 4 (the planned cut) you switch to `demo-finished`.
-- **Steps 4–6** (Prompts 5–7) run live on `demo-finished` against the
-  finished result.
+**Live vs. deployed split:**
+- **Steps 1–3** (Prompts 1–3) run live in your terminal on local `main`.
+- The **deployed live URL** (`presentation.vladimirbujanovic.com`) serves
+  `demo-finished` — the audience sees the finished result there throughout
+  the talk. Slide 6 CTA already works because the live URL has the Q&A
+  feature.
+- After Prompt 4 (the planned cut), you don't `git checkout` anything —
+  the live URL is already showing the finished state. You just shift
+  focus from terminal back to the browser tab.
+- **Steps 4–6** (Prompts 5–7) optionally run on local `demo-finished`
+  if you want to demonstrate `/simplify` and `code-reviewer` against
+  real diff. A local `git checkout demo-finished` for that segment is
+  fine; the live URL on the projector stays unaffected.
 
 ---
 
@@ -145,7 +153,7 @@ subagents for this plan. Run all independent tasks in parallel.
 
 ---
 
-### Prompt 4 — STOP and switch to `demo-finished`
+### Prompt 4 — STOP and shift to the live URL
 
 **When:** All subagents have started and the task list is visible. **Don't
 wait for them to complete** — that takes 5–10 minutes you don't have.
@@ -153,20 +161,21 @@ wait for them to complete** — that takes 5–10 minutes you don't have.
 **Speak this** (don't type — say it to the audience):
 
 > *"Okay — this would now run for about 5 to 10 minutes while the subagents
-> finish their work. To respect your time, I ran this exact workflow
-> yesterday. Let me show you the result, and then we'll run steps 4, 5,
-> and 6 of the workflow live on top of it."*
+> finish their work. To respect your time, the same workflow ran yesterday
+> and the result is already deployed at the URL you've been on this whole
+> time. Let me show you, and then we'll run steps 4, 5, and 6 of the
+> workflow live on top of it."*
 
-**Then in a new terminal tab, run:**
-
-```bash
-git checkout demo-finished
-```
+**Shift focus** from terminal to the browser tab on the live URL
+(<https://presentation.vladimirbujanovic.com>). The browser already shows
+the finished state — no `git checkout` needed. Click "Try the demo
+feature" on slide 6, or navigate to `/feedback`, and submit a question to
+prove it works.
 
 If Claude Code asks about the running subagents, say in chat:
 
 ```text
-Stop the running subagents — I'll show the pre-built result instead.
+Stop the running subagents — the live URL already shows the finished result.
 ```
 
 ---

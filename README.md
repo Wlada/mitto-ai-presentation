@@ -113,15 +113,24 @@ changes, then commit the new PNGs.
 
 ## Branches
 
-- **`main`** — slides + scaffold + docs. The presenter starts the demo here.
-- **`demo-finished`** — `main` + the full Audience Q&A feature with tests.
-  The presenter switches here after the live agent dispatch (around minute 18
-  of the talk) to show the finished result.
+- **`main`** — slides + scaffold + docs. The presenter's local working
+  copy stays on this branch for the entire talk. Claude Code runs the
+  live agent flow (brainstorm → plan → dispatch) here — the agent sees a
+  fresh repo without the Q&A feature, so the brainstorm questions are
+  meaningful.
+- **`demo-finished`** — `main` + the full Audience Q&A feature with
+  tests. **This is the branch deployed at the live URL.** The audience
+  sees the finished state on the live URL throughout the talk; no
+  `git checkout` happens mid-demo.
 
 ```
-main             ◄── presenter starts here
-└─ demo-finished ◄── + Audience Q&A feature (switch here at minute 18)
+main             ◄── local: presenter runs Claude Code here
+└─ demo-finished ◄── deployed: serves the live URL the audience sees
 ```
+
+When the live agent flow finishes (around minute 18), the presenter just
+shifts focus from the terminal to the browser tab on the live URL —
+already showing the finished result — instead of swapping local branches.
 
 ## Ports
 

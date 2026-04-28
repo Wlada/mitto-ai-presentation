@@ -8,6 +8,18 @@
 
 ---
 
+## Setup model (read once, internalize)
+
+- **Local repo:** stays on `main` branch the whole time. Claude Code runs
+  here for the live agent flow (brainstorm → plan → dispatch). You never
+  `git checkout` mid-demo.
+- **Live URL:** <https://presentation.vladimirbujanovic.com> serves the
+  deployed `demo-finished` branch. The audience sees this URL throughout —
+  slides, working /feedback, everything. Same URL works on their phones.
+- **Mid-demo "switch"** is just shifting focus from terminal to browser —
+  no `git checkout demo-finished` needed. The browser already shows the
+  finished result because the live URL is on demo-finished.
+
 ## Pre-show checklist (10 min before going live)
 
 - [ ] Plug in laptop charger (no battery surprises)
@@ -15,16 +27,17 @@
 - [ ] Browser zoom set so audience can read code (cmd+= a few times)
 - [ ] Terminal font size large (cmd+= a few times)
 - [ ] Checkout `main` branch: `git checkout main`
-- [ ] Run `npm run preshow` — one-shot preflight (branch, working tree, ports,
-      deps, slide-8 freshness, all tests). Exits **READY TO PRESENT** or
-      **NOT READY** with a fix list.
-- [ ] (Or, if you only want the slide-8 numbers refreshed:
-      `npm run results:refresh`)
-- [ ] In Terminal 1: `npm run dev` — verify both servers start (web :4300, server :3000)
-- [ ] In Terminal 2: keep ready for `claude` invocation
-- [ ] Open browser to `http://localhost:4300/slides/1`
-- [ ] Open this cheatsheet on a separate device or paper
-- [ ] Open `docs/presentation/04-prepared-prompts.md` for copy-paste
+- [ ] Run `npm run preshow` — one-shot preflight (branch, working tree,
+      deps, slide-8 freshness, tests, **plus warm-up curl on the live URL**
+      so the Render free-tier service isn't cold). Exits **READY TO
+      PRESENT** or **NOT READY** with a fix list.
+- [ ] Browser tab #1 (audience-facing): <https://presentation.vladimirbujanovic.com/slides/1>
+- [ ] Browser tab #2 (optional, for verifying live agent edits visually):
+      `http://localhost:4300/slides/1` — only if you start `npm run dev`
+- [ ] Terminal 1: `claude` in the repo root (running on `main`)
+- [ ] Terminal 2 (optional): `npm run dev` if you want a local preview
+- [ ] Cheatsheet open on a separate device or paper
+- [ ] `docs/presentation/04-prepared-prompts.md` open for copy-paste
 - [ ] Take a deep breath. 30 minutes. You've practiced.
 
 ---
@@ -195,12 +208,17 @@ steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
   frontend, tests. They run in parallel because the work is multi-layer."*
 - Wait until you see the task list dispatched
 
-### Phase D: Cut and switch (16:30 — 18:30)
+### Phase D: Cut (16:30 — 18:30)
 - **Speak Prompt 4** *"This would now run for 5-10 minutes. To respect your
-  time, here's what I produced yesterday — and we'll then run steps 4, 5,
-  and 6 live on top of it."*
-- **Type:** `git checkout demo-finished`
-- **Refresh browser** at /feedback
+  time, here's what the same workflow produced — already deployed at the
+  URL you've been seeing. Then we'll run steps 4, 5, and 6 live on top
+  of it."*
+- **Switch focus** from terminal to browser tab #1 (the live URL).
+  No `git checkout` needed — the live URL is already serving the
+  finished state from `demo-finished`.
+- Click "Try the demo feature" on slide 6, or just navigate to
+  `/feedback` on the live URL — submit a question to prove it works
+  end-to-end.
 
 ---
 
@@ -208,7 +226,7 @@ steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 
 ## Slide 8 (Results) — 18:30 to 19:30
 
-**Switch back to slides:** browser, → to slide 8
+**Browser already on the live URL** — navigate to slide 8.
 
 **Say:**
 > "Same workflow, finished and committed. These numbers come straight from the
@@ -345,12 +363,17 @@ If you run over, cut in this order:
 # Total recovery rule
 
 If anything is going badly past 20:00, **immediately**:
-1. `git checkout demo-finished`
-2. Refresh browser to /feedback (works)
+1. Switch browser focus to the live URL tab (already open)
+2. Navigate to /feedback to prove the feature works
 3. Skip to Phase 4 (Result section)
 
 The audience came for the workflow story. They will not notice you skipped
 the dispatch detail if you're confident.
+
+If the live URL itself is unreachable (Render down, network problem),
+fall back to local: in a terminal, `git checkout demo-finished &&
+npm run dev`, then open `http://localhost:4300`. Slower but works
+offline.
 
 ---
 

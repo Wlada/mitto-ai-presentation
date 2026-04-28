@@ -17,6 +17,6 @@ export const RESULTS: Results = {
   "e2eTests": 18,
   "totalUnitTests": 68,
   "webCoverage": 84,
-  "serverCoverage": 95,
+  "serverCoverage": 89,
   "generatedAt": "2026-04-28"
 } as const;

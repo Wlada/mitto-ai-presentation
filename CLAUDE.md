@@ -1,237 +1,191 @@
 # CLAUDE.md
 
-> Project context for Claude Code. This is the canonical source of truth for how
-> to work on this repository. `AGENTS.md` is an alias pointing here.
+> Project context for Claude Code. The agent reads this file before any
+> interaction with this repository. `AGENTS.md` is an alias pointing here.
+>
+> This file is **also a demo artifact** — the audience reads it on screen
+> during the presentation. Keep it scannable, opinionated, and honest about
+> trade-offs.
 
 ---
 
-## Project overview
+## What this file is and how to maintain it
 
-**Name:** `mitto-ai-presentation`
+A `CLAUDE.md` (also recognized as `AGENTS.md`) is the **standing context** the
+agent uses every time it touches the repo. Think of it as a permanent prompt
+prefix that does not consume your conversation context window.
 
-A presentation application that demonstrates how Claude Code delivers full-stack
-features through a disciplined workflow. The application serves two purposes
-simultaneously:
+### What belongs here
+- **Project-specific rules** — conventions a new contributor would need a
+  human to explain (which lint preset, in-memory storage, no auth, etc.)
+- **Workflow expectations** — the steps every non-trivial task goes through
+- **Code style per layer** — short bullets the agent will treat as ground truth
+- **What NOT to do** — guardrails to prevent past mistakes from recurring
+- **Definition of done** — the checklist the agent self-evaluates against
+- **Demo / context-specific behaviors** — instructions that depend on usage
+  (e.g. "this is a demo, optimize for clarity")
 
-1. **It renders the slides** of the presentation itself (Angular components,
-   Router-based navigation).
-2. **It is the demo target** — Claude Code adds and modifies features in this
-   same repository while the audience watches.
+### What does NOT belong here
+- **Project description, stack table, install commands** — those live in
+  `README.md` (humans read that). Agents don't need a 5-paragraph intro.
+- **Generated artifacts** (test counts, coverage numbers, file inventories) —
+  use scripts (`npm run results:refresh`) or `git`/`grep` to derive these
+- **Anything that drifts** — every line you add is a maintenance liability.
+  If a fact rots over time, prefer a script that recomputes it.
 
-This "meta" structure means the codebase the agent works on during the live
-demo is the same codebase rendering the slides behind the demo.
-
-The presentation is **30 minutes**, audience is a **mixed technical team**
-(developers, QA, tech leads), and the central message is:
-
-> The value isn't agent autonomy — it's a faster, controlled, repeatable
-> engineering process where the developer remains the owner.
-
----
-
-## Tech stack
-
-| Layer | Choice |
-|-------|--------|
-| Frontend | Angular (latest stable) + Angular Material + Router |
-| Backend | Node.js + Express + TypeScript |
-| Storage | In-memory (no database) |
-| Frontend tests | Vitest (built-in via `@angular/build:unit-test`, Angular 21 default) |
-| Backend tests | Vitest + Supertest |
-| E2E | Playwright |
-| Coverage | Vitest built-in (`--coverage`, v8 provider) |
-| Workspace | npm workspaces |
-| Language across the stack | TypeScript |
-
-Do not introduce a database, ORM, authentication library, websockets, message
-queue, or any external service. Storage is in-memory by design.
+### Maintenance discipline (important)
+- **Outdated `CLAUDE.md` is worse than none.** Stale rules teach the agent
+  the wrong patterns and the audience starts ignoring it.
+- After every meaningful change to the repo, ask: *"Does any rule in
+  `CLAUDE.md` need updating?"* If yes, update in the same commit.
+- The "What you must NOT do" section often grows after a bad agent
+  interaction. That is correct — encode the lesson.
+- For a step-by-step on adapting this template to a new repo, see
+  `docs/setup/02-claude-md-template.md`.
 
 ---
 
-## Repository structure
+## Project at a glance
 
-```
-mitto-ai-presentation/
-├── CLAUDE.md                  # this file
-├── AGENTS.md                  # alias → CLAUDE.md
-├── README.md
-├── package.json               # workspaces root
-├── apps/
-│   └── web/                   # Angular app
-│       ├── src/app/
-│       │   ├── slides/        # one component per slide
-│       │   ├── feedback/      # demo feature (Audience Q&A)
-│       │   ├── shared/        # shared components, types
-│       │   └── core/          # services, http clients, guards
-│       └── tests/
-├── server/
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── validators/
-│   │   └── data/              # in-memory stores
-│   └── tests/
-├── e2e/                       # Playwright specs (functional + visual regression)
-├── scripts/                   # Maintenance scripts (e.g. refresh-results.mjs)
-├── docs/
-│   ├── plans/                 # design docs, plan-first artifacts
-│   ├── presentation/          # slide content, cheatsheet, prompts
-│   └── setup/                 # bootstrap and build guides
-└── .claude/
-    ├── settings.json
-    └── plugins/               # superpowers plugin reference
-```
+`mitto-ai-presentation` is a 30-minute presentation app that **renders the
+slides** and is **simultaneously the demo target** the agent works on during
+the live talk. The audience sees the same Angular components evolve in real
+time during the live demo. See `README.md` for the full project description,
+stack, structure, and commands.
 
-Keep the structure flat. Do not add intermediate folders unless they
-materially improve navigation.
+**Hard constraints for this repo:**
+- No database, no auth, no external services — in-memory storage only
+- No background jobs, websockets, or message queues
+- TypeScript across the stack, strict mode, no `any` (except boundaries with
+  untyped third-party code)
+- Optimize for **clarity over cleverness** — the audience reads the code on
+  screen during the talk
 
 ---
 
-## Commands
+## Workflow (mandatory for non-trivial work)
 
-| Command | What it does |
-|---------|--------------|
-| `npm install` | Install all workspace dependencies |
-| `npm run dev` | Run Angular and Express concurrently (frontend on :4300, backend on :3000) |
-| `npm run dev:web` | Run only Angular |
-| `npm run dev:server` | Run only Express |
-| `npm run build` | Build all workspaces for production |
-| `npm test` | Run unit + integration tests across all workspaces |
-| `npm run test:web` | Frontend tests only |
-| `npm run test:server` | Backend tests only |
-| `npm run e2e` | Run Playwright tests (requires dev server running, or use `e2e:ci`) |
-| `npm run e2e:ci` | Start dev server, run Playwright, then shut down |
-| `npm run coverage` | Run all tests with coverage; output to `coverage/` |
-| `npm run results:refresh` | Run coverage and regenerate `apps/web/src/app/slides/slide-08-results/results.data.ts` (Slide 8 live numbers) |
-| `npm run lint` | Lint all workspaces |
-| `npm run format` | Run Prettier across the repo |
+Every feature, refactor, or significant fix flows through this six-step
+cycle. Small one-line bug fixes can skip steps 1–2; everything else does
+the full loop.
 
-Always verify a command works before claiming it does. If a script does not
-exist, add it explicitly to `package.json` rather than assuming.
+### 1. Brainstorm — `/superpowers:brainstorming`
+Triggers a structured Q&A with the agent. The agent asks one question at
+a time to refine intent before any code is written. Goal: surface
+requirements, edge cases, and the simplest viable scope.
 
----
+> **Why first.** Most failed agent runs are wrong assumptions made silently.
+> Brainstorming forces them into the open.
 
-## Workflow rules (most important section)
+### 2. Plan — `/superpowers:writing-plans`
+The agent writes a plan document to `docs/plans/YYYY-MM-DD-<topic>.md`. The
+plan lists files to change, the strategy, tests, and risks. The plan is
+reviewed (by you) before any code changes.
 
-### Plan first, code second
+> **Why a file.** Plans survive the conversation. If you `/clear`, the plan
+> is still there. New conversations can pick it up. Reviewers can read it
+> before approving the diff.
 
-Before editing code, always:
+### 3. Execute — choose one
+- **Parallel (preferred for multi-layer work):**
+  `/superpowers:subagent-driven-development` — dispatches independent
+  subagents per task in the plan (e.g. backend, frontend, e2e). Faster, and
+  each subagent has a focused context window.
+- **Main agent (preferred for single-layer or tightly-coupled work):**
+  Continue in the current session, work through the plan step by step.
 
-1. Read the relevant parts of the repository and `CLAUDE.md`.
-2. Summarize what you understand the task to be in your own words.
-3. Propose a short implementation plan (sections, files, steps).
-4. List the files you expect to create or modify.
-5. Call out any risks, assumptions, or open questions.
+### 4. Simplify — `/simplify` skill
+After implementation, run `/simplify` to look for duplicated code, dead
+helpers, premature abstractions, redundant state, and one-shot wrappers.
+Apply small fixes inline; flag judgement calls.
 
-Only after this — and after confirmation when working interactively — start
-making changes. For bigger features, write the plan to
-`docs/plans/YYYY-MM-DD-<topic>.md` so it survives the conversation.
+> **Why after, not before.** Simplification needs working code to evaluate.
+> Premature simplification deletes things you need.
 
-### Small, focused diffs
+### 5. Review — code-reviewer subagent
+Dispatch the `code-reviewer` subagent with a pointer to the plan and a
+brief of what changed. It reviews against project conventions in this file
+and against the plan. Treat its findings the way you'd treat a senior
+colleague's PR review.
 
-- Prefer the smallest change that solves the problem.
-- Do not bundle refactors with features. Bug fixes do not need surrounding
-  cleanup.
-- Three similar lines is better than a premature abstraction.
-- Do not introduce new dependencies unless clearly necessary.
+### 6. Document — update `CLAUDE.md`, `README.md`, `docs/`
+- Did you add a new command, script, or tool? Update `README.md` and the
+  command table here.
+- Did you encode a new lesson the agent should follow? Update the relevant
+  rule section here.
+- Did you change behaviour the audience or future contributors need to
+  know about? Update `docs/`.
 
-### After changes
-
-1. Run the relevant tests for the area you changed.
-2. Fix anything you broke.
-3. Provide a final summary listing changed files and any risks or follow-ups.
-
-### What you must NOT do
-
-- Do not add a database, auth, or external service.
-- Do not introduce abstractions or design patterns "for the future."
-- Do not delete tests because they fail; fix the cause.
-- Do not silently rename files or move folders without saying so.
-- Do not write large multi-paragraph comments. One short line max.
-- Do not add `// removed` or `// previously` placeholder comments.
-- Do not bypass validation or hooks (`--no-verify`).
+> **Why last.** Docs that get written before the code lie. Docs that get
+> written after the code, in the same commit, stay accurate.
 
 ---
 
-## Frontend rules (Angular)
+## Code conventions
 
-- Use Angular Material components first. Custom components only when Material
-  cannot express what is needed.
-- Components should be small and single-purpose. If a template approaches 100
-  lines, decompose.
-- Services for state and HTTP. Components consume services; they do not own
-  business logic.
-- Strongly type everything. No `any` unless coming from an untyped third-party
-  source.
-- Reactive forms over template-driven forms.
-- Routes are declarative in the routing module — avoid imperative
-  `router.navigate` for primary navigation.
+### Frontend (Angular 21)
+- Use Angular Material first; custom components only when Material doesn't fit
+- Standalone components (this is the Angular 21 default; no NgModules)
+- Signals for state, `OnPush` change detection by default
+- Reactive forms over template-driven
+- File naming follows Angular 21 convention: `*.ts` not `*.component.ts`
+- One slide = one standalone component under `apps/web/src/app/slides/`
 
-### Slide components
+### Backend (Node + Express + TypeScript)
+- Routes are thin: parse → validate → service → respond. No logic in routes.
+- Validators in `server/src/validators/`, return
+  `{ ok: true; value } | { ok: false; errors }`. Never throw for validation.
+- Services in `server/src/services/`. Pure where possible.
+- In-memory storage in `server/src/data/`. Reset on process restart by design.
+- Error response shape is uniform: `{ error: { message: string, details?: unknown } }`
 
-Each slide is its own component under `apps/web/src/app/slides/`. Slides are
-plain components — they render content and (optionally) demo widgets. Slide
-navigation uses the Router (`/slides/:n`).
+### Testing
+- Every new feature: unit tests for logic, integration test for new routes,
+  one Playwright e2e for the main user flow
+- Vitest (not Jest — Angular 21's `@angular/build:unit-test` uses Vitest)
+- Coverage targets: **80%+ backend**, **70%+ frontend**
+- No `setTimeout`-based waits in unit tests; no `page.waitForTimeout()` in
+  Playwright. Use fake timers (`vi.useFakeTimers()`) and proper auto-waits.
 
-When asked to add a new slide:
-1. Create `slide-NN-name.component.ts` (number prefixed for ordering).
-2. Register it in `slides.routes.ts`.
-3. Update the slide registry/index.
-
-### Branding
-
-The brand is **Mitto** (https://mitto.ch). Visual style is **clean, minimal,
-sans-serif**. Primary palette: white background, dark navy/charcoal text,
-muted accents. Do not introduce playful or decorative elements unless asked.
-
----
-
-## Backend rules (Express + TypeScript)
-
-- Routes are thin: parse → validate → call service → respond.
-- Validators live in `server/src/validators/`. They return a structured result
-  `{ ok: true, value } | { ok: false, errors }` — never throw for validation.
-- Services live in `server/src/services/`. Pure functions where possible;
-  inject dependencies through constructor or function parameters for
-  testability.
-- Data layer is in-memory (`server/src/data/`). Use Map or array. Reset on
-  process restart by design.
-- Error responses have a consistent shape: `{ error: { message, details? } }`.
-- Use HTTP status codes correctly: 200, 201, 400, 404, 500.
+### TypeScript and exports
+- Strict mode. No `any` unless the boundary is genuinely untyped.
+- Named exports only. No default exports.
+- One short comment line max. Default to no comments. Only add for non-obvious
+  *why* (hidden constraint, subtle invariant, workaround). Never narrate WHAT
+  the code does — names already do that.
 
 ---
 
-## Testing rules
+## What you must NOT do
 
-Every new feature must include:
-
-- **Unit tests** for any non-trivial logic (validators, services, components).
-- **Integration test** for any new backend route (Supertest).
-- **One Playwright e2e test** for the main user flow if the feature has UI.
-
-Coverage targets: **80%+ backend**, **70%+ frontend**. If a change drops
-coverage below the target, either add tests or explain in the summary why
-the new code is not testable.
-
-Tests must be deterministic. No `setTimeout`-based waits in unit tests. In
-Playwright, use locators and `expect(...).toBeVisible()`-style waits, never
-arbitrary `page.waitForTimeout()`.
+- Do not add a database, ORM, auth, websockets, or external services
+- Do not introduce abstractions or design patterns "for the future"
+- Do not delete tests because they fail; fix the cause
+- Do not silently rename files or move folders without saying so
+- Do not write multi-paragraph comments or `// removed` placeholders
+- Do not bypass validation or git hooks (`--no-verify`)
+- Do not weaken coverage thresholds to make a build pass
+- Do not regenerate `apps/web/src/app/slides/slide-08-results/results.data.ts`
+  from any branch other than `demo-finished` (canonical numbers come from
+  there; running on `main` would write lower values and break the slide-8
+  visual snapshot baseline)
 
 ---
 
-## Demo behavior (presentation context)
+## Demo behavior (this repo is used in a live talk)
 
-This repository is used in a live presentation. When working in this codebase
-during the demo:
-
-- **Optimize for clarity over cleverness.** The audience reads the code on
-  screen. Long expressions and clever one-liners hurt comprehension.
-- **Predictable patterns over advanced abstractions.** Use the same shape
-  across files (e.g., all routes look alike).
-- **Explain trade-offs in the final summary** in 2-3 plain sentences, not as
-  a wall of bullet points.
-- **Time matters.** When invoked through `superpowers:subagent-driven-development`,
-  prefer parallelism over sequential work.
+- Code is read on screen at projector resolution. Long expressions and clever
+  one-liners hurt comprehension live.
+- Predictable patterns over advanced abstractions. All routes look alike. All
+  slides look alike.
+- Final summaries are 2–3 plain sentences, not a wall of bullets.
+- When invoked through `superpowers:subagent-driven-development`, prefer
+  parallelism. The audience sees the dispatch fan out — that's part of the
+  demo's value.
+- Slide numbering is load-bearing (slide 8 = Results, etc.). If you renumber
+  slides, update `apps/web/src/app/slides/slide.config.ts`,
+  `slides.routes.ts`, and every `docs/presentation/*.md` reference in the
+  same commit.
 
 ---
 
@@ -239,19 +193,35 @@ during the demo:
 
 A change is done when:
 
-1. The code compiles and lints.
-2. Tests run and pass (unit + integration + e2e where applicable).
-3. Coverage is at or above target.
-4. There is a final summary listing changed files and any risks.
-5. The diff is reviewable — no unrelated changes mixed in.
+1. Code compiles and lints
+2. Tests run and pass (unit + integration + e2e where applicable)
+3. Coverage at or above target
+4. There is a final summary listing changed files and any risks
+5. The diff is reviewable — no unrelated changes mixed in
+6. `CLAUDE.md`, `README.md`, and relevant `docs/` are updated if behavior or
+   commands changed (workflow step 6)
+7. Visual regression baselines updated and committed if intentional UI
+   changes were made: `npm --workspace e2e run test -- --update-snapshots`
+
+---
+
+## Commands you'll actually use
+
+| Command | What it does |
+|---------|--------------|
+| `npm run dev` | Frontend (:4300) + backend (:3000), concurrently |
+| `npm test` | Unit + integration tests across workspaces |
+| `npm run e2e` | Playwright (functional + visual regression) |
+| `npm run coverage` | HTML coverage reports under `*/coverage/` |
+| `npm run results:refresh` | Regenerate Slide 8 numbers (run on `demo-finished`) |
+| `npm run preshow` | One-shot preflight for the live presentation |
+
+For the full table see `README.md`.
 
 ---
 
 ## References
-
-- Design document: `docs/plans/2026-04-27-presentation-design.md`
-- Slide content: `docs/presentation/02-slide-content.md`
-- Presenter cheatsheet: `docs/presentation/03-presenter-cheatsheet.md`
-- Prepared prompts: `docs/presentation/04-prepared-prompts.md`
-- Fallback plan: `docs/presentation/05-fallback-plan.md`
-- Repo setup: `docs/setup/01-repo-setup.md`
+- `README.md` — project description, stack, structure, full command table
+- `docs/plans/` — past plans the agent has written
+- `docs/presentation/` — slide content, presenter cheatsheet, prompts, fallback
+- `docs/setup/02-claude-md-template.md` — how to write a CLAUDE.md for a new repo

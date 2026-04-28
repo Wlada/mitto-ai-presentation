@@ -13,6 +13,7 @@
     "dev:web": "npm --workspace apps/web run start",
     "dev:server": "npm --workspace server run dev",
     "build": "npm --workspace apps/web run build && npm --workspace server run build",
+    "start": "npm --workspace server run start",
     "test": "npm --workspace apps/web run test && npm --workspace server run test",
     "test:web": "npm --workspace apps/web run test",
     "test:server": "npm --workspace server run test",

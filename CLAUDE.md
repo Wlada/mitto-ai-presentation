@@ -169,6 +169,10 @@ colleague's PR review.
   from any branch other than `demo-finished` (canonical numbers come from
   there; running on `main` would write lower values and break the slide-8
   visual snapshot baseline)
+- Do not deploy to Render without verifying tests pass first. Always run
+  `npm run preshow` (or at minimum `npm test && npm run build`) and ship
+  only on green. Render auto-deploys on push to `demo-finished`, so a
+  broken push goes live in ~3 minutes.
 
 ---
 

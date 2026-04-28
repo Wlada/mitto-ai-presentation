@@ -6,6 +6,10 @@ the slides** of the presentation itself and serves as the **live demo target**
 the agent works on. The audience watches the same Angular components evolve
 during the talk.
 
+**Live demo:** <https://presentation.vladimirbujanovic.com> (deployed from
+`demo-finished` to Render free tier; first request after 15 min idle has a
+~30 s cold start — the [pre-show script](./scripts/pre-show.sh) warms it up).
+
 ## Stack
 
 | Layer | Choice |
@@ -148,6 +152,7 @@ specific list of fixes.
 - [Presentation design](./docs/plans/2026-04-27-presentation-design.md)
 - [Repo setup guide](./docs/setup/01-repo-setup.md)
 - [How to write a CLAUDE.md for any repo](./docs/setup/02-claude-md-template.md)
+- [Deployment to Render + Cloudflare DNS](./docs/setup/04-deployment.md)
 - [Slide content (audience-facing text)](./docs/presentation/02-slide-content.md)
 - [Presenter cheatsheet](./docs/presentation/03-presenter-cheatsheet.md)
 - [Prepared prompts (live demo)](./docs/presentation/04-prepared-prompts.md)

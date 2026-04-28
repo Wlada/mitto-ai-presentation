@@ -21,9 +21,12 @@ else
 fi
 
 SKIP_E2E=0
+SKIP_WARM=0
+LIVE_URL="https://presentation.vladimirbujanovic.com"
 for arg in "$@"; do
   case "$arg" in
     --skip-e2e) SKIP_E2E=1 ;;
+    --skip-warm) SKIP_WARM=1 ;;
     -h|--help)
       sed -n '2,10p' "$0"
       exit 0
@@ -128,7 +131,21 @@ else
   fi
 fi
 
-# 9. Disk space (avoid surprises)
+# 9. Warm up the production Render service so its 30s cold start
+# doesn't bite the audience's first request.
+if [ "$SKIP_WARM" -eq 1 ]; then
+  step "Live URL warm-up"
+  warn "Skipped (--skip-warm)"
+else
+  step "Live URL warm-up"
+  if curl -sf -o /dev/null --max-time 60 "$LIVE_URL/api/health"; then
+    ok "$LIVE_URL is awake"
+  else
+    warn "$LIVE_URL did not respond in 60s — Render may still be cold-starting; demo URL might lag on first request"
+  fi
+fi
+
+# 10. Disk space (avoid surprises)
 step "Disk"
 FREE_GB="$(df -g . | awk 'NR==2 {print $4}')"
 if [ "${FREE_GB:-0}" -ge 1 ]; then

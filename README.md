@@ -14,11 +14,12 @@ presentation itself and serves as the **live demo target** the agent works on.
 ## Quick start
 
 ```bash
-npm install            # installs all workspaces
-npm run dev            # runs frontend (:4300) and backend (:3000) concurrently
-npm test               # unit + integration tests across workspaces
-npm run e2e            # Playwright end-to-end tests
-npm run coverage       # full coverage report
+npm install              # installs all workspaces
+npm run dev              # runs frontend (:4300) and backend (:3000) concurrently
+npm test                 # unit + integration tests across workspaces
+npm run e2e              # Playwright end-to-end tests (functional + visual regression)
+npm run coverage         # full coverage report
+npm run results:refresh  # optional pre-show: regenerates Slide 8 numbers from current coverage
 ```
 
 ## Repository layout
@@ -26,11 +27,17 @@ npm run coverage       # full coverage report
 ```
 apps/web/      Angular app (slides + demo features)
 server/        Express backend
-e2e/           Playwright tests
+e2e/           Playwright tests (functional + visual regression baselines)
+scripts/       Maintenance scripts (e.g. refresh-results.mjs)
 docs/          Design, presentation, setup documentation
 .claude/       Claude Code project config and plugin references
 CLAUDE.md      Canonical project context for AI agents
 ```
+
+Visual regression baselines live under
+`e2e/tests/slides-visual.spec.ts-snapshots/`. Re-baseline with
+`npm --workspace e2e run test -- --update-snapshots` after intentional UI
+changes.
 
 ## Documentation
 

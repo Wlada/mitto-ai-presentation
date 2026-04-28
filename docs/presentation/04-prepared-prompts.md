@@ -146,7 +146,7 @@ Stop the running subagents — I'll show the pre-built result instead.
 
 ## Prompt 6 — Code reviewer subagent (post-result)
 
-**When:** Slide 8 area, after showing the diff and tests, ~minute 22.
+**When:** After Slide 8 (Results), once you have shown the diff and run tests, ~minute 22.
 
 **Paste this:**
 

@@ -71,7 +71,8 @@ mitto-ai-presentation/
 │   │   ├── validators/
 │   │   └── data/              # in-memory stores
 │   └── tests/
-├── e2e/                       # Playwright specs
+├── e2e/                       # Playwright specs (functional + visual regression)
+├── scripts/                   # Maintenance scripts (e.g. refresh-results.mjs)
 ├── docs/
 │   ├── plans/                 # design docs, plan-first artifacts
 │   ├── presentation/          # slide content, cheatsheet, prompts
@@ -101,6 +102,7 @@ materially improve navigation.
 | `npm run e2e` | Run Playwright tests (requires dev server running, or use `e2e:ci`) |
 | `npm run e2e:ci` | Start dev server, run Playwright, then shut down |
 | `npm run coverage` | Run all tests with coverage; output to `coverage/` |
+| `npm run results:refresh` | Run coverage and regenerate `apps/web/src/app/slides/slide-08-results/results.data.ts` (Slide 8 live numbers) |
 | `npm run lint` | Lint all workspaces |
 | `npm run format` | Run Prettier across the repo |
 

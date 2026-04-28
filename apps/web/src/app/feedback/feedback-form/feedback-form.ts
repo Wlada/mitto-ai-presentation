@@ -25,7 +25,10 @@ import { FEEDBACK_TYPES, FeedbackInput, FeedbackType } from '../feedback.types';
   ],
   template: `
     <form class="feedback-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-      <h2 class="form-title">Share your feedback</h2>
+      <h2 class="form-title">
+        <mat-icon class="title-icon" aria-hidden="true">chat</mat-icon>
+        <span>Share your feedback</span>
+      </h2>
 
       <mat-form-field appearance="outline" class="full">
         <mat-label>Name (optional)</mat-label>
@@ -83,12 +86,25 @@ import { FEEDBACK_TYPES, FeedbackInput, FeedbackType } from '../feedback.types';
         border: 1px solid var(--mitto-divider);
         border-radius: 8px;
         background: var(--mitto-surface);
+        box-shadow:
+          0 1px 2px rgba(31, 0, 71, 0.04),
+          0 4px 12px rgba(31, 0, 71, 0.04);
       }
       .form-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         margin: 0 0 8px;
         font-size: 18px;
         font-weight: 600;
         color: var(--mitto-fg);
+      }
+      .title-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: var(--mitto-accent);
+        margin-right: 0;
       }
       .full {
         width: 100%;
@@ -97,7 +113,7 @@ import { FEEDBACK_TYPES, FeedbackInput, FeedbackType } from '../feedback.types';
         display: flex;
         justify-content: flex-end;
       }
-      mat-icon {
+      .actions button mat-icon {
         margin-right: 6px;
       }
     `,

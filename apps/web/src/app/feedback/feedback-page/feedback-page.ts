@@ -14,11 +14,14 @@ import { FeedbackList } from '../feedback-list/feedback-list';
   template: `
     <section class="page">
       <header class="page-header">
-        <a mat-button routerLink="/slides/1" class="back">
+        <a mat-stroked-button routerLink="/slides/1" class="back">
           <mat-icon>arrow_back</mat-icon>
           <span>Back to slides</span>
         </a>
-        <h1>Audience Q&amp;A</h1>
+        <h1>
+          <span class="title-text">Audience Q&amp;A</span>
+          <span class="title-underline" aria-hidden="true"></span>
+        </h1>
         <p class="subtitle">
           Send a question, comment, or suggestion. New entries appear in the list automatically.
         </p>
@@ -35,7 +38,9 @@ import { FeedbackList } from '../feedback-list/feedback-list';
       :host {
         display: block;
         min-height: 100vh;
-        background: var(--mitto-bg);
+        background:
+          linear-gradient(to bottom, var(--mitto-surface), var(--mitto-bg) 160px),
+          var(--mitto-bg);
       }
       .page {
         max-width: 1100px;
@@ -43,17 +48,33 @@ import { FeedbackList } from '../feedback-list/feedback-list';
         padding: 32px 24px 64px;
       }
       .page-header {
-        margin-bottom: 24px;
+        margin-bottom: 32px;
       }
       .back {
-        margin-bottom: 8px;
-        color: var(--mitto-muted);
+        margin-bottom: 16px;
+        color: var(--mitto-fg);
+        border-radius: 999px;
+      }
+      .back mat-icon {
+        margin-right: 4px;
       }
       h1 {
-        margin: 0 0 4px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 0 8px;
         font-size: 28px;
         font-weight: 700;
         color: var(--mitto-fg);
+        line-height: 1.2;
+      }
+      .title-underline {
+        display: block;
+        width: 48px;
+        height: 4px;
+        margin-top: 8px;
+        background: var(--mitto-accent);
+        border-radius: 2px;
       }
       .subtitle {
         margin: 0;

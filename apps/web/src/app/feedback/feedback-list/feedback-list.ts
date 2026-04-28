@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subject, interval, merge } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
@@ -14,11 +15,14 @@ import { relativeTime } from '../relative-time';
   selector: 'app-feedback-list',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, MatChipsModule, MatProgressSpinnerModule],
+  imports: [MatCardModule, MatChipsModule, MatIconModule, MatProgressSpinnerModule],
   template: `
     <div class="list-wrap">
       <div class="header">
-        <h2 class="list-title">Recent feedback</h2>
+        <h2 class="list-title">
+          <mat-icon class="title-icon" aria-hidden="true">forum</mat-icon>
+          <span>Recent feedback</span>
+        </h2>
         @if (loading()) {
           <mat-spinner diameter="18" />
         }
@@ -41,14 +45,19 @@ import { relativeTime } from '../relative-time';
       }
 
       @if (!loading() && entries().length === 0) {
-        <p class="empty">No feedback yet — be the first to ask!</p>
+        <div class="empty">
+          <mat-icon class="empty-icon" aria-hidden="true">question_answer</mat-icon>
+          <p class="empty-text">No feedback yet — be the first to ask!</p>
+        </div>
       }
 
       <div class="entries">
         @for (entry of entries(); track entry.id) {
-          <mat-card appearance="outlined" class="entry">
+          <mat-card appearance="outlined" class="entry" [attr.data-type]="entry.type">
             <div class="entry-head">
-              <span class="who">{{ displayName(entry.name) }}</span>
+              <span class="who" [class.anon]="!entry.name?.trim()">{{
+                displayName(entry.name)
+              }}</span>
               <span class="badge" [attr.data-type]="entry.type">{{ entry.type }}</span>
               <span class="time">{{ relativeTime(entry.createdAt) }}</span>
             </div>
@@ -74,10 +83,19 @@ import { relativeTime } from '../relative-time';
         gap: 12px;
       }
       .list-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         margin: 0;
         font-size: 18px;
         font-weight: 600;
         color: var(--mitto-fg);
+      }
+      .title-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        color: var(--mitto-accent);
       }
       .filters {
         display: flex;
@@ -92,7 +110,18 @@ import { relativeTime } from '../relative-time';
         border: 1px solid var(--mitto-divider);
         background: var(--mitto-bg);
         padding: 16px;
-        box-shadow: none !important;
+        box-shadow:
+          0 1px 2px rgba(31, 0, 71, 0.04),
+          0 4px 12px rgba(31, 0, 71, 0.04) !important;
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+      .entry:hover {
+        transform: translateY(-1px);
+        box-shadow:
+          0 2px 4px rgba(31, 0, 71, 0.06),
+          0 8px 20px rgba(31, 0, 71, 0.06) !important;
       }
       .entry-head {
         display: flex;
@@ -104,6 +133,11 @@ import { relativeTime } from '../relative-time';
         font-weight: 600;
         color: var(--mitto-fg);
         font-size: 14px;
+      }
+      .who.anon {
+        font-weight: 500;
+        font-style: italic;
+        color: var(--mitto-muted);
       }
       .time {
         margin-left: auto;
@@ -121,12 +155,12 @@ import { relativeTime } from '../relative-time';
         color: var(--mitto-muted);
       }
       .badge[data-type='question'] {
-        background: rgba(31, 58, 138, 0.1);
+        background: rgba(252, 0, 121, 0.1);
         color: var(--mitto-accent);
       }
       .badge[data-type='comment'] {
         background: var(--mitto-surface);
-        color: var(--mitto-muted);
+        color: var(--mitto-fg-soft);
       }
       .badge[data-type='suggestion'] {
         background: rgba(46, 125, 50, 0.12);
@@ -140,9 +174,23 @@ import { relativeTime } from '../relative-time';
         white-space: pre-wrap;
       }
       .empty {
-        margin: 16px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin: 24px 0;
         color: var(--mitto-muted);
+      }
+      .empty-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+        color: var(--mitto-divider);
+      }
+      .empty-text {
+        margin: 0;
         font-style: italic;
+        font-size: 14px;
       }
       .error {
         margin: 0;

@@ -1,5 +1,5 @@
 import { Component, HostListener, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,7 +9,7 @@ import { SlideService } from '../slide.service';
 @Component({
   selector: 'app-slide-layout',
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [RouterLink, RouterOutlet, MatToolbarModule, MatButtonModule, MatIconModule],
   templateUrl: './slide-layout.html',
   styleUrl: './slide-layout.scss',
 })

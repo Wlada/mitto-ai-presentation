@@ -5,28 +5,27 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>Demo application architecture</h1>
-      <p class="lead">
-        The slides you're watching live in the same repo the agent will modify. One Angular app,
-        one Express server, one CLAUDE.md.
-      </p>
-      <pre>mitto-ai-presentation/
-├── apps/web/
-├── server/
-├── e2e/
-├── docs/
-└── CLAUDE.md</pre>
+      <h1>Today's demo app</h1>
+      <pre>apps/web/      Angular 21 + Material
+server/        Node + Express + TypeScript
+e2e/           Playwright
+docs/          Plans, prompts, cheatsheet
+CLAUDE.md      The project context file</pre>
       <ul>
-        <li>Frontend: Angular 21 + Material, signals, zoneless</li>
-        <li>Backend: Node + Express + TypeScript, in-memory storage</li>
-        <li>Tests: Vitest (unit + integration), Playwright (e2e), Supertest (HTTP)</li>
+        <li>Frontend: Angular 21 + Material</li>
+        <li>Backend: Node + Express + TypeScript</li>
+        <li>End-to-end tests: Playwright</li>
+        <li>Docs: plans, prompts, cheatsheet</li>
+        <li><code>CLAUDE.md</code>: the project context file</li>
       </ul>
+      <p class="closing">
+        The slides you see right now are rendered by this same app.
+      </p>
     </section>
   `,
   styles: [
     `
       :host { display: block; }
-      .lead { margin: 0 0 24px; }
       pre {
         font-size: 14px;
         line-height: 1.6;
@@ -37,6 +36,12 @@ import { Component } from '@angular/core';
         border-radius: 6px;
       }
       li { margin-bottom: 6px; }
+      .closing {
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 1.5;
+        color: var(--mitto-fg);
+      }
     `,
   ],
 })

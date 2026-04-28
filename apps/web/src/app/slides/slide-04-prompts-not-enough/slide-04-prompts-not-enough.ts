@@ -5,19 +5,30 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>Why prompts alone aren't enough</h1>
-      <p class="lead">
-        A single chat prompt produces a snippet. A real change needs context, conventions, tests,
-        and review.
-      </p>
+      <h1>The problem with "just prompt it"</h1>
       <ul>
-        <li>Prompts forget the project — agents read it every run</li>
-        <li>Prompts produce code in a vacuum — agents run the tests</li>
-        <li>Prompts can't dispatch parallel work — agents can</li>
-        <li>Prompts have no review step — agents do</li>
+        <li>Without project context, the agent guesses.</li>
+        <li>Without a workflow, it skips review steps.</li>
+        <li>Without rules, it adds dependencies you don't want.</li>
+      </ul>
+      <h2>The fix</h2>
+      <ul class="fix">
+        <li><code>CLAUDE.md</code> &rarr; permanent project rules</li>
+        <li><strong>Skills</strong> &rarr; reusable workflows</li>
+        <li><strong>Subagents</strong> &rarr; parallel, specialized work</li>
       </ul>
     </section>
   `,
-  styles: [':host { display: block; }'],
+  styles: [
+    `
+      :host { display: block; }
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 32px 0 12px;
+        color: var(--mitto-fg);
+      }
+    `,
+  ],
 })
 export class Slide04PromptsNotEnough {}

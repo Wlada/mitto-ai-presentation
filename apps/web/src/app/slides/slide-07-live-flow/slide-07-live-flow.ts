@@ -5,17 +5,18 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>The live workflow: analyze → plan → dispatch</h1>
-      <p class="lead">
-        Five steps. Each one a separate skill. The developer reviews between every step.
-      </p>
+      <h1>What the agent will do</h1>
       <ol>
-        <li><strong>Analyze</strong> — brainstorm requirements with the agent</li>
-        <li><strong>Plan</strong> — write the implementation plan to <code>docs/plans/</code></li>
-        <li><strong>Dispatch</strong> — split the plan into parallel subagent tasks</li>
-        <li><strong>Run</strong> — subagents work in parallel, each in its own context</li>
-        <li><strong>Review</strong> — independent code-reviewer subagent checks the diff</li>
+        <li><strong>Brainstorm the feature</strong> &mdash; asks me questions</li>
+        <li><strong>Write the plan</strong> &mdash; commits to a doc</li>
+        <li><strong>Dispatch subagents</strong> &mdash; parallel work</li>
+        <li><strong>Run tests</strong> &mdash; verifies its own output</li>
+        <li><strong>Summarize</strong> &mdash; reports what changed</li>
       </ol>
+      <p class="closing">
+        You'll see steps 1&ndash;3 live.<br />
+        Steps 4&ndash;5 take longer; we'll jump to a finished result.
+      </p>
     </section>
   `,
   styles: [
@@ -24,6 +25,12 @@ import { Component } from '@angular/core';
       ol { padding-left: 1.5rem; }
       li { margin-bottom: 12px; }
       strong { color: var(--mitto-fg); font-weight: 600; }
+      .closing {
+        margin-top: 32px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--mitto-fg);
+      }
     `,
   ],
 })

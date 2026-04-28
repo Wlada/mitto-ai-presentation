@@ -42,14 +42,26 @@ ok() { printf "  ${GREEN}✓${RESET} %s\n" "$1"; }
 fail() { printf "  ${RED}✗${RESET} %s\n" "$1"; FAILURES+=("$1"); }
 warn() { printf "  ${YELLOW}!${RESET} %s\n" "$1"; }
 
-# 1. Branch check — must be on `main` (the demo starts here)
+# 1. Branch check — informational. Each branch has a legitimate use:
+#   main          — start the LIVE demo here (audience-facing)
+#   demo-finished — refresh slide 8 numbers / verify before deploying
+#   rehearsal     — practice runs without touching main
 step "Branch"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [ "$BRANCH" = "main" ]; then
-  ok "On 'main' (the demo starts here)"
-else
-  fail "On branch '$BRANCH', not 'main'. Run: git checkout main"
-fi
+case "$BRANCH" in
+  main)
+    ok "On 'main' — ready for the LIVE demo"
+    ;;
+  demo-finished)
+    ok "On 'demo-finished' — fine for refreshing slide 8 numbers and verifying the deploy state. Switch to main before the talk."
+    ;;
+  rehearsal)
+    ok "On 'rehearsal' — fine for practice. Switch to main before the talk."
+    ;;
+  *)
+    warn "On branch '$BRANCH'. Expected one of: main (live), demo-finished (deploy), rehearsal (practice)."
+    ;;
+esac
 
 # 2. Working tree clean
 step "Working tree"

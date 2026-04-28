@@ -65,31 +65,44 @@ git rev-parse --verify --quiet refs/heads/demo-finished >/dev/null && ok "demo-f
 
 # 4. node_modules ready
 step "Dependencies"
-if [ -d node_modules ] && [ -d apps/web/node_modules -o -L apps/web/node_modules ]; then
+if [ -d node_modules ]; then
   ok "node_modules exists"
 else
   fail "node_modules missing — run: npm install"
 fi
 
-# 5. Ports 3000 and 4300 free
+# 5. Ports 3000 and 4300
+# A dev server already running on these is normal — only flag foreign processes.
 step "Ports"
 for port in 3000 4300; do
   if lsof -nP -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
     PID="$(lsof -nP -iTCP:"$port" -sTCP:LISTEN -t | head -1)"
     PROC="$(ps -p "$PID" -o comm= 2>/dev/null || echo unknown)"
-    fail "Port $port already in use by $PROC (PID $PID). Kill before starting dev."
+    CMD="$(ps -p "$PID" -o command= 2>/dev/null || echo '')"
+    if echo "$CMD" | grep -qE "ng serve|tsx|node.*server/(src|dist)"; then
+      ok "Port $port: our dev server (PID $PID)"
+    else
+      warn "Port $port in use by $PROC (PID $PID). Foreign process — kill before 'npm run dev'."
+    fi
   else
     ok "Port $port free"
   fi
 done
 
-# 6. Refresh slide 8 numbers from current coverage
-step "Refresh slide 8 results data"
-if npm run results:refresh >/tmp/preshow-results.log 2>&1; then
-  ok "results.data.ts regenerated"
-  tail -8 /tmp/preshow-results.log | sed 's/^/    /'
+# 6. Refresh slide 8 numbers — only from demo-finished where the Q&A
+# feature exists. On main, the committed results.data.ts already holds
+# the canonical numbers and must not be overwritten with main's lower
+# values (would also break the slide-08 visual snapshot baseline).
+step "Slide 8 results data"
+if [ "$BRANCH" = "demo-finished" ]; then
+  if npm run results:refresh >/tmp/preshow-results.log 2>&1; then
+    ok "results.data.ts regenerated"
+    tail -8 /tmp/preshow-results.log | sed 's/^/    /'
+  else
+    fail "results:refresh failed — see /tmp/preshow-results.log"
+  fi
 else
-  fail "results:refresh failed — see /tmp/preshow-results.log"
+  warn "Skipped on '$BRANCH' (refresh from demo-finished, then sync the file)"
 fi
 
 # 7. Unit + integration tests

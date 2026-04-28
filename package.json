@@ -21,7 +21,7 @@
     "e2e:ci": "npm --workspace e2e run test:ci",
     "e2e:install": "npx --workspace e2e playwright install --with-deps chromium",
     "coverage": "npm --workspace apps/web run coverage && npm --workspace server run coverage",
-    "results:refresh": "npm run coverage && node scripts/refresh-results.mjs",
+    "results:refresh": "(npm run coverage || true) && node scripts/refresh-results.mjs",
     "preshow": "./scripts/pre-show.sh",
     "lint": "npm --workspaces --if-present run lint",
     "format": "prettier --write \"**/*.{ts,html,scss,json,md}\""

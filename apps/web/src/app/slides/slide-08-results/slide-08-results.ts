@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RESULTS } from './results.data';
 
 @Component({
   selector: 'app-slide-08-results',
@@ -7,15 +8,16 @@ import { Component } from '@angular/core';
     <section class="slide">
       <h1>What that produced</h1>
       <p class="lead">
-        The same workflow, finished and committed. Numbers below are from the
-        actual test runs on this repo.
+        The same workflow, finished and committed. Numbers below are read from
+        this repo's coverage reports — refreshed with
+        <code>npm run results:refresh</code>.
       </p>
 
       <div class="cols">
         <div class="col">
           <h2>Commands</h2>
-          <pre>npm test         # 36 web + 32 server unit/integration
-npm run e2e      # 4 Playwright tests (live UI)
+          <pre>npm test         # {{ results.webTests }} web + {{ results.serverTests }} server unit/integration
+npm run e2e      # {{ results.e2eTests }} Playwright tests (live UI)
 npm run coverage # HTML reports under coverage/</pre>
         </div>
 
@@ -23,33 +25,36 @@ npm run coverage # HTML reports under coverage/</pre>
           <h2>Results</h2>
           <div class="stats">
             <div class="stat">
-              <div class="num">72</div>
-              <div class="label">tests passing</div>
+              <div class="num">{{ results.totalUnitTests }}</div>
+              <div class="label">unit + integration tests</div>
             </div>
             <div class="stat">
-              <div class="num">95%+</div>
+              <div class="num">{{ results.serverCoverage ?? '—' }}%</div>
               <div class="label">backend coverage</div>
             </div>
             <div class="stat">
-              <div class="num">70%+</div>
+              <div class="num">{{ results.webCoverage ?? '—' }}%</div>
               <div class="label">frontend coverage</div>
             </div>
             <div class="stat">
-              <div class="num">4</div>
-              <div class="label">e2e in 13s</div>
+              <div class="num">{{ results.e2eTests }}</div>
+              <div class="label">Playwright e2e</div>
             </div>
           </div>
         </div>
       </div>
 
       <p class="closing">
-        Read the diff with <code>git diff main..demo-finished --stat</code>.
+        Numbers refreshed {{ results.generatedAt }} ·
+        diff with <code>git diff main..demo-finished --stat</code>
       </p>
     </section>
   `,
   styles: [
     `
-      :host { display: block; }
+      :host {
+        display: block;
+      }
 
       .cols {
         display: grid;
@@ -98,4 +103,6 @@ npm run coverage # HTML reports under coverage/</pre>
     `,
   ],
 })
-export class Slide08Results {}
+export class Slide08Results {
+  protected readonly results = RESULTS;
+}

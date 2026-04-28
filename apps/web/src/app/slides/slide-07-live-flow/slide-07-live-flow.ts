@@ -22,14 +22,13 @@ import { Component } from '@angular/core';
   styles: [
     `
       :host { display: block; }
-      ol { padding-left: 1.5rem; }
-      li { margin-bottom: 12px; }
       strong { color: var(--mitto-fg); font-weight: 600; }
       .closing {
-        margin-top: 32px;
+        margin: 32px 0 0;
         font-size: 18px;
         line-height: 1.6;
         color: var(--mitto-fg);
+        font-style: normal;
       }
     `,
   ],

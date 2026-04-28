@@ -33,14 +33,16 @@ import { RouterLink } from '@angular/router';
   styles: [
     `
       :host { display: block; }
-      h2 { font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
+      h2 { font-size: 18px; margin: 32px 0 12px; }
       .takeaway {
         font-size: 20px;
         line-height: 1.5;
         color: var(--mitto-fg);
         margin: 0 0 16px;
-        padding-left: 16px;
+        padding: 0 0 0 16px;
+        background: transparent;
         border-left: 3px solid var(--mitto-accent);
+        border-radius: 0;
       }
       .thanks {
         margin-top: 40px;

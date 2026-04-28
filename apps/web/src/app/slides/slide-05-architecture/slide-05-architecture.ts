@@ -28,19 +28,17 @@ CLAUDE.md      The project context file</pre>
       :host { display: block; }
       pre {
         font-size: 14px;
-        line-height: 1.6;
         margin: 0 0 24px;
         padding: 16px 20px;
-        background: var(--mitto-surface);
-        border: 1px solid var(--mitto-divider);
         border-radius: 6px;
       }
       li { margin-bottom: 6px; }
       .closing {
-        margin-top: 24px;
+        margin: 24px 0 0;
         font-size: 18px;
         line-height: 1.5;
         color: var(--mitto-fg);
+        font-style: normal;
       }
     `,
   ],

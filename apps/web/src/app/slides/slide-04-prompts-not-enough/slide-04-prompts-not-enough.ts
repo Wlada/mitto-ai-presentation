@@ -24,9 +24,7 @@ import { Component } from '@angular/core';
       :host { display: block; }
       h2 {
         font-size: 18px;
-        font-weight: 600;
         margin: 32px 0 12px;
-        color: var(--mitto-fg);
       }
     `,
   ],

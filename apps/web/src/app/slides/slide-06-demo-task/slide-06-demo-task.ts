@@ -29,19 +29,15 @@ Tests:     unit + integration + Playwright e2e</pre>
       :host { display: block; }
       .quote {
         font-size: 22px;
-        font-weight: 600;
-        color: var(--mitto-fg);
         margin: 0 0 24px;
         padding-left: 16px;
         border-left: 3px solid var(--mitto-accent);
+        line-height: 1.4;
       }
       pre {
         font-size: 14px;
-        line-height: 1.6;
         margin: 0 0 24px;
         padding: 16px 20px;
-        background: var(--mitto-surface);
-        border: 1px solid var(--mitto-divider);
         border-radius: 6px;
       }
       .cta { margin-top: 24px; }

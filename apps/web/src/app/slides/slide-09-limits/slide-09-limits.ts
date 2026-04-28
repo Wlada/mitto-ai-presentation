@@ -22,10 +22,11 @@ import { Component } from '@angular/core';
     `
       :host { display: block; }
       .closing {
-        margin-top: 32px;
+        margin: 32px 0 0;
         font-size: 18px;
         line-height: 1.6;
         color: var(--mitto-fg);
+        font-style: normal;
       }
     `,
   ],

@@ -15,6 +15,7 @@
 - [ ] Browser zoom set so audience can read code (cmd+= a few times)
 - [ ] Terminal font size large (cmd+= a few times)
 - [ ] Checkout `main` branch: `git checkout main`
+- [ ] Run `npm run results:refresh` — regenerates Slide 8 numbers from current coverage
 - [ ] In Terminal 1: `npm run dev` — verify both servers start (web :4300, server :3000)
 - [ ] In Terminal 2: keep ready for `claude` invocation
 - [ ] Open browser to `http://localhost:4300/slides/1`

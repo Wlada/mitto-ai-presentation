@@ -15,13 +15,13 @@ import { SlideService } from '../../slides/slide.service';
   template: `
     <section class="page">
       <a
-        mat-icon-button
+        mat-stroked-button
         [routerLink]="['/slides', slides.currentNumber()]"
         class="back"
         [attr.aria-label]="'Back to slide ' + slides.currentNumber()"
-        [title]="'Back to slide ' + slides.currentNumber()"
       >
         <mat-icon>arrow_back</mat-icon>
+        <span>Back to slide {{ slides.currentNumber() }}</span>
       </a>
 
       <header class="page-header">
@@ -58,15 +58,18 @@ import { SlideService } from '../../slides/slide.service';
       .back {
         color: var(--mitto-fg);
         background: var(--mitto-bg);
-        border: 1px solid var(--mitto-divider);
+        border-radius: 999px;
+        font-weight: 500;
         transition:
           color 160ms ease,
           border-color 160ms ease,
           background 160ms ease;
       }
+      .back mat-icon {
+        margin-right: 4px;
+      }
       .back:hover {
         color: var(--mitto-accent);
-        border-color: var(--mitto-accent);
       }
       .page-header {
         margin: 28px 0 40px;

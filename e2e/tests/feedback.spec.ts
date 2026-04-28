@@ -38,8 +38,11 @@ test.describe('Audience Q&A flow', () => {
     await expect(page.getByText(/thanks for your feedback/i)).toBeVisible({ timeout: 5000 });
 
     // The list polls every 3s; new entry should appear within one cycle.
-    await expect(page.getByText(uniqueMessage)).toBeVisible({ timeout: 5000 });
-    await expect(page.getByText('Demo Attendee')).toBeVisible();
+    // Scope to the card carrying the unique message so prior in-memory entries
+    // (the dev server is reused across runs) don't trigger strict-mode errors.
+    const newCard = page.locator('mat-card').filter({ hasText: uniqueMessage });
+    await expect(newCard).toBeVisible({ timeout: 5000 });
+    await expect(newCard.getByText('Demo Attendee')).toBeVisible();
   });
 
   test('submit is disabled until a message is provided', async ({ page }) => {

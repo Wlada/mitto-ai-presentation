@@ -15,15 +15,13 @@ import { RouterLink } from '@angular/router';
         It's a faster, controlled cycle<br />
         where the developer stays the owner.
       </p>
-      <h2>Try it tomorrow</h2>
-      <ul>
-        <li>Write a <code>CLAUDE.md</code> for one repo</li>
-        <li>Run one feature through plan-first</li>
-        <li>Compare diff vs. how you'd write it</li>
-      </ul>
       <p class="closer">
         Treat the agent as a fast junior.<br />
         Treat yourself as the senior.
+      </p>
+      <p class="note">
+        Licenses are coming soon. I'm here for questions
+        and happy to share what I learned.
       </p>
       <p class="thanks">Thank you.</p>
       <p class="cta">
@@ -37,7 +35,6 @@ import { RouterLink } from '@angular/router';
   styles: [
     `
       :host { display: block; }
-      h2 { font-size: 18px; margin: 32px 0 12px; }
       .takeaway {
         font-size: 20px;
         line-height: 1.5;
@@ -49,7 +46,7 @@ import { RouterLink } from '@angular/router';
         border-radius: 0;
       }
       .closer {
-        margin: 32px 0 0;
+        margin: 28px 0 0;
         padding: 0 0 0 16px;
         font-size: 20px;
         line-height: 1.5;
@@ -57,8 +54,14 @@ import { RouterLink } from '@angular/router';
         color: var(--mitto-fg);
         border-left: 3px solid var(--mitto-accent);
       }
+      .note {
+        margin: 28px 0 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--mitto-muted);
+      }
       .thanks {
-        margin-top: 32px;
+        margin-top: 28px;
         font-size: 22px;
         font-weight: 600;
         color: var(--mitto-accent);

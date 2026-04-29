@@ -58,12 +58,7 @@ export const SLIDE_ROUTES: Routes = [
       {
         path: '10',
         loadComponent: () =>
-          import('./slide-10-team-model/slide-10-team-model').then((m) => m.Slide10TeamModel),
-      },
-      {
-        path: '11',
-        loadComponent: () =>
-          import('./slide-11-conclusion/slide-11-conclusion').then((m) => m.Slide11Conclusion),
+          import('./slide-10-conclusion/slide-10-conclusion').then((m) => m.Slide10Conclusion),
       },
       { path: '', redirectTo: '1', pathMatch: 'full' },
     ],

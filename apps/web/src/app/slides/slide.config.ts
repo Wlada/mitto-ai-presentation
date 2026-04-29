@@ -14,6 +14,5 @@ export const SLIDES: readonly SlideMeta[] = [
   { number: 7, route: 'results', title: 'What that produced' },
   { number: 8, route: 'what-works', title: 'What agents do well' },
   { number: 9, route: 'limits', title: 'Limits and risks' },
-  { number: 10, route: 'team-model', title: 'Recommended team model' },
-  { number: 11, route: 'conclusion', title: 'Conclusion and next steps' },
+  { number: 10, route: 'conclusion', title: 'Conclusion and next steps' },
 ] as const;

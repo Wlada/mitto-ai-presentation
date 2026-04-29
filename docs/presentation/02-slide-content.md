@@ -164,8 +164,8 @@ Commands                              Results
   npm test         # 36 web + 32       68 unit / integration passing
                      server unit/      95% backend coverage
                      integration       83% frontend coverage
-  npm run e2e      # 4 functional      16 e2e (4 functional + 11 visual + 1 feedback)
-                     + 11 visual
+  npm run e2e      # 5 functional      16 e2e (5 functional + 10 visual + 1 feedback)
+                     + 10 visual
                      regression
   npm run coverage # HTML reports
                      under coverage/
@@ -181,7 +181,7 @@ Live numbers on this slide come from
 - *"Ovo su realni brojevi sa ovog repoa, generisani pre demoa skriptom `npm run results:refresh`. Možeš ih i sad pokrenuti uživo u terminalu."*
 - *"Komande i brojevi koje vidite ovde su izlaz onog istog 6-step workflowa koji ste upravo videli — brainstorm, plan, execute — ali izvršenog do kraja na `demo-finished`. Sada ćemo da pustimo i steps 4, 5 i 6 nad ovim rezultatom."*
 - *"Komande su iste one koje vaš tim već zna — npm test, npm run e2e."*
-- *"E2E ima dve familije: 4 funkcionalna testa i 11 visual regression testova koji slikaju svaki slajd i porede sa baseline-om, plus 1 feedback page snapshot."*
+- *"E2E ima dve familije: 5 funkcionalna testa i 10 visual regression testova koji slikaju svaki slajd i porede sa baseline-om, plus 1 feedback page snapshot."*
 - *"Coverage nije cilj, ali je signal da agent nije preskočio testove."*
 - 60-90 sekundi. Pređi na slajd 8 (What agents do well) kad si pokazao komande u terminalu.
 
@@ -230,29 +230,7 @@ Stay safe with: small scope, plan first, every diff reviewed.
 
 ---
 
-## Slide 10 — Recommended team model
-
-```
-How a team should use this
-
-  Agent makes the plan      →  Human approves
-  Agent makes small diffs   →  Human reviews each
-  Tests are mandatory       →  CI gates on coverage
-  No autonomous merging     →  Always a human PR
-  CLAUDE.md owned by team   →  Living document
-
-Treat the agent as a fast junior.
-Treat yourself as the senior.
-```
-
-**Speaker notes (SR):**
-- Naglasi poslednje dve linije — to je memorable.
-- *"Ako bi novi junior u timu radio bez review-a, ne bi pustili. Isto pravilo za agenta."*
-- 60 sekundi.
-
----
-
-## Slide 11 — Conclusion
+## Slide 10 — Conclusion
 
 ```
 Takeaway
@@ -266,6 +244,9 @@ Try it tomorrow:
   →  Run one feature through plan-first
   →  Compare diff vs. how you'd write it
 
+Treat the agent as a fast junior.
+Treat yourself as the senior.
+
 Thank you.
 
 → Leave a question or comment
@@ -273,6 +254,7 @@ Thank you.
 
 **Speaker notes (SR):**
 - Ne čitaj slide. Reci centralnu poruku svojim rečima.
+- Naglasi "fast junior / senior" linije — to je memorable closer.
 - *"Ako biste sutra nešto probali — najmanji korak je CLAUDE.md za jedan repo. Pola sata posla. Već ćete videti razliku u sledećoj interakciji."*
 - Pozovi pitanja kroz Q&A link na slajdu.
 - Ostavi 3-5 minuta za pitanja.
@@ -284,4 +266,4 @@ Thank you.
 - **Don't read the slide.** Glance at it, then look at the audience.
 - **Move on quickly from intro.** Most of the value is in slides 3-6 (concept + live).
 - **If you forget what to say — pause.** Silence reads as confidence. Filler words don't.
-- **Time check at slide 8.** If past 26 min, skip slide 10 (Team model) and go straight to slide 11 (Conclusion).
+- **Time check at slide 8.** If past 26 min, trim Slide 9 (Limits) to one strong example so you still land Slide 10 (Conclusion) cleanly.

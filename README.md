@@ -80,7 +80,7 @@ mitto-ai-presentation/
 ├── apps/
 │   └── web/                   # Angular 21 app — slides + demo features
 │       ├── src/app/
-│       │   ├── slides/        # one component per slide (11 slides)
+│       │   ├── slides/        # one component per slide (10 slides)
 │       │   ├── feedback/      # Audience Q&A demo feature (demo-finished branch)
 │       │   ├── core/
 │       │   └── shared/

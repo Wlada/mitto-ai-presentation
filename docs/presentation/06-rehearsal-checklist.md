@@ -10,7 +10,7 @@
 - [x] Repo scaffolded, builds, tests pass
 - [x] CLAUDE.md written
 - [x] Demo-finished branch with Q&A feature
-- [x] Slide 1-11 placeholders rendering
+- [x] Slide 1-10 placeholders rendering
 - [x] All design docs in `docs/`
 
 If anything above is **not** checked, finish Week 1 before moving on.

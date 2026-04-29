@@ -38,13 +38,12 @@ A local CLI agent that:
   runs your commands
   follows project-specific rules
 
-Works in your terminal. No cloud sync.
-You decide what runs, what lands.
+Works in your terminal. You decide what runs.
 ```
 
 **Speaker notes (SR):**
 - Otvori terminal sa Claude Code-om u kratkoj demo verziji ako stigne (ne mora — slide je dovoljan).
-- Reci: *"Lokalni je. Vidi vaš kod, ne sluši na pozadini, ne sinhronizuje fajlove. Vi pokrećete, vi odlučujete šta se commituje."*
+- Reci: *"Lokalni je. Vidi vaš kod, vi odlučujete šta se pokreće."*
 - 60-90 sekundi.
 
 ---

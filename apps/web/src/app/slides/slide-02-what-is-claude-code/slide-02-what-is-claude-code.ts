@@ -14,8 +14,7 @@ import { Component } from '@angular/core';
         <li>follows project-specific rules</li>
       </ul>
       <p class="closing">
-        Works in your terminal. No cloud sync.<br />
-        You decide what runs, what lands.
+        Works in your terminal. You decide what runs.
       </p>
     </section>
   `,

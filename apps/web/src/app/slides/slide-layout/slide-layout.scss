@@ -92,18 +92,16 @@
 
 .corner-qr-frame {
   display: block;
-  width: 72px;
-  height: 72px;
-  padding: 6px;
+  width: 96px;
+  height: 96px;
+  padding: 8px;
   background: var(--mitto-bg);
   border: 1.5px solid var(--mitto-accent);
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 1px 2px rgba(252, 0, 121, 0);
   transition:
-    box-shadow 240ms ease,
-    transform 240ms ease,
-    border-color 240ms ease;
-  animation: qr-breathe 4s ease-in-out infinite;
+    box-shadow 280ms ease,
+    border-color 280ms ease;
 }
 
 .corner-qr img {
@@ -118,14 +116,12 @@
   letter-spacing: 0.02em;
   color: var(--mitto-muted);
   white-space: nowrap;
-  transition: color 200ms ease;
+  transition: color 280ms ease;
 }
 
 .corner-qr:hover .corner-qr-frame {
-  transform: scale(1.06);
-  box-shadow: 0 4px 16px rgba(252, 0, 121, 0.25);
+  box-shadow: 0 1px 6px rgba(252, 0, 121, 0.12);
   border-color: var(--mitto-accent);
-  animation: none;
 }
 
 .corner-qr:hover .corner-qr-label {
@@ -133,26 +129,9 @@
 }
 
 .corner-qr:focus-visible .corner-qr-frame {
-  box-shadow: 0 0 0 3px rgba(252, 0, 121, 0.35);
+  box-shadow: 0 0 0 3px rgba(252, 0, 121, 0.25);
 }
 
-@keyframes qr-breathe {
-  0%,
-  100% {
-    box-shadow: 0 1px 2px rgba(252, 0, 121, 0);
-    border-color: rgba(252, 0, 121, 0.5);
-  }
-  50% {
-    box-shadow: 0 2px 8px rgba(252, 0, 121, 0.18);
-    border-color: var(--mitto-accent);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .corner-qr-frame {
-    animation: none;
-  }
-}
 
 .bottombar {
   display: grid;

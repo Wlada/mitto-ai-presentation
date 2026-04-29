@@ -239,25 +239,24 @@ Takeaway
   It's a faster, controlled cycle
   where the developer stays the owner.
 
-Try it tomorrow:
-  →  Write a CLAUDE.md for one repo
-  →  Run one feature through plan-first
-  →  Compare diff vs. how you'd write it
-
 Treat the agent as a fast junior.
 Treat yourself as the senior.
+
+Licenses are coming soon. I'm here for questions
+and happy to share what I learned.
 
 Thank you.
 
 → Leave a question or comment
 ```
 
-**Speaker notes (SR):**
-- Ne čitaj slide. Reci centralnu poruku svojim rečima.
-- Naglasi "fast junior / senior" linije — to je memorable closer.
-- *"Ako biste sutra nešto probali — najmanji korak je CLAUDE.md za jedan repo. Pola sata posla. Već ćete videti razliku u sledećoj interakciji."*
-- Pozovi pitanja kroz Q&A link na slajdu.
-- Ostavi 3-5 minuta za pitanja.
+**Speaker notes (English):**
+- Don't read the slide. Say the takeaway in your own words.
+- *"If you'd remember one thing from this talk — that's it. The fast junior / senior framing is the simplest way to think about your role."*
+- *"Licenses for Claude Code or Codex are coming soon, so you'll all get to try this. Until then I'm here for questions, or come find me after — happy to share what I learned along the way."*
+- Pause. Pause again. Don't rush "Thank you".
+- Invite questions via the Q&A link on the slide.
+- Leave 3-5 minutes for questions.
 
 ---
 

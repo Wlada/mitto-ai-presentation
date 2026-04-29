@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-slide-11-conclusion',
+  selector: 'app-slide-10-conclusion',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, RouterLink],
   template: `
@@ -21,6 +21,10 @@ import { RouterLink } from '@angular/router';
         <li>Run one feature through plan-first</li>
         <li>Compare diff vs. how you'd write it</li>
       </ul>
+      <p class="closer">
+        Treat the agent as a fast junior.<br />
+        Treat yourself as the senior.
+      </p>
       <p class="thanks">Thank you.</p>
       <p class="cta">
         <a mat-stroked-button color="primary" routerLink="/feedback">
@@ -44,8 +48,17 @@ import { RouterLink } from '@angular/router';
         border-left: 3px solid var(--mitto-accent);
         border-radius: 0;
       }
+      .closer {
+        margin: 32px 0 0;
+        padding: 0 0 0 16px;
+        font-size: 20px;
+        line-height: 1.5;
+        font-weight: 600;
+        color: var(--mitto-fg);
+        border-left: 3px solid var(--mitto-accent);
+      }
       .thanks {
-        margin-top: 40px;
+        margin-top: 32px;
         font-size: 22px;
         font-weight: 600;
         color: var(--mitto-accent);
@@ -55,4 +68,4 @@ import { RouterLink } from '@angular/router';
     `,
   ],
 })
-export class Slide11Conclusion {}
+export class Slide10Conclusion {}

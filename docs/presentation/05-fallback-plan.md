@@ -165,7 +165,7 @@ caused by a font-rendering tweak, a Material theme bump, or a logo recolor.
   baseline by `git checkout e2e/tests/slides-visual.spec.ts-snapshots/` and
   fix the underlying styling instead.
 
-### Scenario 10 — The QR code / link from slide 11 doesn't work
+### Scenario 10 — The QR code / link from slide 10 doesn't work
 
 **Symptom:** Audience can't reach your local /feedback page.
 
@@ -211,7 +211,7 @@ If you reach Slide 7 past minute 21, do **all** of these in sequence:
 2. Skip Prompt 6 (code-reviewer subagent) next
 3. Skip Prompt 5 (`/simplify`) if still over
 4. Skip `npm run coverage` — just say "coverage is at 80%+"
-5. Combine Slide 10 (Team model) + 11 (Conclusion) into one minute
+5. Trim Slide 10 (Conclusion) to 45 seconds — drop the "try it tomorrow" bullets, keep the takeaway and the "fast junior / senior" closer
 6. **Do not skip Slide 9 (Limits).** It's the credibility anchor.
 
 ---

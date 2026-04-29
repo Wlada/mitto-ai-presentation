@@ -7,14 +7,14 @@ import { Component } from '@angular/core';
     <section class="slide">
       <h1>Where it can go wrong</h1>
       <ul>
-        <li>Wrong assumptions made silently</li>
-        <li>Diff bigger than the task warranted</li>
-        <li>Tests that pass but don't actually verify</li>
-        <li>Confidence that exceeds correctness</li>
-        <li>"Helpful" refactors that break things</li>
+        <li>Wrong guesses it never tells you about</li>
+        <li>Changes bigger than the task asked for</li>
+        <li>Tests that pass but don't really check anything</li>
+        <li>Sounds confident even when it's wrong</li>
+        <li>"Helpful" cleanups that break other things</li>
       </ul>
       <p class="closing">
-        Mitigation: <strong>small scope, plan-first, mandatory review.</strong>
+        Stay safe with: <strong>small scope, plan first, every diff reviewed.</strong>
       </p>
     </section>
   `,

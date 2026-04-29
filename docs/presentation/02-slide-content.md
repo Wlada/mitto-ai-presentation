@@ -199,33 +199,34 @@ What agents are good at
   Reading unfamiliar code (without changing it)
 ```
 
-**Speaker notes (SR):**
-- Vraćaš se na slajdove posle live demoa.
-- *"Sve što ste maločas videli — pravljenje formi, ruta, validacije, pisanje testova — to su tipovi zadataka koje agenti rade dobro. Ne traže od njih kreativne odluke ni arhitekturu, traže ponavljanje paterna koji već imate u kodu."*
-- *"Iza svega stoji isto pravilo: jasno definisan zadatak, jasan rezultat. Što je task više 'osmisli nešto novo', to ide gore."*
-- 60 sekundi.
+**Speaker notes (English):**
+- Coming back to slides after the live demo.
+- *"Everything you just saw — adding forms, routes, validation, tests — those are tasks agents handle well. We don't ask them for creative or architectural decisions, we ask them to repeat patterns we already have in the code."*
+- *"The rule behind all this: a clear task with a clear result. The more open-ended the task, the worse it tends to go."*
+- 60 seconds.
 
 ---
 
-## Slide 9 — Limits and risks
+## Slide 9 — Where it can go wrong
 
 ```
 Where it can go wrong
 
-  Wrong assumptions made silently
-  Diff bigger than the task warranted
-  Tests that pass but don't actually verify
-  Confidence that exceeds correctness
-  "Helpful" refactors that break things
+  Wrong guesses it never tells you about
+  Changes bigger than the task asked for
+  Tests that pass but don't really check anything
+  Sounds confident even when it's wrong
+  "Helpful" cleanups that break other things
 
-Mitigation: small scope, plan-first, mandatory review.
+Stay safe with: small scope, plan first, every diff reviewed.
 ```
 
-**Speaker notes (SR):**
-- Ovaj slajd je *bitan za kredibilitet*. Ne preskači rizike.
-- Daj jedan konkretan primer iz ličnog iskustva ako možeš (npr. "agent je jednom dodao biblioteku koja nam nije trebala — uhvatio sam u review-u").
-- *"Plan-first workflow koji ste videli direktno adresira ovo. Ako agent prvo napiše plan, vidite šta neće raditi pre nego što krene."*
-- 90 sekundi. **Najjača poenta nakon live deoa.**
+**Speaker notes (English):**
+- This is the credibility slide. Don't skip the risks.
+- *"Each of these has bitten me at least once. The most expensive one is the first — the agent doesn't pause to ask, it picks a direction and ships it. You only see it in the diff."*
+- If you have a personal example, share one. (E.g. *"I had an agent add a library we didn't need — caught it in review."*)
+- *"The plan-first workflow you saw earlier directly addresses this. The plan is written before any code, so you see the wrong choices before they're made."*
+- 90 seconds. **The strongest moment after the live demo — don't rush.**
 
 ---
 

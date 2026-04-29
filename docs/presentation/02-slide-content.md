@@ -187,23 +187,22 @@ Live numbers on this slide come from
 
 ---
 
-## Slide 8 — What agents do well
+## Slide 8 — What agents are good at
 
 ```
-Where agents earn their keep
+What agents are good at
 
-  Scaffolding new features along existing patterns
-  Writing tests for predictable code paths
-  Wiring components, routes, services
-  Refactoring repetitive structures
-  Exploring unfamiliar code (read-only)
-
-The pattern: bounded, well-shaped problems.
+  Adding new features that follow patterns you already have
+  Writing tests
+  Wiring up components, routes, services
+  Cleaning up repetitive code
+  Reading unfamiliar code (without changing it)
 ```
 
 **Speaker notes (SR):**
 - Vraćaš se na slajdove posle live demoa.
-- *"Vidite — sve što ste videli da radi su ovi tipovi zadataka. Ne kreativnost, ne arhitektonske odluke, ne 'osmisli novi koncept'. Nego: 'ovo je patern, ponovi ga ovde'."*
+- *"Sve što ste maločas videli — pravljenje formi, ruta, validacije, pisanje testova — to su tipovi zadataka koje agenti rade dobro. Ne traže od njih kreativne odluke ni arhitekturu, traže ponavljanje paterna koji već imate u kodu."*
+- *"Iza svega stoji isto pravilo: jasno definisan zadatak, jasan rezultat. Što je task više 'osmisli nešto novo', to ide gore."*
 - 60 sekundi.
 
 ---

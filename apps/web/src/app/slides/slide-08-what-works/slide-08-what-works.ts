@@ -5,30 +5,16 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>Where agents earn their keep</h1>
+      <h1>What agents are good at</h1>
       <ul>
-        <li>Scaffolding new features along existing patterns</li>
-        <li>Writing tests for predictable code paths</li>
-        <li>Wiring components, routes, services</li>
-        <li>Refactoring repetitive structures</li>
-        <li>Exploring unfamiliar code (read-only)</li>
+        <li>Adding new features that follow patterns you already have</li>
+        <li>Writing tests</li>
+        <li>Wiring up components, routes, services</li>
+        <li>Cleaning up repetitive code</li>
+        <li>Reading unfamiliar code (without changing it)</li>
       </ul>
-      <p class="closing">
-        The pattern: <strong>bounded, well-shaped problems.</strong>
-      </p>
     </section>
   `,
-  styles: [
-    `
-      :host { display: block; }
-      .closing {
-        margin: 32px 0 0;
-        font-size: 18px;
-        line-height: 1.6;
-        color: var(--mitto-fg);
-        font-style: normal;
-      }
-    `,
-  ],
+  styles: [':host { display: block; }'],
 })
 export class Slide08WhatWorks {}

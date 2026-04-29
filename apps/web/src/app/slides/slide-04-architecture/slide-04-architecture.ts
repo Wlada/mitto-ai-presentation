@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-slide-05-architecture',
+  selector: 'app-slide-04-architecture',
   standalone: true,
   template: `
     <section class="slide">
@@ -43,4 +43,4 @@ CLAUDE.md      The project context file</pre>
     `,
   ],
 })
-export class Slide05Architecture {}
+export class Slide04Architecture {}

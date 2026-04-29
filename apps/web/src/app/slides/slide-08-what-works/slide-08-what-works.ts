@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-slide-09-what-works',
+  selector: 'app-slide-08-what-works',
   standalone: true,
   template: `
     <section class="slide">
@@ -31,4 +31,4 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class Slide09WhatWorks {}
+export class Slide08WhatWorks {}

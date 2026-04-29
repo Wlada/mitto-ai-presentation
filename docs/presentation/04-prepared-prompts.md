@@ -53,7 +53,7 @@ exact workflow. The prompts below reproduce it.
 - **Steps 1–3** (Prompts 1–3) run live in your terminal on local `main`.
 - The **deployed live URL** (`presentation.vladimirbujanovic.com`) serves
   `demo-finished` — the audience sees the finished result there throughout
-  the talk. Slide 6 CTA already works because the live URL has the Q&A
+  the talk. Slide 5 CTA already works because the live URL has the Q&A
   feature.
 - After Prompt 4 (the planned cut), you don't `git checkout` anything —
   the live URL is already showing the finished state. You just shift
@@ -69,7 +69,7 @@ exact workflow. The prompts below reproduce it.
 
 ### Prompt 1 — Brainstorm (workflow step 1)
 
-**When:** Slide 7, immediately after you say "let me actually run it now."
+**When:** Slide 6, immediately after you say "let me actually run it now."
 
 **Paste this:**
 
@@ -169,7 +169,7 @@ wait for them to complete** — that takes 5–10 minutes you don't have.
 **Shift focus** from terminal to the browser tab on the live URL
 (<https://presentation.vladimirbujanovic.com>). The browser already shows
 the finished state — no `git checkout` needed. Click "Try the demo
-feature" on slide 6, or navigate to `/feedback`, and submit a question to
+feature" on slide 5, or navigate to `/feedback`, and submit a question to
 prove it works.
 
 If Claude Code asks about the running subagents, say in chat:
@@ -188,7 +188,7 @@ these stalls.
 
 ### Prompt 5 — Simplify pass (workflow step 4)
 
-**When:** After Slide 8 (Results) and the live `npm test` / `git diff`,
+**When:** After Slide 7 (Results) and the live `npm test` / `git diff`,
 ~minute 21.
 
 **Paste this:**
@@ -284,10 +284,10 @@ is the cut; Prompts 5–7 run live on `demo-finished`.
 
 | Prompt | Workflow step | Slide / Moment | Approx. Time |
 |--------|---------------|----------------|--------------|
-| 1 — Brainstorm | 1 — Brainstorm | After slide 7, ~10:30 | 30s typing + 2–3 min Q&A |
-| 2 — Move to plan | 2 — Plan | Brainstorm complete, ~13:00 | 1–2 min for plan to write |
-| 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:30 | 1–2 min for dispatch fan-out |
-| 4 — STOP and switch | (cut) | Task list shown, ~16:30 | <30s |
-| 5 — `/simplify` | 4 — Simplify | After diff + tests, ~21:00 | 1 min |
-| 6 — `code-reviewer` | 5 — Review | Right after Prompt 5, ~22:00 | 1–2 min |
-| 7 — Doc update | 6 — Document | Bonus, ~24:00 | 30–60s — **cut first** |
+| 1 — Brainstorm | 1 — Brainstorm | After slide 6, ~9:30 | 30s typing + 2–3 min Q&A |
+| 2 — Move to plan | 2 — Plan | Brainstorm complete, ~12:00 | 1–2 min for plan to write |
+| 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:00 | 1–2 min for dispatch fan-out |
+| 4 — STOP and switch | (cut) | Task list shown, ~16:00 | <30s |
+| 5 — `/simplify` | 4 — Simplify | After diff + tests, ~20:30 | 1 min |
+| 6 — `code-reviewer` | 5 — Review | Right after Prompt 5, ~21:30 | 1–2 min |
+| 7 — Doc update | 6 — Document | Bonus, ~23:00 | 30–60s — **cut first** |

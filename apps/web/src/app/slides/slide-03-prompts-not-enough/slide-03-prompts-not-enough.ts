@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-slide-04-prompts-not-enough',
+  selector: 'app-slide-03-prompts-not-enough',
   standalone: true,
   template: `
     <section class="slide">
@@ -29,4 +29,4 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class Slide04PromptsNotEnough {}
+export class Slide03PromptsNotEnough {}

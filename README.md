@@ -64,7 +64,7 @@ The prepared prompts that drive the live demo are in
 | `npm run e2e` | Playwright (functional + visual regression) |
 | `npm run e2e:install` | One-time: install Chromium for Playwright |
 | `npm run coverage` | HTML coverage reports under `apps/web/coverage/` and `server/coverage/` |
-| `npm run results:refresh` | Regenerate Slide 8 numbers (run only on `demo-finished`) |
+| `npm run results:refresh` | Regenerate Slide 7 numbers (run only on `demo-finished`) |
 | `npm run preshow` | One-shot preflight before going live |
 | `npm run lint` | Lint all workspaces |
 | `npm run format` | Prettier across the repo |
@@ -80,7 +80,7 @@ mitto-ai-presentation/
 ├── apps/
 │   └── web/                   # Angular 21 app — slides + demo features
 │       ├── src/app/
-│       │   ├── slides/        # one component per slide (12 slides)
+│       │   ├── slides/        # one component per slide (11 slides)
 │       │   ├── feedback/      # Audience Q&A demo feature (demo-finished branch)
 │       │   ├── core/
 │       │   └── shared/
@@ -97,7 +97,7 @@ mitto-ai-presentation/
 │   ├── tests/
 │   └── tests/slides-visual.spec.ts-snapshots/   # visual regression baselines
 ├── scripts/                   # maintenance and pre-show automation
-│   ├── refresh-results.mjs    # regenerate Slide 8 numbers from coverage
+│   ├── refresh-results.mjs    # regenerate Slide 7 numbers from coverage
 │   └── pre-show.sh            # 10-min preflight before going live
 ├── docs/
 │   ├── plans/                 # plan documents written during workflow step 2
@@ -151,7 +151,7 @@ Before going live, run from the repo root:
 npm run preshow
 ```
 
-It checks branch, working tree, ports, dependencies, slide-8 data freshness,
+It checks branch, working tree, ports, dependencies, slide-7 data freshness,
 runs all tests, and exits **READY TO PRESENT** or **NOT READY** with a
 specific list of fixes.
 

@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-slide-12-conclusion',
+  selector: 'app-slide-11-conclusion',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, RouterLink],
   template: `
@@ -55,4 +55,4 @@ import { RouterLink } from '@angular/router';
     `,
   ],
 })
-export class Slide12Conclusion {}
+export class Slide11Conclusion {}

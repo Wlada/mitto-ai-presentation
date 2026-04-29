@@ -59,6 +59,7 @@
 }
 
 .body {
+  position: relative;
   overflow-y: auto;
   background: var(--mitto-bg);
   display: flex;
@@ -72,6 +73,85 @@
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+// Bottom-right "Browse the code" widget. Subtle border breathe + slight
+// scale-on-hover. No movement loop that could distract during a slide.
+.corner-qr {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  outline: none;
+  z-index: 1;
+}
+
+.corner-qr-frame {
+  display: block;
+  width: 72px;
+  height: 72px;
+  padding: 6px;
+  background: var(--mitto-bg);
+  border: 1.5px solid var(--mitto-accent);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(252, 0, 121, 0);
+  transition:
+    box-shadow 240ms ease,
+    transform 240ms ease,
+    border-color 240ms ease;
+  animation: qr-breathe 4s ease-in-out infinite;
+}
+
+.corner-qr img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.corner-qr-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--mitto-muted);
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+.corner-qr:hover .corner-qr-frame {
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(252, 0, 121, 0.25);
+  border-color: var(--mitto-accent);
+  animation: none;
+}
+
+.corner-qr:hover .corner-qr-label {
+  color: var(--mitto-accent);
+}
+
+.corner-qr:focus-visible .corner-qr-frame {
+  box-shadow: 0 0 0 3px rgba(252, 0, 121, 0.35);
+}
+
+@keyframes qr-breathe {
+  0%,
+  100% {
+    box-shadow: 0 1px 2px rgba(252, 0, 121, 0);
+    border-color: rgba(252, 0, 121, 0.5);
+  }
+  50% {
+    box-shadow: 0 2px 8px rgba(252, 0, 121, 0.18);
+    border-color: var(--mitto-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corner-qr-frame {
+    animation: none;
+  }
 }
 
 .bottombar {

@@ -10,7 +10,7 @@
 - [x] Repo scaffolded, builds, tests pass
 - [x] CLAUDE.md written
 - [x] Demo-finished branch with Q&A feature
-- [x] Slide 1-12 placeholders rendering
+- [x] Slide 1-11 placeholders rendering
 - [x] All design docs in `docs/`
 
 If anything above is **not** checked, finish Week 1 before moving on.
@@ -33,7 +33,7 @@ If anything above is **not** checked, finish Week 1 before moving on.
       see in the other within 3-4 seconds)
 - [ ] Verify error states (submit empty form, server down, etc.)
 - [ ] Verify slide 6 "Try the demo feature" link works on `demo-finished`
-- [ ] Run `npm run results:refresh` and open Slide 8 in the browser; confirm
+- [ ] Run `npm run results:refresh` and open Slide 7 in the browser; confirm
       the test counts and coverage percentages look right
 
 ### Saturday — Read-through (1 hour)
@@ -62,7 +62,7 @@ If anything above is **not** checked, finish Week 1 before moving on.
 - [ ] Set 30-min timer
 - [ ] Goal: finish at 28:00 ± 1:00
 - [ ] No stops, no pauses to think
-- [ ] If you finish at 26:00, you're talking too fast — slow down for slide 9
+- [ ] If you finish at 26:00, you're talking too fast — slow down for slide 8
 - [ ] If you finish at 32:00, identify what to cut next time
 - [ ] **Verify Prompt 5 (`/simplify`) actually runs end-to-end on
       `demo-finished`** — skill installed, responds with output in <60s
@@ -143,7 +143,7 @@ You're ready to go live when:
 - You can recover from at least 2 of the 3 drills without the audience noticing
 - You've watched at least one rehearsal video back without cringing more than
   3 times
-- You can recite Slide 4's central message ("CLAUDE.md, skills, subagents")
+- You can recite Slide 3's central message ("CLAUDE.md, skills, subagents")
   without looking
 - You can recite the 6-step workflow (brainstorm → plan → execute →
   simplify → review → document) without looking

@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-slide-06-demo-task',
+  selector: 'app-slide-05-demo-task',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, RouterLink],
   template: `
@@ -45,4 +45,4 @@ Tests:     unit + integration + Playwright e2e</pre>
     `,
   ],
 })
-export class Slide06DemoTask {}
+export class Slide05DemoTask {}

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RESULTS } from './results.data';
 
 @Component({
-  selector: 'app-slide-08-results',
+  selector: 'app-slide-07-results',
   standalone: true,
   template: `
     <section class="slide">
@@ -103,6 +103,6 @@ npm run coverage # HTML reports under coverage/</pre>
     `,
   ],
 })
-export class Slide08Results {
+export class Slide07Results {
   protected readonly results = RESULTS;
 }

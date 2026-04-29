@@ -28,7 +28,7 @@
 - [ ] Terminal font size large (cmd+= a few times)
 - [ ] Checkout `main` branch: `git checkout main`
 - [ ] Run `npm run preshow` — one-shot preflight (branch, working tree,
-      deps, slide-8 freshness, tests, **plus warm-up curl on the live URL**
+      deps, slide-7 freshness, tests, **plus warm-up curl on the live URL**
       so the Render free-tier service isn't cold). Exits **READY TO
       PRESENT** or **NOT READY** with a fix list.
 - [ ] Browser tab #1 (audience-facing): <https://presentation.vladimirbujanovic.com/slides/1>
@@ -42,7 +42,7 @@
 
 ---
 
-# PHASE 1 — Intro and concept (0:00 — 6:00)
+# PHASE 1 — Intro and concept (0:00 — 5:00)
 
 ## Slide 1 (Title) — 0:00 to 0:45
 
@@ -62,27 +62,9 @@
 
 ---
 
-## Slide 2 (Why agents) — 0:45 to 2:00
+## Slide 2 (What Claude Code is) — 0:45 to 2:15
 
 **Show:** Slide 2
-
-**Say:**
-> "AI coding agents shorten the cycle from idea to working code. Faster
-> understanding of unfamiliar code. Faster scaffolding. Tests written along
-> with the code, not after."
-
-> "Important: this is not about replacing engineers. It's about a shorter
-> cycle, with control. Where the developer stays the reviewer and the owner."
-
-**Do:** Press → for slide 3
-
-**Ako pređeš preko vremena:** preskoči ovaj slajd ubuduće — manje važan.
-
----
-
-## Slide 3 (What Claude Code is) — 2:00 to 3:30
-
-**Show:** Slide 3
 
 **Say:**
 > "Claude Code is a local CLI agent. It reads your repo, edits your files,
@@ -91,13 +73,13 @@
 > "Important: nothing leaves your machine without your decision. You see
 > everything. You control what gets committed."
 
-**Do:** Press → for slide 4
+**Do:** Press → for slide 3
 
 ---
 
-## Slide 4 (Why prompts aren't enough) — 3:30 to 5:00
+## Slide 3 (Why prompts aren't enough) — 2:15 to 3:30
 
-**Show:** Slide 4 — **THIS IS THE MOST IMPORTANT CONCEPTUAL SLIDE**
+**Show:** Slide 3 — **THIS IS THE MOST IMPORTANT CONCEPTUAL SLIDE**
 
 **Say:**
 > "If you've used ChatGPT for code, you know the problem: you copy-paste,
@@ -109,16 +91,16 @@
 
 > "I'll show you all three in the next 15 minutes."
 
-**Do:** Press → for slide 5
+**Do:** Press → for slide 4
 
 **Backup ako neko pita:** "CLAUDE.md is just a markdown file in the repo root.
 Claude reads it before every interaction."
 
 ---
 
-## Slide 5 (Architecture) — 5:00 to 7:00
+## Slide 4 (Architecture) — 3:30 to 5:00
 
-**Show:** Slide 5 + open VS Code on the side with the repo
+**Show:** Slide 4 + open VS Code on the side with the repo
 
 **Say:**
 > "Today's demo app. Standard stack: Angular frontend, Express backend,
@@ -134,17 +116,17 @@ Claude reads it before every interaction."
 - Read out 1-2 lines (e.g., "Plan first, code second")
 - *"This is the file that drives every agent interaction with this repo."*
 
-**Press → for slide 6** when done.
+**Press → for slide 5** when done.
 
 **NE zaboravi:** ovo je najduži deo pre live-a. Ne žuri, ali ni ne sedi.
 
 ---
 
-# PHASE 2 — Demo task setup (6:00 — 9:00)
+# PHASE 2 — Demo task setup (5:00 — 9:00)
 
-## Slide 6 (Demo task) — 6:00 to 8:00
+## Slide 5 (Demo task) — 5:00 to 7:00
 
-**Show:** Slide 6
+**Show:** Slide 5
 
 **Say:**
 > "Today's task: an audience Q&A feature. Real shape. Form, validation, two
@@ -158,15 +140,15 @@ Claude reads it before every interaction."
 - Click the "Try the demo feature" link on the slide
 - Briefly show the working /feedback page (you're on `main` so it WON'T be
   there — that's the point: *"This is what we're going to build."*)
-- Press ← back to slide 6
+- Press ← back to slide 5
 
-**Press → for slide 7**
+**Press → for slide 6**
 
 ---
 
-## Slide 7 (Live flow) — 8:00 to 9:30
+## Slide 6 (Live flow) — 7:00 to 9:00
 
-**Show:** Slide 7
+**Show:** Slide 6
 
 **Say:**
 > "These are the 6 steps of the workflow. Watch what happens when I trigger them."
@@ -180,15 +162,15 @@ Claude reads it before every interaction."
 
 ---
 
-# PHASE 3 — LIVE DEMO (9:30 — 18:30)
+# PHASE 3 — LIVE DEMO (9:00 — 18:00)
 
-## The live block — 9:30 to 18:30
+## The live block — 9:00 to 18:00
 
 **This is the part you've practiced 3+ times.** Use the prompts in
 `04-prepared-prompts.md`. **Live block covers Prompts 1–4** (workflow
 steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 
-### Phase A: Brainstorm — workflow step 1 (9:30 — 12:30)
+### Phase A: Brainstorm — workflow step 1 (9:00 — 12:00)
 - **Paste Prompt 1** (brainstorming trigger)
 - **Say while it loads (~5s):** *"Brainstorming skill, step 1 of the
   workflow. It will ask me questions instead of guessing."*
@@ -196,19 +178,19 @@ steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 - **Talk between answers** — *"This is the kind of question a senior would ask
   before starting work."*
 
-### Phase B: Plan — workflow step 2 (12:30 — 14:30)
+### Phase B: Plan — workflow step 2 (12:00 — 14:00)
 - **Paste Prompt 2** (move to writing-plans)
 - **Say:** *"Step 2. It's writing a real plan document. Survives the
   conversation."*
 - Wait for the plan file to appear
 
-### Phase C: Execute via subagents — workflow step 3 (14:30 — 16:30)
+### Phase C: Execute via subagents — workflow step 3 (14:00 — 16:00)
 - **Paste Prompt 3** (subagent dispatch)
 - **Say:** *"Step 3 — execute. Each subagent is independent — backend,
   frontend, tests. They run in parallel because the work is multi-layer."*
 - Wait until you see the task list dispatched
 
-### Phase D: Cut (16:30 — 18:30)
+### Phase D: Cut (16:00 — 18:00)
 - **Speak Prompt 4** *"This would now run for 5-10 minutes. To respect your
   time, here's what the same workflow produced — already deployed at the
   URL you've been seeing. Then we'll run steps 4, 5, and 6 live on top
@@ -216,29 +198,29 @@ steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 - **Switch focus** from terminal to browser tab #1 (the live URL).
   No `git checkout` needed — the live URL is already serving the
   finished state from `demo-finished`.
-- Click "Try the demo feature" on slide 6, or just navigate to
+- Click "Try the demo feature" on slide 5, or just navigate to
   `/feedback` on the live URL — submit a question to prove it works
   end-to-end.
 
 ---
 
-# PHASE 4 — Result and review (18:30 — 25:00)
+# PHASE 4 — Result and review (18:00 — 25:00)
 
-## Slide 8 (Results) — 18:30 to 19:30
+## Slide 7 (Results) — 18:00 to 19:00
 
-**Browser already on the live URL** — navigate to slide 8.
+**Browser already on the live URL** — navigate to slide 7.
 
 **Say:**
 > "Same workflow, finished and committed. These numbers come straight from the
 > repo, regenerated by `npm run results:refresh` before the talk: 68 unit and
 > integration tests passing, 95% backend coverage, 83% frontend, plus 4
-> functional and 12 visual regression e2e tests."
+> functional and 11 visual regression e2e tests."
 
 > "Same commands your team already knows — `npm test`, `npm run e2e`."
 
 **Then run them live in the terminal so the audience sees green.**
 
-## Diff + tests (19:30 — 20:45)
+## Diff + tests (19:00 — 20:30)
 
 **Do (in terminal):**
 ```bash
@@ -254,7 +236,7 @@ git diff main..demo-finished --stat
 - *"Reviewable like any other code."*
 - Run `npm test` in terminal — wait for green (~5s)
 
-## Prompt 5 — `/simplify` — workflow step 4 (20:45 — 21:45)
+## Prompt 5 — `/simplify` — workflow step 4 (20:30 — 21:30)
 
 - **Paste Prompt 5** (`/simplify` over the diff)
 - **Say:** *"Step 4 of the workflow. Skill scans the new code for redundant
@@ -263,7 +245,7 @@ git diff main..demo-finished --stat
 - Show whatever it flags. If it flags nothing, say so — that's also a
   signal.
 
-## Prompt 6 — `code-reviewer` — workflow step 5 (21:45 — 23:00)
+## Prompt 6 — `code-reviewer` — workflow step 5 (21:30 — 22:45)
 
 - **Paste Prompt 6** (code-reviewer subagent against plan + CLAUDE.md)
 - **Say:** *"Step 5. Different Claude — didn't write this code. Reads the
@@ -271,16 +253,16 @@ git diff main..demo-finished --stat
   you'd do before opening a PR."*
 - Read 1–2 of its findings to the audience.
 
-## Prompt 7 — Documentation update — workflow step 6 (23:00 — 24:00) — OPTIONAL
+## Prompt 7 — Documentation update — workflow step 6 (22:45 — 23:45) — OPTIONAL
 
-**This is the first thing to skip when running over.** If past 23:30,
-go straight to Coverage / Slide 9.
+**This is the first thing to skip when running over.** If past 23:15,
+go straight to Coverage / Slide 8.
 
 - **Paste Prompt 7** (proposed doc patch)
 - **Say:** *"Step 6. Closes the loop — docs written after the code, in the
   same commit, stay accurate. In production we'd apply this patch."*
 
-## Coverage (24:00 — 25:00)
+## Coverage (23:45 — 25:00)
 
 **Do:**
 ```bash
@@ -296,9 +278,9 @@ open server/coverage/index.html
 
 # PHASE 5 — Limits and conclusion (25:00 — 30:00)
 
-## Slide 9 (What works) — 25:00 to 26:00
+## Slide 8 (What works) — 25:00 to 25:45
 
-**Switch back to slides:** browser, → to slide 9
+**Switch back to slides:** browser, → to slide 8
 
 **Say:**
 > "What you saw earlier — those are the patterns where agents shine.
@@ -306,7 +288,11 @@ open server/coverage/index.html
 
 **Press →**
 
-## Slide 10 (Limits) — 26:00 to 27:30 — **CRITICAL FOR CREDIBILITY**
+## Slide 9 (Limits) — 25:45 to 27:45 — **CRITICAL FOR CREDIBILITY**
+
+This slide gets the extra time freed up by cutting the old "Why agents"
+slide. Use it. Two minutes here is more valuable than two minutes
+anywhere else in the talk.
 
 **Say:**
 > "Where it can go wrong. Wrong assumptions made silently. Diffs bigger than
@@ -318,9 +304,14 @@ open server/coverage/index.html
 > "The plan-first workflow you saw directly addresses this. If the agent
 > writes a plan, you see what won't work before code is written."
 
+> "*Second concrete: tests that pass but don't verify.* Agent wrote a test
+> that asserted the route returned 200 — but didn't check the body. Looked
+> green; verified nothing. Caught in review. The fix isn't 'no agents' —
+> it's 'mandatory review, every time'."
+
 **Press →**
 
-## Slide 11 (Team model) — 27:30 to 28:30
+## Slide 10 (Team model) — 27:45 to 28:45
 
 **Say:**
 > "How a team should use this. Agent makes the plan, human approves. Agent
@@ -331,7 +322,7 @@ open server/coverage/index.html
 
 **Press →**
 
-## Slide 12 (Conclusion) — 28:30 to 30:00
+## Slide 11 (Conclusion) — 28:45 to 30:00
 
 **Say:**
 > "The takeaway: the value isn't agent autonomy. It's a faster, controlled
@@ -353,12 +344,12 @@ If you run over, cut in this order:
 
 | If past... | Then skip... |
 |------------|--------------|
-| 7:30 entering Phase 2 | Slide 5 deep dive (just point at the file, don't read) |
-| 18:00 still in Phase 3 | The dispatch wait — speak Prompt 4 immediately |
-| 22:30 entering simplify | Skip Prompt 7 (docs update) outright |
-| 23:30 still on review | Skip Prompt 7 outright; jump to coverage |
-| 24:00 entering coverage | Skip coverage section, jump to Slide 9 |
-| 28:00 still on limits | Combine Slide 11 + 12 in 60 seconds |
+| 6:30 entering Phase 2 | Slide 4 deep dive (just point at the file, don't read) |
+| 17:30 still in Phase 3 | The dispatch wait — speak Prompt 4 immediately |
+| 22:00 entering simplify | Skip Prompt 7 (docs update) outright |
+| 23:00 still on review | Skip Prompt 7 outright; jump to coverage |
+| 23:30 entering coverage | Skip coverage section, jump to Slide 8 |
+| 28:00 still on limits | Combine Slide 10 + 11 in 60 seconds |
 
 # Total recovery rule
 
@@ -383,5 +374,5 @@ offline.
 - **Don't apologize.** Skipping = "Let me move on", not "Sorry about that".
 - **Don't read the slide.** Look at the audience.
 - **Hands away from face.** Don't touch your nose / glasses.
-- **One sip of water at slide 5.** And one at slide 10. Don't drink mid-sentence.
+- **One sip of water at slide 4.** And one at slide 9. Don't drink mid-sentence.
 - **Last 30 seconds:** smile. Thank them. Pause for applause / silence.

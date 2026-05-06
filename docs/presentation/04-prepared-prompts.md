@@ -74,49 +74,67 @@ exact workflow. The prompts below reproduce it.
 **Paste this:**
 
 ```text
-/superpowers:brainstorming I want to add an Audience Q&A feature to this
-presentation app. Users should be able to submit questions, comments, or
-suggestions, and view them in a near real-time list. Help me design and
-plan this end-to-end (frontend, backend, validation, tests).
+/superpowers:brainstorming Add an Audience Q&A page at /feedback so anyone
+in the room can post a question, comment, or suggestion and see a live list.
+UI is locked — match this layout:
+
+- Title "Audience Q&A" + subtitle "Send a question, comment, or suggestion.
+  New entries appear in the list automatically."
+- "Back to slide 5" button, top-left
+- LEFT panel "Share your feedback":
+  - Name (optional, max 50, char counter)
+  - Type — Material mat-select dropdown, default "question",
+    options: question / comment / suggestion
+  - Message (required, max 500, char counter)
+  - Submit button with send icon, disabled until valid
+- RIGHT panel "Recent feedback":
+  - Filter chip group: All / Question / Comment / Suggestion (default All)
+  - Empty state "No feedback yet — be the first to ask!"
+  - Each entry shows: name (or "Anonymous" if blank), type badge,
+    relative time (e.g. "3 min ago"), message body
+
+Technical decisions — do not ask about these, just apply:
+- Backend: POST /api/feedback (returns 201 + entry), GET /api/feedback
+  with optional ?type= query param. Server-side filter, NOT client-side.
+- In-memory storage, newest-first sort by createdAt. No seed data —
+  start empty so the locked empty state is reachable.
+- Validator: name optional max 50 (trim), type required (one of three),
+  message required (trim, 1–500). Standard {ok,value}|{ok,errors} shape.
+- Frontend: polling interval = 3000ms with switchMap so old responses
+  can't overwrite newer ones. Filter chip click triggers an immediate
+  refresh, not just on next tick.
+- Submit: wait for POST 201 (no optimistic insert). On success, show a
+  Material snackbar "Thanks for your feedback!" and reset the form.
+- On poll failure: keep the last list visible, show a small inline
+  "Could not load feedback." line. No toast, no retry, no offline mode.
+- Message body is rendered as plain text via Angular interpolation
+  (default escaping). No HTML, no link auto-detection.
+- No animation library. New entries just appear on the next poll.
+- No moderation, no presenter mode, no admin gate.
 ```
 
 **What you say while it loads (5–10 seconds):**
-> *"This is the brainstorming skill — workflow step 1. Instead of guessing
-> my requirements, it's going to ask me one question at a time. Watch what
-> it picks up."*
+> *"This is the brainstorming skill — workflow step 1. The UI is fixed by a
+> design mock and I've pre-answered the technical decisions, so the skill
+> will only ask about what's genuinely undecided. Watch it self-limit."*
 
-The skill will ask 4–6 questions. **Have ready answers** so you don't stumble.
-Sample answers (the actual questions may differ — adapt):
+The skill should ask **0–2 short questions** (most decisions are already
+encoded). If anything does come up, stay brief:
 
-**If asked about feedback types:**
-> "Three types: question, comment, suggestion. Type is required, defaults to question."
-
-**If asked about authentication:**
-> "No auth. Optional name field — if empty, display as 'Anonymous'."
-
-**If asked about real-time updates:**
-> "Polling every 3 seconds is fine. No websockets — the audience is small and we want to keep it simple."
-
-**If asked about validation rules:**
-> "Message required, max 500 characters. Name optional, max 50 characters. Reject empty-after-trim messages."
-
-**If asked about persistence:**
-> "In-memory only. The server restarts, the feedback resets. That's intentional for the demo."
-
-**If asked about UI framework:**
-> "Angular Material — match the existing app. One page with form on the left, list on the right."
-
-**If asked about routes:**
-> "/feedback for the combined view. /feedback/submit and /feedback/list as standalone routes for flexibility."
-
-**If asked about anything else:**
+**If asked about anything not covered above:**
 > "Use the simplest implementation that meets the requirement. Defer additions."
+
+**If brainstorming asks about moderation / hiding posts:**
+> "No moderation. Trust the room."
+
+**If brainstorming asks about pre-seeding data:**
+> "Start empty — the empty state should be visible on first load."
 
 ---
 
 ### Prompt 2 — Move to plan (workflow step 2)
 
-**When:** Brainstorming feels done (3–5 questions answered).
+**When:** Brainstorming is done (usually 0–2 questions answered, then it stops itself).
 
 **Paste this:**
 
@@ -284,7 +302,7 @@ is the cut; Prompts 5–7 run live on `demo-finished`.
 
 | Prompt | Workflow step | Slide / Moment | Approx. Time |
 |--------|---------------|----------------|--------------|
-| 1 — Brainstorm | 1 — Brainstorm | After slide 6, ~9:30 | 30s typing + 2–3 min Q&A |
+| 1 — Brainstorm | 1 — Brainstorm | After slide 6, ~9:30 | 30s typing + 0–60s Q&A |
 | 2 — Move to plan | 2 — Plan | Brainstorm complete, ~12:00 | 1–2 min for plan to write |
 | 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:00 | 1–2 min for dispatch fan-out |
 | 4 — STOP and switch | (cut) | Task list shown, ~16:00 | <30s |

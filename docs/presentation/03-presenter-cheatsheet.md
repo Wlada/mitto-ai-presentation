@@ -314,8 +314,7 @@ more valuable than three minutes anywhere else in the talk.
 ## Slide 10 (Conclusion) — 28:30 to 30:00
 
 **Say:**
-> "The takeaway: the value isn't agent autonomy. It's a faster, controlled
-> cycle where the developer stays the owner."
+> "The takeaway: it's a faster, controlled cycle where the developer stays the owner."
 
 > "If you'd try one thing tomorrow: write a CLAUDE.md for one of your repos.
 > Half an hour. You'll see the difference in the next interaction."

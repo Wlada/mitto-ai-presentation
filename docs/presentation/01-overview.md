@@ -24,8 +24,7 @@ controlled engineering process.
 
 ## The central message
 
-> The value isn't agent autonomy. It's a faster, controlled cycle where the
-> developer stays the owner.
+> It's a faster, controlled cycle where the developer stays the owner.
 
 ## Time budget
 

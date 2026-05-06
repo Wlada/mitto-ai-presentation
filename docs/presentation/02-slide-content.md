@@ -235,7 +235,6 @@ Stay safe with: small scope, plan first, every diff reviewed.
 ```
 Takeaway
 
-  The value isn't agent autonomy.
   It's a faster, controlled cycle
   where the developer stays the owner.
 

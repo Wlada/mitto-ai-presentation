@@ -11,7 +11,6 @@ import { RouterLink } from '@angular/router';
     <section class="slide">
       <h1>Takeaway</h1>
       <p class="takeaway">
-        The value isn't agent autonomy.<br />
         It's a faster, controlled cycle<br />
         where the developer stays the owner.
       </p>

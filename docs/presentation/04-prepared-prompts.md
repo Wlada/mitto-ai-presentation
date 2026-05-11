@@ -85,61 +85,39 @@ exact workflow. The prompts below reproduce it.
 **Paste this:**
 
 ```text
-/superpowers:brainstorming Add an Audience Q&A page at /feedback so anyone
-in the room can post a question, comment, or suggestion and see a live list.
-UI is locked — match this layout:
+/superpowers:brainstorming Add an Audience Q&A page at /feedback.
 
-- Title "Audience Q&A" + subtitle "Send a question, comment, or suggestion.
-  New entries appear in the list automatically."
-- "Back to slide 6" button, top-left
-- LEFT panel "Share your feedback":
-  - Name (optional, max 50, char counter)
-  - Type — Material mat-select dropdown, default "question",
-    options: question / comment / suggestion
-  - Message (required, max 500, char counter)
-  - Submit button with send icon, disabled until valid
-- RIGHT panel "Recent feedback":
-  - Filter chip group: All / Question / Comment / Suggestion (default All)
-  - Empty state "No feedback yet — be the first to ask!"
-  - Each entry shows: name (or "Anonymous" if blank), type badge,
-    relative time (e.g. "3 min ago"), message body
-
-Technical decisions — do not ask about these, just apply:
-- Backend: POST /api/feedback (returns 201 + entry), GET /api/feedback
-  with optional ?type= query param. Server-side filter, NOT client-side.
-- In-memory storage, newest-first sort by createdAt. No seed data —
-  start empty so the locked empty state is reachable.
-- Validator: name optional max 50 (trim), type required (one of three),
-  message required (trim, 1–500). Standard {ok,value}|{ok,errors} shape.
-- Frontend: polling interval = 3000ms with switchMap so old responses
-  can't overwrite newer ones. Filter chip click triggers an immediate
-  refresh, not just on next tick.
-- Submit: wait for POST 201 (no optimistic insert). On success, show a
-  Material snackbar "Thanks for your feedback!" and reset the form.
-- On poll failure: keep the last list visible, show a small inline
-  "Could not load feedback." line. No toast, no retry, no offline mode.
-- Message body is rendered as plain text via Angular interpolation
-  (default escaping). No HTML, no link auto-detection.
-- No animation library. New entries just appear on the next poll.
-- No moderation, no presenter mode, no admin gate.
+People in the room post a question, comment, or suggestion — each with
+an optional name, a type, and a message. New entries show up on the page
+automatically.
 ```
 
 **What you say while it loads (5–10 seconds):**
-> *"This is the brainstorming skill — workflow step 1. The UI is fixed by a
-> design mock and I've pre-answered the technical decisions, so the skill
-> will only ask about what's genuinely undecided. Watch it self-limit."*
+> *"This is the brainstorming skill — workflow step 1. Notice how short
+> the prompt is. I didn't tell it the stack, the storage rules, or the
+> constraints — it reads all of that from CLAUDE.md. The questions you'll
+> see next are the things CLAUDE.md doesn't cover."*
 
-The skill should ask **0–2 short questions** (most decisions are already
-encoded). If anything does come up, stay brief:
+The skill should ask **2–3 questions** out of the list below. Answer with
+the matching line; each answer is one short sentence so the dialogue
+moves quickly. (Storage, database, auth, and websockets are not in this
+list — CLAUDE.md forbids them, so the agent shouldn't ask.)
 
-**If asked about anything not covered above:**
-> "Use the simplest implementation that meets the requirement. Defer additions."
+**Answer cheat sheet — say only the right-hand column:**
 
-**If brainstorming asks about moderation / hiding posts:**
-> "No moderation. Trust the room."
+| If the agent asks about... | You say |
+|---------------------------|---------|
+| Update frequency / polling interval | *"Every 3 seconds is fine."* |
+| Filtering the list | *"Yes — filter chips by type. All / Question / Comment / Suggestion. Default All."* |
+| Empty state | *"Show a friendly empty-state message until the first entry. Something like 'No feedback yet — be the first to ask!'"* |
+| Moderation / hiding posts | *"No moderation. Trust the room."* |
+| Pre-seeding data | *"Start empty — the empty state should be visible on first load."* |
+| Submit behavior / optimistic insert | *"Wait for the server response. Show a snackbar on success, then reset the form."* |
+| Poll failure handling | *"Keep the last list visible. Show a small inline 'Could not load feedback' line. No retry, no toast."* |
+| Anything not covered above | *"Use the simplest implementation that meets the requirement. Defer extras."* |
 
-**If brainstorming asks about pre-seeding data:**
-> "Start empty — the empty state should be visible on first load."
+If the skill keeps asking after 3 questions, stop it:
+> *"That's enough — let's move to the plan."*
 
 ---
 
@@ -318,7 +296,7 @@ Standard flow uses Prompts 1–4 only. Prompts 5–7 are reference / optional.
 
 | Prompt | Workflow step | Slide / Moment | Approx. Time |
 |--------|---------------|----------------|--------------|
-| 1 — Brainstorm | 1 — Brainstorm | After slide 5, ~9:30 | 30s typing + 0–60s Q&A |
+| 1 — Brainstorm | 1 — Brainstorm | After slide 5, ~9:30 | 10s typing + 60–120s Q&A (2–3 questions) |
 | 2 — Move to plan | 2 — Plan | Brainstorm complete, ~12:00 | 1–2 min for plan to write |
 | 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:00 | 1–2 min for dispatch fan-out |
 | 4 — STOP and switch | (cut) | Task list shown, ~16:00 | <30s |

@@ -11,14 +11,15 @@ import { Component } from '@angular/core';
         <li>Frontend: Angular 21 + Material</li>
         <li>Backend: Node + Express + TypeScript</li>
         <li>End-to-end tests: Playwright</li>
-        <li>Docs: plans, prompts, cheatsheet</li>
         <li><code>CLAUDE.md</code>: the project context file</li>
       </ul>
       <pre>apps/web/      Angular 21 + Material
 server/        Node + Express + TypeScript
 e2e/           Playwright
-docs/          Plans, prompts, cheatsheet
 CLAUDE.md      The project context file</pre>
+      <p class="closing">
+        The slides you're seeing now were built with this same setup.
+      </p>
     </section>
   `,
   styles: [
@@ -38,6 +39,12 @@ CLAUDE.md      The project context file</pre>
         border-radius: 6px;
       }
       li { margin-bottom: 6px; }
+      .closing {
+        margin: 24px 0 0;
+        font-size: 18px;
+        line-height: 1.5;
+        color: var(--mitto-fg);
+      }
     `,
   ],
 })

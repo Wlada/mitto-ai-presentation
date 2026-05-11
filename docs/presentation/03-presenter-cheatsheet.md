@@ -89,9 +89,17 @@
 > things or do them differently. Without rules it adds dependencies we
 > don't want."
 
-> "The fix is three things: a project context file we call CLAUDE.md,
-> reusable workflows called Skills, and parallel specialized work via
-> subagents."
+> "Three things fix this. First, CLAUDE.md. It's a file in the repo that
+> tells the agent the project rules — what stack, what tests, what not to
+> do. The agent reads it every time."
+
+> "Second, Skills. A skill is a saved workflow you call with a slash
+> command. The agent follows the same steps every time, instead of
+> inventing them."
+
+> "Third, Subagents. A subagent is a separate Claude with one job and
+> its own memory. We use them for parallel work, and for a fresh code
+> review from a different agent."
 
 > "I'll show you all three in the next 15 minutes."
 
@@ -107,10 +115,12 @@ Claude reads it before every interaction."
 **Show:** Slide 4 + open VS Code on the side with the repo
 
 **Say:**
-> "In today's demo app we'll implement a Q&A feature. We'll use a standard
-> stack — Angular, Express, Playwright. Tests via Vitest. We'll look at the
-> CLAUDE.md workflow as well as plans and prompts."
+> "In today's demo app we'll add a Q&A feature. We use a standard stack —
+> Angular, Express, Playwright. The interesting part is the CLAUDE.md
+> file at the top of the repo."
 
+**Point to the closing line on the slide ("The slides you're seeing now
+were built with this same setup.") and expand on it:**
 > "The slides you see right now are rendered by this same app. Same Angular
 > components, same CLAUDE.md, same test setup. The thing the agent works on
 > during the demo IS the slides app."
@@ -160,10 +170,12 @@ were already executed on `demo-finished`; Slide 6 narrates them. Prompts
 click-through flow.
 
 ### Phase A: Brainstorm — workflow step 1 (9:00 — 12:00)
-- **Paste Prompt 1** (brainstorming trigger)
-- **Say while it loads (~5s):** *"Brainstorming skill, step 1 of the
-  workflow. It will ask me questions instead of guessing."*
-- **Answer 4-6 questions.** Reference the prompt doc for sample answers.
+- **Paste Prompt 1** (brainstorming trigger) — the prompt is short on purpose
+- **Say while it loads (~5–10s):** *"Brainstorming skill, step 1 of the
+  workflow. Notice how short the prompt is — I didn't tell it the stack
+  or the constraints. It reads those from CLAUDE.md. The questions
+  you'll see next are the things CLAUDE.md doesn't cover."*
+- **Answer 2–3 questions.** Use the answer cheat sheet in `04-prepared-prompts.md` — every likely question has a one-line scripted reply.
 - **Talk between answers** — *"This is the kind of question a senior would ask
   before starting work."*
 
@@ -249,19 +261,21 @@ one concrete example for the strongest two, and link each back to the
 workflow you just showed.
 
 **Say:**
-> "Where it can go wrong. Wrong assumptions made silently. Diffs bigger than
-> the task warranted. Tests that pass but don't really verify."
+> "Where it can go wrong. The agent can make a wrong guess and not tell
+> you. It can change more than you asked for. It can write tests that
+> pass but don't really test anything. It can sound sure even when it
+> is wrong. And small cleanups can break other things."
 
-> "*Brief personal example*: [insert one short story — agent added a dependency
-> we didn't need, caught in review]."
+> "*Brief personal example*: [one short story — for example: the agent
+> added a library we didn't need; I caught it in the review.]"
 
-> "The plan-first workflow you saw directly addresses this. If the agent
-> writes a plan, you see what won't work before code is written."
+> "This is why we plan first. The plan shows the wrong choice before
+> any code is written."
 
-> "*Second concrete: tests that pass but don't verify.* Agent wrote a test
-> that asserted the route returned 200 — but didn't check the body. Looked
-> green; verified nothing. Caught in review. The fix isn't 'no agents' —
-> it's 'mandatory review, every time'."
+> "*One more example: tests that pass but don't really test.* The agent
+> wrote a test that checked the route returned 200, but did not check the
+> body. It looked green and verified nothing. I caught it in the review.
+> The fix is not 'no agents' — it is 'always review every change'."
 
 **Press →**
 

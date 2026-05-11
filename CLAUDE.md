@@ -173,6 +173,13 @@ colleague's PR review.
   `npm run preshow` (or at minimum `npm test && npm run build`) and ship
   only on green. Render auto-deploys on push to `demo-finished`, so a
   broken push goes live in ~3 minutes.
+- Do not read presenter-prep files during a live agent session on `main`.
+  Specifically: `docs/setup/03-demo-finished-build.md` (step-by-step
+  rebuild guide for `demo-finished`) and `docs/plans/2026-04-27-presentation-design.md`
+  (the talk's design doc, which pre-describes the demo feature). Those
+  files exist for the human presenter, not for the agent — reading them
+  during the live brainstorm would short-circuit the workflow you are
+  meant to demonstrate.
 
 ---
 

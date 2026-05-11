@@ -66,7 +66,10 @@ The fix:
 
 **Speaker notes:**
 - Say: *"If we use a chat tool — like ChatGPT — for coding, we end up in a copy/paste cycle: code in, edits, code back out. The chat agent doesn't know the project context. It has no specific workflow, so it can skip things or do them in a different way. Without rules, it can add dependencies we don't want."*
-- The fix: *"We use a CLAUDE.md that defines project rules. We use reusable workflows with Skills. And we run work in parallel with subagents."*
+- The fix — three short lines, one per concept:
+  - *"Three things fix this. First, CLAUDE.md. It's a file in the repo that tells the agent the project rules — what stack, what tests, what not to do. The agent reads it every time."*
+  - *"Second, Skills. A skill is a saved workflow you call with a slash command. The agent follows the same steps every time, instead of inventing them."*
+  - *"Third, Subagents. A subagent is a separate Claude with one job and its own memory. We use them for parallel work, and for a fresh code review from a different agent."*
 - This is the *most important conceptual slide*. The audience should leave with: a prompt is not enough.
 - 90 seconds.
 
@@ -82,18 +85,19 @@ Today's demo app
   Frontend: Angular 21 + Material
   Backend:  Node + Express + TypeScript
   E2E:      Playwright
-  Docs:     plans, prompts, cheatsheet
   CLAUDE.md: the project context file
 
   apps/web/      Angular 21 + Material
   server/        Node + Express + TypeScript
   e2e/           Playwright
-  docs/          Plans, prompts, cheatsheet
   CLAUDE.md      The project context file
+
+The slides you're seeing now were built with this same setup.
 ```
 
 **Speaker notes:**
-- Say: *"In today's demo app we'll implement a Q&A feature. We'll use a standard stack — Angular, Express, Playwright. Tests via Vitest. We'll look at the CLAUDE.md workflow as well as plans and prompts."*
+- Say: *"In today's demo app we'll add a Q&A feature. We use a standard stack — Angular, Express, Playwright. The interesting part is the CLAUDE.md file at the top."*
+- Then point to the closing line on the slide: *"And one more thing — the slides you're looking at right now were built with this same setup. Same Angular components, same CLAUDE.md, same tests. The thing the agent works on during the demo IS the slides app."*
 - Open VS Code on the second monitor. Show the repo structure. Open `CLAUDE.md`.
 - Show the key sections: workflow rules, frontend rules, definition of done.
 - *"This is the file Claude reads before every interaction with the repo. You don't have to write a novel — ours is around 250 lines."*
@@ -183,20 +187,20 @@ What agents are good at
 ```
 Where it can go wrong
 
-  Wrong guesses it never tells you about
-  Changes bigger than the task asked for
-  Tests that pass but don't really check anything
-  Sounds confident even when it's wrong
-  "Helpful" cleanups that break other things
+  Silent wrong guesses
+  Doing more than asked
+  Tests that pass but don't really test
+  Sounds sure even when it is wrong
+  Cleanups that break other things
 
-Stay safe with: small scope, plan first, every diff reviewed.
+Stay safe: small tasks, plan first, review every change.
 ```
 
 **Speaker notes:**
 - This is the credibility slide. Don't skip the risks.
-- *"Each of these has bitten me at least once. The most expensive one is the first — the agent doesn't pause to ask, it picks a direction and ships it. You only see it in the diff."*
-- If you have a personal example, share one. (E.g. *"I had an agent add a library we didn't need — caught it in review."*)
-- *"The plan-first workflow you saw earlier directly addresses this. The plan is written before any code, so you see the wrong choices before they're made."*
+- *"Each of these has happened to me at least once. The worst one is the first: the agent makes a wrong guess, doesn't ask about it, and only the diff shows what it did. So you have to read the diff every time."*
+- If you have a personal example, share one. (E.g. *"I had an agent add a library we didn't need — I caught it in the review."*)
+- *"This is why we plan first. The plan shows the wrong choice before any code is written."*
 - 90 seconds. **The strongest moment after the live demo — don't rush.**
 
 ---

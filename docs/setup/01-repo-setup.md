@@ -56,7 +56,6 @@ mitto-ai-presentation/
 ├── apps/web/                   # Angular 21 frontend
 │   ├── src/app/
 │   │   ├── slides/             # one component per slide
-│   │   ├── feedback/           # demo feature
 │   │   ├── core/
 │   │   └── shared/
 │   ├── proxy.conf.json         # /api → :3000

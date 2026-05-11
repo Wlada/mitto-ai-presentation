@@ -81,7 +81,7 @@ mitto-ai-presentation/
 │   └── web/                   # Angular 21 app — slides + demo features
 │       ├── src/app/
 │       │   ├── slides/        # one component per slide (9 slides)
-│       │   ├── feedback/      # Audience Q&A demo feature (demo-finished branch)
+│       │   ├── feedback/      # demo feature added on the `demo-finished` branch
 │       │   ├── core/
 │       │   └── shared/
 │       └── proxy.conf.json
@@ -118,7 +118,7 @@ changes, then commit the new PNGs.
   live agent flow (brainstorm → plan → dispatch) here — the agent sees a
   fresh repo without the Q&A feature, so the brainstorm questions are
   meaningful.
-- **`demo-finished`** — `main` + the full Audience Q&A feature with
+- **`demo-finished`** — `main` + the demo feature built end-to-end with
   tests. **This is the branch deployed at the live URL.** The audience
   sees the finished state on the live URL throughout the talk; no
   `git checkout` happens mid-demo.

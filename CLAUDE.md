@@ -2,64 +2,21 @@
 
 > Project context for Claude Code. The agent reads this file before any
 > interaction with this repository. `AGENTS.md` is an alias pointing here.
->
-> This file is **also a demo artifact** — the audience reads it on screen
-> during the presentation. Keep it scannable, opinionated, and honest about
-> trade-offs.
-
----
-
-## What this file is and how to maintain it
-
-A `CLAUDE.md` (also recognized as `AGENTS.md`) is the **standing context** the
-agent uses every time it touches the repo. Think of it as a permanent prompt
-prefix that does not consume your conversation context window.
-
-### What belongs here
-- **Project-specific rules** — conventions a new contributor would need a
-  human to explain (which lint preset, in-memory storage, no auth, etc.)
-- **Workflow expectations** — the steps every non-trivial task goes through
-- **Code style per layer** — short bullets the agent will treat as ground truth
-- **What NOT to do** — guardrails to prevent past mistakes from recurring
-- **Definition of done** — the checklist the agent self-evaluates against
-- **Demo / context-specific behaviors** — instructions that depend on usage
-  (e.g. "this is a demo, optimize for clarity")
-
-### What does NOT belong here
-- **Project description, stack table, install commands** — those live in
-  `README.md` (humans read that). Agents don't need a 5-paragraph intro.
-- **Generated artifacts** (test counts, coverage numbers, file inventories) —
-  use scripts (`npm run results:refresh`) or `git`/`grep` to derive these
-- **Anything that drifts** — every line you add is a maintenance liability.
-  If a fact rots over time, prefer a script that recomputes it.
-
-### Maintenance discipline (important)
-- **Outdated `CLAUDE.md` is worse than none.** Stale rules teach the agent
-  the wrong patterns and the audience starts ignoring it.
-- After every meaningful change to the repo, ask: *"Does any rule in
-  `CLAUDE.md` need updating?"* If yes, update in the same commit.
-- The "What you must NOT do" section often grows after a bad agent
-  interaction. That is correct — encode the lesson.
-- For a step-by-step on adapting this template to a new repo, see
-  `docs/setup/02-claude-md-template.md`.
 
 ---
 
 ## Project at a glance
 
-`mitto-ai-presentation` is a 30-minute presentation app that **renders the
-slides** and is **simultaneously the demo target** the agent works on during
-the live talk. The audience sees the same Angular components evolve in real
-time during the live demo. See `README.md` for the full project description,
-stack, structure, and commands.
+`mitto-ai-presentation` is a presentation app that renders its own slides
+and exposes a small feature alongside. See `README.md` for the full project
+description, stack, structure, and commands.
 
 **Hard constraints for this repo:**
 - No database, no auth, no external services — in-memory storage only
 - No background jobs, websockets, or message queues
 - TypeScript across the stack, strict mode, no `any` (except boundaries with
   untyped third-party code)
-- Optimize for **clarity over cleverness** — the audience reads the code on
-  screen during the talk
+- Optimize for clarity over cleverness — code should be obvious on first read
 
 ---
 
@@ -74,17 +31,10 @@ Triggers a structured Q&A with the agent. The agent asks one question at
 a time to refine intent before any code is written. Goal: surface
 requirements, edge cases, and the simplest viable scope.
 
-> **Why first.** Most failed agent runs are wrong assumptions made silently.
-> Brainstorming forces them into the open.
-
 ### 2. Plan — `/superpowers:writing-plans`
 The agent writes a plan document to `docs/plans/YYYY-MM-DD-<topic>.md`. The
 plan lists files to change, the strategy, tests, and risks. The plan is
 reviewed (by you) before any code changes.
-
-> **Why a file.** Plans survive the conversation. If you `/clear`, the plan
-> is still there. New conversations can pick it up. Reviewers can read it
-> before approving the diff.
 
 ### 3. Execute — choose one
 - **Parallel (preferred for multi-layer work):**
@@ -99,9 +49,6 @@ After implementation, run `/simplify` to look for duplicated code, dead
 helpers, premature abstractions, redundant state, and one-shot wrappers.
 Apply small fixes inline; flag judgement calls.
 
-> **Why after, not before.** Simplification needs working code to evaluate.
-> Premature simplification deletes things you need.
-
 ### 5. Review — code-reviewer subagent
 Dispatch the `code-reviewer` subagent with a pointer to the plan and a
 brief of what changed. It reviews against project conventions in this file
@@ -109,15 +56,11 @@ and against the plan. Treat its findings the way you'd treat a senior
 colleague's PR review.
 
 ### 6. Document — update `CLAUDE.md`, `README.md`, `docs/`
-- Did you add a new command, script, or tool? Update `README.md` and the
-  command table here.
+- Did you add a new command, script, or tool? Update `README.md`.
 - Did you encode a new lesson the agent should follow? Update the relevant
   rule section here.
-- Did you change behaviour the audience or future contributors need to
-  know about? Update `docs/`.
-
-> **Why last.** Docs that get written before the code lie. Docs that get
-> written after the code, in the same commit, stay accurate.
+- Did you change behaviour future contributors need to know about?
+  Update `docs/`.
 
 ---
 
@@ -173,26 +116,22 @@ colleague's PR review.
   `npm run preshow` (or at minimum `npm test && npm run build`) and ship
   only on green. Render auto-deploys on push to `demo-finished`, so a
   broken push goes live in ~3 minutes.
-- Do not read presenter-prep files during a live agent session on `main`.
-  Specifically: `docs/setup/03-demo-finished-build.md` (step-by-step
-  rebuild guide for `demo-finished`) and `docs/plans/2026-04-27-presentation-design.md`
-  (the talk's design doc, which pre-describes the demo feature). Those
-  files exist for the human presenter, not for the agent — reading them
-  during the live brainstorm would short-circuit the workflow you are
-  meant to demonstrate.
+- Do not read `docs/setup/03-demo-finished-build.md` or
+  `docs/plans/2026-04-27-presentation-design.md`. Those files exist outside
+  the agent's scope; reading them during a live session would short-circuit
+  the workflow.
 
 ---
 
-## Demo behavior (this repo is used in a live talk)
+## Code style notes
 
-- Code is read on screen at projector resolution. Long expressions and clever
-  one-liners hurt comprehension live.
-- Predictable patterns over advanced abstractions. All routes look alike. All
-  slides look alike.
+- Long expressions and clever one-liners hurt comprehension; prefer obvious
+  code.
+- Predictable patterns over advanced abstractions. All routes look alike.
+  All slides look alike.
 - Final summaries are 2–3 plain sentences, not a wall of bullets.
 - When invoked through `superpowers:subagent-driven-development`, prefer
-  parallelism. The audience sees the dispatch fan out — that's part of the
-  demo's value.
+  parallelism for genuinely independent tasks.
 - Slide numbering is load-bearing (slide 6 = Results, etc.). If you renumber
   slides, update `apps/web/src/app/slides/slide.config.ts`,
   `slides.routes.ts`, and every `docs/presentation/*.md` reference in the
@@ -216,23 +155,6 @@ A change is done when:
 
 ---
 
-## Commands you'll actually use
-
-| Command | What it does |
-|---------|--------------|
-| `npm run dev` | Frontend (:4300) + backend (:3000), concurrently |
-| `npm test` | Unit + integration tests across workspaces |
-| `npm run e2e` | Playwright (functional + visual regression) |
-| `npm run coverage` | HTML coverage reports under `*/coverage/` |
-| `npm run results:refresh` | Regenerate Slide 6 numbers (run on `demo-finished`) |
-| `npm run preshow` | One-shot preflight for the live presentation |
-
-For the full table see `README.md`.
-
----
-
 ## References
-- `README.md` — project description, stack, structure, full command table
+- `README.md` — project description, stack, structure, commands
 - `docs/plans/` — past plans the agent has written
-- `docs/presentation/` — slide content, presenter cheatsheet, prompts, fallback
-- `docs/setup/02-claude-md-template.md` — how to write a CLAUDE.md for a new repo

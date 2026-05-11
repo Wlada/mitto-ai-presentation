@@ -56,9 +56,10 @@ test.describe('Audience Q&A flow', () => {
   });
 
   test('full demo flow: slide CTA → submit → back to source slide', async ({ page }) => {
-    // Land on the demo-task slide where the audience CTA lives.
-    await page.goto('/slides/5');
-    await expect(page).toHaveURL(/\/slides\/5$/);
+    // Land on slide 6 (Results) where the audience CTA lives after the
+    // renumbering that dropped the old slide-5 demo-task.
+    await page.goto('/slides/6');
+    await expect(page).toHaveURL(/\/slides\/6$/);
 
     // Click the slide's CTA link into the feature.
     await page.getByRole('link', { name: /try the demo feature/i }).click();
@@ -77,8 +78,8 @@ test.describe('Audience Q&A flow', () => {
     await expect(page.getByText(/thanks for your feedback/i)).toBeVisible({ timeout: 5000 });
 
     // The back arrow should return to the source slide, not /slides/1.
-    await page.getByRole('link', { name: /back to slide 5/i }).click();
-    await expect(page).toHaveURL(/\/slides\/5$/);
-    await expect(page.getByRole('heading', { name: /today's demo task/i })).toBeVisible();
+    await page.getByRole('link', { name: /back to slide 6/i }).click();
+    await expect(page).toHaveURL(/\/slides\/6$/);
+    await expect(page.getByRole('heading', { level: 1, name: /what we produced/i })).toBeVisible();
   });
 });

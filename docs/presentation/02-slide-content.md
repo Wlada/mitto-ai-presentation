@@ -100,7 +100,7 @@ The slides you're seeing now were built with this same setup.
 - Then point to the closing line on the slide: *"And one more thing — the slides you're looking at right now were built with this same setup. Same Angular components, same CLAUDE.md, same tests. The thing the agent works on during the demo IS the slides app."*
 - Open VS Code on the second monitor. Show the repo structure. Open `CLAUDE.md`.
 - Show the key sections: workflow rules, frontend rules, definition of done.
-- *"This is the file Claude reads before every interaction with the repo. You don't have to write a novel — ours is around 250 lines."*
+- *"This is the file Claude reads before every interaction with the repo. You don't have to write a novel — ours is around 160 lines."*
 - 2-3 minutes. **Longest section before the live demo.**
 
 ---

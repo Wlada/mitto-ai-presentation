@@ -107,7 +107,7 @@ shows Render's cold-start splash longer than ~30s.
   instead."*
 - Open `coverage/index.html` from `docs/presentation/backup/` (recorded
   in week 4) or screenshot fallback.
-- Continue to slide 8.
+- Continue to slide 7.
 
 ### Scenario 7 — Playwright browser doesn't open
 
@@ -165,7 +165,7 @@ caused by a font-rendering tweak, a Material theme bump, or a logo recolor.
   baseline by `git checkout e2e/tests/slides-visual.spec.ts-snapshots/` and
   fix the underlying styling instead.
 
-### Scenario 10 — The QR code / link from slide 10 doesn't work
+### Scenario 10 — The QR code / link from slide 9 doesn't work
 
 **Symptom:** Audience can't reach your local /feedback page.
 
@@ -183,7 +183,7 @@ on `demo-finished`.
   the workflow story is intact without these two steps.
 - Say: *"Steps 4 and 5 of the workflow look like this in normal use. We've
   already seen the result they verify, so let's keep moving."*
-- Continue to the coverage section / Slide 8. Do not retry.
+- Continue to the coverage section / Slide 7. Do not retry.
 
 ---
 
@@ -195,7 +195,7 @@ the recovery:
 | Drill | Trigger |
 |-------|---------|
 | Drill 1 | Disconnect Wi-Fi mid-Phase 3: prove you can fall back to local `git checkout demo-finished && npm run dev` and finish |
-| Drill 2 | Skip Phase 3 entirely: jump straight to the live URL on slide 7 after Slide 6, narrate as if dispatch finished |
+| Drill 2 | Skip Phase 3 entirely: jump straight to the live URL on slide 6 after Slide 5, narrate as if dispatch finished |
 | Drill 3 | Fail a test on purpose: temporarily break a validator, run `npm test`, recover |
 
 Practice the recovery 3 times. Then it's reflex.
@@ -204,15 +204,15 @@ Practice the recovery 3 times. Then it's reflex.
 
 ## Hard cuts (in order, when running over)
 
-If you reach Slide 7 past minute 21, do **all** of these in sequence:
+If you reach Slide 6 past minute 21, do **all** of these in sequence:
 
 1. **Skip Prompt 7 (docs update) first** — it's the cheapest cut, no
    visible loss to the audience
 2. Skip Prompt 6 (code-reviewer subagent) next
 3. Skip Prompt 5 (`/simplify`) if still over
 4. Skip `npm run coverage` — just say "coverage is at 80%+"
-5. Trim Slide 10 (Conclusion) to 45 seconds — drop the "try it tomorrow" bullets, keep the takeaway and the "fast junior / senior" closer
-6. **Do not skip Slide 9 (Limits).** It's the credibility anchor.
+5. Trim Slide 9 (Conclusion) to 45 seconds — keep the takeaway and the "fast junior / senior" closer
+6. **Do not skip Slide 8 (Limits).** It's the credibility anchor.
 
 ---
 

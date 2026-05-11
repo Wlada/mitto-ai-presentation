@@ -53,7 +53,7 @@ exact workflow. The prompts below reproduce it.
 - **Steps 1–3** (Prompts 1–3) run live in your terminal on local `main`.
 - The **deployed live URL** (`presentation.vladimirbujanovic.com`) serves
   `demo-finished` — the audience sees the finished result there throughout
-  the talk. Slide 5 CTA already works because the live URL has the Q&A
+  the talk. Slide 6 CTA already works because the live URL has the Q&A
   feature.
 - After Prompt 4 (the planned cut), you don't `git checkout` anything —
   the live URL is already showing the finished state. You just shift
@@ -69,7 +69,7 @@ exact workflow. The prompts below reproduce it.
 
 ### Prompt 1 — Brainstorm (workflow step 1)
 
-**When:** Slide 6, immediately after you say "let me actually run it now."
+**When:** Slide 5, immediately after you say "let me actually run it now."
 
 **Paste this:**
 
@@ -80,7 +80,7 @@ UI is locked — match this layout:
 
 - Title "Audience Q&A" + subtitle "Send a question, comment, or suggestion.
   New entries appear in the list automatically."
-- "Back to slide 5" button, top-left
+- "Back to slide 6" button, top-left
 - LEFT panel "Share your feedback":
   - Name (optional, max 50, char counter)
   - Type — Material mat-select dropdown, default "question",
@@ -187,7 +187,7 @@ wait for them to complete** — that takes 5–10 minutes you don't have.
 **Shift focus** from terminal to the browser tab on the live URL
 (<https://presentation.vladimirbujanovic.com>). The browser already shows
 the finished state — no `git checkout` needed. Click "Try the demo
-feature" on slide 5, or navigate to `/feedback`, and submit a question to
+feature" on slide 6, or navigate to `/feedback`, and submit a question to
 prove it works.
 
 If Claude Code asks about the running subagents, say in chat:
@@ -206,7 +206,7 @@ these stalls.
 
 ### Prompt 5 — Simplify pass (workflow step 4)
 
-**When:** After Slide 7 (Results) and the live `npm test` / `git diff`,
+**When:** After Slide 6 (Results) and the live `npm test` / `git diff`,
 ~minute 21.
 
 **Paste this:**
@@ -302,7 +302,7 @@ is the cut; Prompts 5–7 run live on `demo-finished`.
 
 | Prompt | Workflow step | Slide / Moment | Approx. Time |
 |--------|---------------|----------------|--------------|
-| 1 — Brainstorm | 1 — Brainstorm | After slide 6, ~9:30 | 30s typing + 0–60s Q&A |
+| 1 — Brainstorm | 1 — Brainstorm | After slide 5, ~9:30 | 30s typing + 0–60s Q&A |
 | 2 — Move to plan | 2 — Plan | Brainstorm complete, ~12:00 | 1–2 min for plan to write |
 | 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:00 | 1–2 min for dispatch fan-out |
 | 4 — STOP and switch | (cut) | Task list shown, ~16:00 | <30s |

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>Claude Code, in practice</h1>
+      <h1>Claude Code CLI</h1>
       <p class="lead">A local CLI agent that:</p>
       <ul>
         <li>reads your repo</li>

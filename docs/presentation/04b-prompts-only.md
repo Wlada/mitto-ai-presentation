@@ -14,7 +14,7 @@ UI is locked — match this layout:
 
 - Title "Audience Q&A" + subtitle "Send a question, comment, or suggestion.
   New entries appear in the list automatically."
-- "Back to slide 5" button, top-left
+- "Back to slide 6" button, top-left
 - LEFT panel "Share your feedback":
   - Name (optional, max 50, char counter)
   - Type — Material mat-select dropdown, default "question",

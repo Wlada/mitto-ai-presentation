@@ -165,9 +165,9 @@ colleague's PR review.
 - Do not write multi-paragraph comments or `// removed` placeholders
 - Do not bypass validation or git hooks (`--no-verify`)
 - Do not weaken coverage thresholds to make a build pass
-- Do not regenerate `apps/web/src/app/slides/slide-07-results/results.data.ts`
+- Do not regenerate `apps/web/src/app/slides/slide-06-results/results.data.ts`
   from any branch other than `demo-finished` (canonical numbers come from
-  there; running on `main` would write lower values and break the slide-7
+  there; running on `main` would write lower values and break the slide-6
   visual snapshot baseline)
 - Do not deploy to Render without verifying tests pass first. Always run
   `npm run preshow` (or at minimum `npm test && npm run build`) and ship
@@ -186,7 +186,7 @@ colleague's PR review.
 - When invoked through `superpowers:subagent-driven-development`, prefer
   parallelism. The audience sees the dispatch fan out — that's part of the
   demo's value.
-- Slide numbering is load-bearing (slide 7 = Results, etc.). If you renumber
+- Slide numbering is load-bearing (slide 6 = Results, etc.). If you renumber
   slides, update `apps/web/src/app/slides/slide.config.ts`,
   `slides.routes.ts`, and every `docs/presentation/*.md` reference in the
   same commit.
@@ -217,7 +217,7 @@ A change is done when:
 | `npm test` | Unit + integration tests across workspaces |
 | `npm run e2e` | Playwright (functional + visual regression) |
 | `npm run coverage` | HTML coverage reports under `*/coverage/` |
-| `npm run results:refresh` | Regenerate Slide 7 numbers (run on `demo-finished`) |
+| `npm run results:refresh` | Regenerate Slide 6 numbers (run on `demo-finished`) |
 | `npm run preshow` | One-shot preflight for the live presentation |
 
 For the full table see `README.md`.

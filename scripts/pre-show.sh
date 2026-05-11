@@ -44,7 +44,7 @@ warn() { printf "  ${YELLOW}!${RESET} %s\n" "$1"; }
 
 # 1. Branch check — informational. Each branch has a legitimate use:
 #   main          — start the LIVE demo here (audience-facing)
-#   demo-finished — refresh slide 7 numbers / verify before deploying
+#   demo-finished — refresh slide 6 numbers / verify before deploying
 #   rehearsal     — practice runs without touching main
 step "Branch"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
@@ -53,7 +53,7 @@ case "$BRANCH" in
     ok "On 'main' — ready for the LIVE demo"
     ;;
   demo-finished)
-    ok "On 'demo-finished' — fine for refreshing slide 7 numbers and verifying the deploy state. Switch to main before the talk."
+    ok "On 'demo-finished' — fine for refreshing slide 6 numbers and verifying the deploy state. Switch to main before the talk."
     ;;
   rehearsal)
     ok "On 'rehearsal' — fine for practice. Switch to main before the talk."
@@ -104,11 +104,11 @@ for port in 3000 4300; do
   fi
 done
 
-# 6. Refresh slide 7 numbers — only from demo-finished where the Q&A
+# 6. Refresh slide 6 numbers — only from demo-finished where the Q&A
 # feature exists. On main, the committed results.data.ts already holds
 # the canonical numbers and must not be overwritten with main's lower
-# values (would also break the slide-07 visual snapshot baseline).
-step "Slide 7 results data"
+# values (would also break the slide-06 visual snapshot baseline).
+step "Slide 6 results data"
 if [ "$BRANCH" = "demo-finished" ]; then
   if npm run results:refresh >/tmp/preshow-results.log 2>&1; then
     ok "results.data.ts regenerated"

@@ -1,7 +1,7 @@
 # Presenter Cheatsheet
 
 > **Print this. Keep it next to your laptop.** A4 portrait, one phase per page
-> ideally. Speaker notes in Serbian (for you), spoken lines in English.
+> ideally. Speaker notes and spoken lines both in English.
 >
 > **Rule:** if anything goes wrong, you say *"Let me move on"* and skip to the
 > next phase. Never apologize for skipping.
@@ -28,7 +28,7 @@
 - [ ] Terminal font size large (cmd+= a few times)
 - [ ] Checkout `main` branch: `git checkout main`
 - [ ] Run `npm run preshow` — one-shot preflight (branch, working tree,
-      deps, slide-7 freshness, tests, **plus warm-up curl on the live URL**
+      deps, slide-6 freshness, tests, **plus warm-up curl on the live URL**
       so the Render free-tier service isn't cold). Exits **READY TO
       PRESENT** or **NOT READY** with a fix list.
 - [ ] Browser tab #1 (audience-facing): <https://presentation.vladimirbujanovic.com/slides/1>
@@ -48,67 +48,72 @@
 
 **Show:** Slide 1 in browser
 
-**Say (English):**
-> "Thanks for being here. Next 30 minutes — not what Claude Code is in
-> marketing terms, but how it works in practice and what it means for your
-> daily work."
+**Say:**
+> "Hi everyone, thanks for being here. My name is Vladimir, and over the
+> next 30 minutes I want to show you how I've been getting the best results
+> out of Claude Code, and what that means for our day-to-day work."
 
 > "My goal isn't to convince you. My goal is for you to leave with enough
 > information to make your own call."
 
 **Do:** Press → for slide 2
 
-**NE zaboravi:** Ne čitaj slide. Pogledaj publiku.
+**Reminder:** Don't read the slide. Look at the audience.
 
 ---
 
-## Slide 2 (What Claude Code is) — 0:45 to 2:15
+## Slide 2 (Claude Code CLI) — 0:45 to 2:15
 
 **Show:** Slide 2
 
 **Say:**
-> "Claude Code is a local CLI agent. It reads your repo, edits your files,
-> runs your commands. Lives in your terminal."
+> "Claude Code CLI is a local CLI agent that lives in your terminal. It can
+> read your repo, edit your files, run your commands, and follow project-
+> specific rules."
 
-> "Important: nothing leaves your machine without your decision. You see
-> everything. You control what gets committed."
+> "Important: nothing leaves your machine without your decision. We decide
+> what runs and what gets executed."
 
 **Do:** Press → for slide 3
 
 ---
 
-## Slide 3 (Why prompts aren't enough) — 2:15 to 3:30
+## Slide 3 (The problem with Chat agent) — 2:15 to 3:30
 
 **Show:** Slide 3 — **THIS IS THE MOST IMPORTANT CONCEPTUAL SLIDE**
 
 **Say:**
-> "If you've used ChatGPT for code, you know the problem: you copy-paste,
-> tweak, copy back. The agent doesn't know your project. It doesn't know
-> your conventions. Each prompt restarts."
+> "If we use a chat tool — like ChatGPT — for coding, we end up in a
+> copy/paste cycle: code in, edits, code back out. The chat agent doesn't
+> know the project context. It has no specific workflow, so it can skip
+> things or do them differently. Without rules it adds dependencies we
+> don't want."
 
-> "The fix is three things: a project context file we call CLAUDE.md, reusable
-> workflows called skills, and parallel specialized work via subagents."
+> "The fix is three things: a project context file we call CLAUDE.md,
+> reusable workflows called Skills, and parallel specialized work via
+> subagents."
 
 > "I'll show you all three in the next 15 minutes."
 
 **Do:** Press → for slide 4
 
-**Backup ako neko pita:** "CLAUDE.md is just a markdown file in the repo root.
+**Backup if asked:** "CLAUDE.md is just a markdown file in the repo root.
 Claude reads it before every interaction."
 
 ---
 
-## Slide 4 (Architecture) — 3:30 to 5:00
+## Slide 4 (Today's demo app) — 3:30 to 7:00
 
 **Show:** Slide 4 + open VS Code on the side with the repo
 
 **Say:**
-> "Today's demo app. Standard stack: Angular frontend, Express backend,
-> Playwright for end-to-end. Tests via Vitest."
+> "In today's demo app we'll implement a Q&A feature. We'll use a standard
+> stack — Angular, Express, Playwright. Tests via Vitest. We'll look at the
+> CLAUDE.md workflow as well as plans and prompts."
 
-> "Notable: the slides you see right now are rendered by this same app.
-> Same Angular components. Same CLAUDE.md. Same test setup. The thing the
-> agent works on during the demo IS the slides app."
+> "The slides you see right now are rendered by this same app. Same Angular
+> components, same CLAUDE.md, same test setup. The thing the agent works on
+> during the demo IS the slides app."
 
 **Do:**
 - Open `CLAUDE.md` in editor
@@ -118,45 +123,26 @@ Claude reads it before every interaction."
 
 **Press → for slide 5** when done.
 
-**NE zaboravi:** ovo je najduži deo pre live-a. Ne žuri, ali ni ne sedi.
+**Reminder:** longest section before the live demo. Don't rush, but don't sit on it either.
 
 ---
 
-# PHASE 2 — Demo task setup (5:00 — 9:00)
+# PHASE 2 — Demo task setup (7:00 — 9:00)
 
-## Slide 5 (Demo task) — 5:00 to 7:00
+## Slide 5 (What the agent will do) — 7:00 to 9:00
 
 **Show:** Slide 5
 
 **Say:**
-> "Today's task: an audience Q&A feature. Real shape. Form, validation, two
-> backend endpoints, in-memory storage. Tests at every level: unit,
-> integration, e2e."
+> "We'll see how the agent runs an end-to-end feature. We'll walk through
+> brainstorming, planning, and subagent execution — but we won't wait for
+> the whole feature, because that takes 15-20 minutes. The agent will also
+> write unit + integration tests as well as Playwright e2e tests."
 
-> "Watch the agent build this end-to-end. Or rather — watch it START to build
-> this. We won't have time to watch the whole thing."
-
-**Do:**
-- Click the "Try the demo feature" link on the slide
-- Briefly show the working /feedback page (you're on `main` so it WON'T be
-  there — that's the point: *"This is what we're going to build."*)
-- Press ← back to slide 5
-
-**Press → for slide 6**
-
----
-
-## Slide 6 (Live flow) — 7:00 to 9:00
-
-**Show:** Slide 6
-
-**Say:**
-> "These are the 6 steps of the workflow. Watch what happens when I trigger them."
-
-> "I'll let you see the first 3 live on `main` — brainstorm, plan, execute.
-> Step 3 finishes the code in 5–10 minutes, so we'll cut and switch to the
-> finished branch. Steps 4, 5, and 6 — simplify, review, document — I'll
-> then run live on top of the finished result."
+> "I'll let you see steps 1-3 live on `main` — brainstorm, plan, dispatch.
+> Step 3 finishes the code in 5–10 minutes, so we'll cut and switch to
+> the finished branch. The remaining steps — running tests, simplify,
+> review — I'll then run live on top of the finished result."
 
 **Do:** Switch to terminal with Claude Code
 
@@ -193,12 +179,12 @@ steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 ### Phase D: Cut (16:00 — 18:00)
 - **Speak Prompt 4** *"This would now run for 5-10 minutes. To respect your
   time, here's what the same workflow produced — already deployed at the
-  URL you've been seeing. Then we'll run steps 4, 5, and 6 live on top
+  URL you've been seeing. Then we'll run steps 4 and 5 live on top
   of it."*
 - **Switch focus** from terminal to browser tab #1 (the live URL).
   No `git checkout` needed — the live URL is already serving the
   finished state from `demo-finished`.
-- Click "Try the demo feature" on slide 5, or just navigate to
+- Click "Try the demo feature" on slide 6, or just navigate to
   `/feedback` on the live URL — submit a question to prove it works
   end-to-end.
 
@@ -206,15 +192,17 @@ steps 1–3 + the cut). Prompts 5–7 happen in Phase 4.
 
 # PHASE 4 — Result and review (18:00 — 25:00)
 
-## Slide 7 (Results) — 18:00 to 19:00
+## Slide 6 (What we produced) — 18:00 to 19:00
 
-**Browser already on the live URL** — navigate to slide 7.
+**Browser already on the live URL** — navigate to slide 6.
 
 **Say:**
-> "Same workflow, finished and committed. These numbers come straight from the
-> repo, regenerated by `npm run results:refresh` before the talk: 68 unit and
-> integration tests passing, 95% backend coverage, 83% frontend, plus 5
-> functional and 10 visual regression e2e tests."
+> "This is what the workflow we just saw produced — this presentation, plus
+> the Q&A feature we were just building. You can see the test coverage on
+> screen. These numbers come straight from the repo, regenerated by
+> `npm run results:refresh` before the talk: 68 unit and integration tests
+> passing, 95% backend coverage, 83% frontend, plus 5 functional and 10
+> visual regression e2e tests."
 
 > "Same commands your team already knows — `npm test`, `npm run e2e`."
 
@@ -256,7 +244,7 @@ git diff main..demo-finished --stat
 ## Prompt 7 — Documentation update — workflow step 6 (22:45 — 23:45) — OPTIONAL
 
 **This is the first thing to skip when running over.** If past 23:15,
-go straight to Coverage / Slide 8.
+go straight to Coverage / Slide 7.
 
 - **Paste Prompt 7** (proposed doc patch)
 - **Say:** *"Step 6. Closes the loop — docs written after the code, in the
@@ -278,9 +266,9 @@ open server/coverage/index.html
 
 # PHASE 5 — Limits and conclusion (25:00 — 30:00)
 
-## Slide 8 (What works) — 25:00 to 25:45
+## Slide 7 (What agents do well) — 25:00 to 25:45
 
-**Switch back to slides:** browser, → to slide 8
+**Switch back to slides:** browser, → to slide 7
 
 **Say:**
 > "What you saw earlier — those are the patterns where agents shine.
@@ -288,7 +276,7 @@ open server/coverage/index.html
 
 **Press →**
 
-## Slide 9 (Limits) — 25:45 to 28:30 — **CRITICAL FOR CREDIBILITY**
+## Slide 8 (Limits) — 25:45 to 28:30 — **CRITICAL FOR CREDIBILITY**
 
 This slide gets the extra time freed up by cutting the old "Why agents"
 slide and the Team-model slide. Use it. Almost three minutes here is
@@ -311,15 +299,15 @@ more valuable than three minutes anywhere else in the talk.
 
 **Press →**
 
-## Slide 10 (Conclusion) — 28:30 to 30:00
+## Slide 9 (Conclusion) — 28:30 to 30:00
 
 **Say:**
 > "The takeaway: it's a faster, controlled cycle where the developer stays the owner."
 
-> "If you'd try one thing tomorrow: write a CLAUDE.md for one of your repos.
-> Half an hour. You'll see the difference in the next interaction."
-
 > "Treat the agent as a fast junior. Treat yourself as the senior."
+
+> "Licenses for Claude Code or Codex are coming soon, so you'll all get
+> to try this. Until then I'm here for questions, or come find me after."
 
 > "Thank you. Questions?"
 
@@ -334,12 +322,12 @@ If you run over, cut in this order:
 
 | If past... | Then skip... |
 |------------|--------------|
-| 6:30 entering Phase 2 | Slide 4 deep dive (just point at the file, don't read) |
+| 6:30 still on slide 4 | Slide 4 deep dive (just point at the file, don't read) |
 | 17:30 still in Phase 3 | The dispatch wait — speak Prompt 4 immediately |
 | 22:00 entering simplify | Skip Prompt 7 (docs update) outright |
 | 23:00 still on review | Skip Prompt 7 outright; jump to coverage |
-| 23:30 entering coverage | Skip coverage section, jump to Slide 8 |
-| 28:30 still on limits | Trim Slide 10 (Conclusion) to 45 seconds — drop the "try it tomorrow" bullets, keep the takeaway and the "fast junior / senior" closer |
+| 23:30 entering coverage | Skip coverage section, jump to Slide 7 |
+| 28:30 still on limits | Trim Slide 9 (Conclusion) to 45 seconds — keep the takeaway and the "fast junior / senior" closer |
 
 # Total recovery rule
 
@@ -364,5 +352,5 @@ offline.
 - **Don't apologize.** Skipping = "Let me move on", not "Sorry about that".
 - **Don't read the slide.** Look at the audience.
 - **Hands away from face.** Don't touch your nose / glasses.
-- **One sip of water at slide 4.** And one at slide 9. Don't drink mid-sentence.
+- **One sip of water at slide 4.** And one at slide 8. Don't drink mid-sentence.
 - **Last 30 seconds:** smile. Thank them. Pause for applause / silence.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Read raw vitest coverage-final.json files and spec test counts, then write
-// a typed RESULTS module that slide-07-results imports. Run after `npm run
+// a typed RESULTS module that slide-06-results imports. Run after `npm run
 // coverage` to refresh the numbers shown in the presentation.
 
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
@@ -131,7 +131,7 @@ export interface Results {
 export const RESULTS: Results = ${JSON.stringify(out, null, 2)} as const;
 `;
 
-const targetPath = join(repoRoot, 'apps/web/src/app/slides/slide-07-results/results.data.ts');
+const targetPath = join(repoRoot, 'apps/web/src/app/slides/slide-06-results/results.data.ts');
 writeFileSync(targetPath, tsBody);
 
 console.log(`Wrote ${targetPath}`);

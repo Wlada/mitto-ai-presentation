@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { RESULTS } from './results.data';
 
 @Component({
-  selector: 'app-slide-07-results',
+  selector: 'app-slide-06-results',
   standalone: true,
+  imports: [MatButtonModule, MatIconModule, RouterLink],
   template: `
     <section class="slide">
-      <h1>What that produced</h1>
+      <h1>What we produced</h1>
       <p class="lead">
         The same workflow, finished and committed. Numbers below are read from
         this repo's coverage reports — refreshed with
@@ -47,6 +51,13 @@ npm run coverage # HTML reports under coverage/</pre>
       <p class="closing">
         Numbers refreshed {{ results.generatedAt }} ·
         diff with <code>git diff main..demo-finished --stat</code>
+      </p>
+
+      <p class="cta">
+        <a mat-stroked-button color="primary" routerLink="/feedback">
+          <mat-icon>open_in_new</mat-icon>
+          <span>Try the demo feature</span>
+        </a>
       </p>
     </section>
   `,
@@ -95,6 +106,9 @@ npm run coverage # HTML reports under coverage/</pre>
         margin-top: 4px;
       }
 
+      .cta { margin-top: 24px; }
+      .cta mat-icon { margin-right: 6px; }
+
       @media (max-width: 800px) {
         .cols {
           grid-template-columns: 1fr;
@@ -103,6 +117,6 @@ npm run coverage # HTML reports under coverage/</pre>
     `,
   ],
 })
-export class Slide07Results {
+export class Slide06Results {
   protected readonly results = RESULTS;
 }

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   template: `
     <section class="slide title-slide">
       <h1>Claude Code in Practice</h1>
-      <p class="subtitle">How an AI agent delivers features through a disciplined workflow</p>
+      <p class="subtitle">AI agents in everyday work</p>
       <p class="presenter">Vladimir Bujanovic · Mitto · 2026</p>
     </section>
   `,

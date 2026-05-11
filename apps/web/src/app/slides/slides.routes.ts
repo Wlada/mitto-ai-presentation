@@ -33,32 +33,27 @@ export const SLIDE_ROUTES: Routes = [
       {
         path: '5',
         loadComponent: () =>
-          import('./slide-05-demo-task/slide-05-demo-task').then((m) => m.Slide05DemoTask),
+          import('./slide-05-live-flow/slide-05-live-flow').then((m) => m.Slide05LiveFlow),
       },
       {
         path: '6',
         loadComponent: () =>
-          import('./slide-06-live-flow/slide-06-live-flow').then((m) => m.Slide06LiveFlow),
+          import('./slide-06-results/slide-06-results').then((m) => m.Slide06Results),
       },
       {
         path: '7',
         loadComponent: () =>
-          import('./slide-07-results/slide-07-results').then((m) => m.Slide07Results),
+          import('./slide-07-what-works/slide-07-what-works').then((m) => m.Slide07WhatWorks),
       },
       {
         path: '8',
         loadComponent: () =>
-          import('./slide-08-what-works/slide-08-what-works').then((m) => m.Slide08WhatWorks),
+          import('./slide-08-limits/slide-08-limits').then((m) => m.Slide08Limits),
       },
       {
         path: '9',
         loadComponent: () =>
-          import('./slide-09-limits/slide-09-limits').then((m) => m.Slide09Limits),
-      },
-      {
-        path: '10',
-        loadComponent: () =>
-          import('./slide-10-conclusion/slide-10-conclusion').then((m) => m.Slide10Conclusion),
+          import('./slide-09-conclusion/slide-09-conclusion').then((m) => m.Slide09Conclusion),
       },
       { path: '', redirectTo: '1', pathMatch: 'full' },
     ],

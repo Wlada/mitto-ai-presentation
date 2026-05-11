@@ -5,8 +5,9 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <section class="slide">
-      <h1>The problem with "just prompt it"</h1>
+      <h1>The problem with Chat agent</h1>
       <ul>
+        <li>Copy / paste cycle: code in, edits, code back out.</li>
         <li>Without project context, the agent guesses.</li>
         <li>Without a workflow, it skips review steps.</li>
         <li>Without rules, it adds dependencies you don't want.</li>

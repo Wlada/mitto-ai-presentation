@@ -42,7 +42,7 @@ Open `http://localhost:4300/slides/1` to verify the slides render.
 | `npm run test:server` | Only backend tests |
 | `npm run e2e` | Playwright e2e (functional + visual regression, auto-starts dev server) |
 | `npm run coverage` | Coverage reports for both workspaces |
-| `npm run results:refresh` | Run coverage and regenerate Slide 7 numbers (`apps/web/src/app/slides/slide-07-results/results.data.ts`) |
+| `npm run results:refresh` | Run coverage and regenerate Slide 6 numbers (`apps/web/src/app/slides/slide-06-results/results.data.ts`) |
 | `npm --workspace e2e run test -- --update-snapshots` | Re-baseline visual regression snapshots after intentional UI changes |
 | `npm run build` | Production build of frontend + backend |
 | `npm run lint` | Lint all workspaces (best-effort) |
@@ -56,7 +56,6 @@ mitto-ai-presentation/
 ├── apps/web/                   # Angular 21 frontend
 │   ├── src/app/
 │   │   ├── slides/             # one component per slide
-│   │   ├── feedback/           # demo feature
 │   │   ├── core/
 │   │   └── shared/
 │   ├── proxy.conf.json         # /api → :3000
@@ -74,7 +73,7 @@ mitto-ai-presentation/
 │   │   └── slides-visual.spec.ts-snapshots/   # baseline screenshots
 │   └── playwright.config.ts
 ├── scripts/
-│   └── refresh-results.mjs    # regenerates Slide 7 results.data.ts
+│   └── refresh-results.mjs    # regenerates Slide 6 results.data.ts
 ├── docs/
 │   ├── plans/
 │   ├── presentation/

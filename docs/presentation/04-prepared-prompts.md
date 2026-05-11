@@ -6,6 +6,17 @@
 > **Tip:** keep this file open in a side window during the demo. Use a
 > single-keystroke clipboard manager (Raycast, Alfred snippets, etc.) to paste
 > instantly without searching this document.
+>
+> ## Standard flow vs. reference prompts
+>
+> **Standard click-through flow uses Prompts 1–4 only** — brainstorm, plan,
+> dispatch, cut. After the cut, you narrate Slide 6 (which already says the
+> agent ran Simplify / Review / Document on `demo-finished`) and move on.
+>
+> **Prompts 5–7 are reference documentation** of what the workflow actually
+> did on `demo-finished`. They are useful if you have spare time and want
+> to demonstrate `/simplify` and `code-reviewer` against the real diff, but
+> they are **not part of the standard flow**. Skip them on the day.
 
 ---
 
@@ -53,15 +64,15 @@ exact workflow. The prompts below reproduce it.
 - **Steps 1–3** (Prompts 1–3) run live in your terminal on local `main`.
 - The **deployed live URL** (`presentation.vladimirbujanovic.com`) serves
   `demo-finished` — the audience sees the finished result there throughout
-  the talk. Slide 5 CTA already works because the live URL has the Q&A
+  the talk. Slide 6 CTA already works because the live URL has the Q&A
   feature.
 - After Prompt 4 (the planned cut), you don't `git checkout` anything —
   the live URL is already showing the finished state. You just shift
   focus from terminal back to the browser tab.
-- **Steps 4–6** (Prompts 5–7) optionally run on local `demo-finished`
-  if you want to demonstrate `/simplify` and `code-reviewer` against
-  real diff. A local `git checkout demo-finished` for that segment is
-  fine; the live URL on the projector stays unaffected.
+- **Steps 4–6** (Simplify, Review, Document) ran on `demo-finished` when
+  the feature was built. Slide 6 narrates that they happened. **You do
+  not run Prompts 5–7 in the standard flow.** They are kept below as
+  reference / optional bonus material only.
 
 ---
 
@@ -69,66 +80,44 @@ exact workflow. The prompts below reproduce it.
 
 ### Prompt 1 — Brainstorm (workflow step 1)
 
-**When:** Slide 6, immediately after you say "let me actually run it now."
+**When:** Slide 5, immediately after you say "let me actually run it now."
 
 **Paste this:**
 
 ```text
-/superpowers:brainstorming Add an Audience Q&A page at /feedback so anyone
-in the room can post a question, comment, or suggestion and see a live list.
-UI is locked — match this layout:
+/superpowers:brainstorming Add an Audience Q&A page at /feedback.
 
-- Title "Audience Q&A" + subtitle "Send a question, comment, or suggestion.
-  New entries appear in the list automatically."
-- "Back to slide 5" button, top-left
-- LEFT panel "Share your feedback":
-  - Name (optional, max 50, char counter)
-  - Type — Material mat-select dropdown, default "question",
-    options: question / comment / suggestion
-  - Message (required, max 500, char counter)
-  - Submit button with send icon, disabled until valid
-- RIGHT panel "Recent feedback":
-  - Filter chip group: All / Question / Comment / Suggestion (default All)
-  - Empty state "No feedback yet — be the first to ask!"
-  - Each entry shows: name (or "Anonymous" if blank), type badge,
-    relative time (e.g. "3 min ago"), message body
-
-Technical decisions — do not ask about these, just apply:
-- Backend: POST /api/feedback (returns 201 + entry), GET /api/feedback
-  with optional ?type= query param. Server-side filter, NOT client-side.
-- In-memory storage, newest-first sort by createdAt. No seed data —
-  start empty so the locked empty state is reachable.
-- Validator: name optional max 50 (trim), type required (one of three),
-  message required (trim, 1–500). Standard {ok,value}|{ok,errors} shape.
-- Frontend: polling interval = 3000ms with switchMap so old responses
-  can't overwrite newer ones. Filter chip click triggers an immediate
-  refresh, not just on next tick.
-- Submit: wait for POST 201 (no optimistic insert). On success, show a
-  Material snackbar "Thanks for your feedback!" and reset the form.
-- On poll failure: keep the last list visible, show a small inline
-  "Could not load feedback." line. No toast, no retry, no offline mode.
-- Message body is rendered as plain text via Angular interpolation
-  (default escaping). No HTML, no link auto-detection.
-- No animation library. New entries just appear on the next poll.
-- No moderation, no presenter mode, no admin gate.
+People in the room post a question, comment, or suggestion — each with
+an optional name, a type, and a message. New entries show up on the page
+automatically.
 ```
 
 **What you say while it loads (5–10 seconds):**
-> *"This is the brainstorming skill — workflow step 1. The UI is fixed by a
-> design mock and I've pre-answered the technical decisions, so the skill
-> will only ask about what's genuinely undecided. Watch it self-limit."*
+> *"This is the brainstorming skill — workflow step 1. Notice how short
+> the prompt is. I didn't tell it the stack, the storage rules, or the
+> constraints — it reads all of that from CLAUDE.md. The questions you'll
+> see next are the things CLAUDE.md doesn't cover."*
 
-The skill should ask **0–2 short questions** (most decisions are already
-encoded). If anything does come up, stay brief:
+The skill should ask **2–3 questions** out of the list below. Answer with
+the matching line; each answer is one short sentence so the dialogue
+moves quickly. (Storage, database, auth, and websockets are not in this
+list — CLAUDE.md forbids them, so the agent shouldn't ask.)
 
-**If asked about anything not covered above:**
-> "Use the simplest implementation that meets the requirement. Defer additions."
+**Answer cheat sheet — say only the right-hand column:**
 
-**If brainstorming asks about moderation / hiding posts:**
-> "No moderation. Trust the room."
+| If the agent asks about... | You say |
+|---------------------------|---------|
+| Update frequency / polling interval | *"Every 3 seconds is fine."* |
+| Filtering the list | *"Yes — filter chips by type. All / Question / Comment / Suggestion. Default All."* |
+| Empty state | *"Show a friendly empty-state message until the first entry. Something like 'No feedback yet — be the first to ask!'"* |
+| Moderation / hiding posts | *"No moderation. Trust the room."* |
+| Pre-seeding data | *"Start empty — the empty state should be visible on first load."* |
+| Submit behavior / optimistic insert | *"Wait for the server response. Show a snackbar on success, then reset the form."* |
+| Poll failure handling | *"Keep the last list visible. Show a small inline 'Could not load feedback' line. No retry, no toast."* |
+| Anything not covered above | *"Use the simplest implementation that meets the requirement. Defer extras."* |
 
-**If brainstorming asks about pre-seeding data:**
-> "Start empty — the empty state should be visible on first load."
+If the skill keeps asking after 3 questions, stop it:
+> *"That's enough — let's move to the plan."*
 
 ---
 
@@ -187,7 +176,7 @@ wait for them to complete** — that takes 5–10 minutes you don't have.
 **Shift focus** from terminal to the browser tab on the live URL
 (<https://presentation.vladimirbujanovic.com>). The browser already shows
 the finished state — no `git checkout` needed. Click "Try the demo
-feature" on slide 5, or navigate to `/feedback`, and submit a question to
+feature" on slide 6, or navigate to `/feedback`, and submit a question to
 prove it works.
 
 If Claude Code asks about the running subagents, say in chat:
@@ -198,15 +187,21 @@ Stop the running subagents — the live URL already shows the finished result.
 
 ---
 
-## Post-result prompts (steps 4–6, executed live on `demo-finished`)
+## Reference / optional prompts (steps 4–6 — NOT used in standard flow)
 
-These run against the finished feature. The audience has already seen the
-diff and a green test run, so the workflow story is intact even if any of
-these stalls.
+> **Reminder:** Slide 6 already tells the audience that Simplify, Review,
+> and Document ran on `demo-finished`. The standard click-through flow
+> does **not** invoke these prompts live. They are kept here so you can
+> demonstrate them on demand (extra time, hands-on workshop, recorded
+> follow-up), and so that the prompts that actually built the deployed
+> feature are documented.
+>
+> If you decide to run them anyway: `git checkout demo-finished` locally
+> first; the live URL on the projector is unaffected.
 
 ### Prompt 5 — Simplify pass (workflow step 4)
 
-**When:** After Slide 7 (Results) and the live `npm test` / `git diff`,
+**When:** After Slide 6 (Results) and the live `npm test` / `git diff`,
 ~minute 21.
 
 **Paste this:**
@@ -297,15 +292,14 @@ the browser.
 
 ## Prompt timing summary
 
-Aligned to the 6-step workflow. Prompts 1–3 run live on `main`; Prompt 4
-is the cut; Prompts 5–7 run live on `demo-finished`.
+Standard flow uses Prompts 1–4 only. Prompts 5–7 are reference / optional.
 
 | Prompt | Workflow step | Slide / Moment | Approx. Time |
 |--------|---------------|----------------|--------------|
-| 1 — Brainstorm | 1 — Brainstorm | After slide 6, ~9:30 | 30s typing + 0–60s Q&A |
+| 1 — Brainstorm | 1 — Brainstorm | After slide 5, ~9:30 | 10s typing + 60–120s Q&A (2–3 questions) |
 | 2 — Move to plan | 2 — Plan | Brainstorm complete, ~12:00 | 1–2 min for plan to write |
 | 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:00 | 1–2 min for dispatch fan-out |
 | 4 — STOP and switch | (cut) | Task list shown, ~16:00 | <30s |
-| 5 — `/simplify` | 4 — Simplify | After diff + tests, ~20:30 | 1 min |
-| 6 — `code-reviewer` | 5 — Review | Right after Prompt 5, ~21:30 | 1–2 min |
-| 7 — Doc update | 6 — Document | Bonus, ~23:00 | 30–60s — **cut first** |
+| 5 — `/simplify` | 4 — Simplify | **Not run live** — reference only | — |
+| 6 — `code-reviewer` | 5 — Review | **Not run live** — reference only | — |
+| 7 — Doc update | 6 — Document | **Not run live** — reference only | — |

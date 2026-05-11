@@ -10,7 +10,7 @@
 - [x] Repo scaffolded, builds, tests pass
 - [x] CLAUDE.md written
 - [x] Demo-finished branch with Q&A feature
-- [x] Slide 1-10 placeholders rendering
+- [x] Slide 1-9 placeholders rendering
 - [x] All design docs in `docs/`
 
 If anything above is **not** checked, finish Week 1 before moving on.
@@ -33,7 +33,7 @@ If anything above is **not** checked, finish Week 1 before moving on.
       see in the other within 3-4 seconds)
 - [ ] Verify error states (submit empty form, server down, etc.)
 - [ ] Verify slide 6 "Try the demo feature" link works on `demo-finished`
-- [ ] Run `npm run results:refresh` and open Slide 7 in the browser; confirm
+- [ ] Run `npm run results:refresh` and open Slide 6 in the browser; confirm
       the test counts and coverage percentages look right
 
 ### Saturday — Read-through (1 hour)
@@ -62,14 +62,12 @@ If anything above is **not** checked, finish Week 1 before moving on.
 - [ ] Set 30-min timer
 - [ ] Goal: finish at 28:00 ± 1:00
 - [ ] No stops, no pauses to think
-- [ ] If you finish at 26:00, you're talking too fast — slow down for slide 8
+- [ ] If you finish at 26:00, you're talking too fast — slow down for slide 7
 - [ ] If you finish at 32:00, identify what to cut next time
-- [ ] **Verify Prompt 5 (`/simplify`) actually runs end-to-end on
-      `demo-finished`** — skill installed, responds with output in <60s
-- [ ] **Verify Prompt 6 (`code-reviewer`) actually runs end-to-end on
-      `demo-finished`** — subagent installed, returns review in <90s
-- [ ] If either skill is missing or unresponsive, install / fix this week —
-      do not discover it on stage
+- [ ] **Optional — only if you plan to demo Prompts 5/6 as bonus material:**
+      verify they still run end-to-end on `demo-finished` (skill + subagent
+      installed, respond within ~60s each). The standard flow does not use
+      them, so skip this check if you are sticking to Prompts 1–4.
 
 ### Saturday — Record yourself (45 min)
 - [ ] Phone propped up, video the whole rehearsal
@@ -90,10 +88,10 @@ Record once, save permanently:
       `docs/presentation/backup/tests-pass.png`
 - [ ] Screenshot of Playwright HTML report:
       `docs/presentation/backup/playwright-pass.png`
-- [ ] Screenshot of `code-reviewer` subagent output (Prompt 6):
-      `docs/presentation/backup/code-review.png`
-- [ ] Snapshot of `coverage/` directory:
-      `docs/presentation/backup/coverage-snapshot/` (zip if large)
+- [ ] **Optional** — only if you plan to demo Prompts 5/6 as bonus material:
+      screenshot of `code-reviewer` output at
+      `docs/presentation/backup/code-review.png`, and a `coverage/`
+      snapshot at `docs/presentation/backup/coverage-snapshot/`.
 - [ ] Verify visual regression baselines pass at projector resolution:
       run `npm run e2e` once on the actual screen you'll present from. If
       diffs appear, re-baseline with
@@ -101,7 +99,7 @@ Record once, save permanently:
 
 These are your safety net. If anything fails live, you show these instead.
 
-### Thursday — Generalna proba (60 min)
+### Thursday — Final dress rehearsal (60 min)
 - [ ] Full dress rehearsal: actual presentation room if possible
 - [ ] Real laptop, real screen, real Wi-Fi
 - [ ] Time it. Note any environment-specific issues (font size on projector,

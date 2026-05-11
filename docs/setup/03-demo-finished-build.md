@@ -106,14 +106,14 @@ npm run coverage
 # 4. E2E pass (functional + visual regression)
 npm run e2e
 
-# 5. Refresh Slide 7 numbers from this run's coverage
+# 5. Refresh Slide 6 numbers from this run's coverage
 npm run results:refresh
 
 # 6. Manual smoke
 npm run dev
 open http://localhost:4300/feedback
 # Submit a question. See it appear in the list.
-# Then open http://localhost:4300/slides/7 and confirm the live numbers.
+# Then open http://localhost:4300/slides/6 and confirm the live numbers.
 ```
 
 If all six pass, `demo-finished` is rehearsal-ready.

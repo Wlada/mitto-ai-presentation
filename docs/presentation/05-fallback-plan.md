@@ -107,7 +107,7 @@ shows Render's cold-start splash longer than ~30s.
   instead."*
 - Open `coverage/index.html` from `docs/presentation/backup/` (recorded
   in week 4) or screenshot fallback.
-- Continue to slide 8.
+- Continue to slide 7.
 
 ### Scenario 7 — Playwright browser doesn't open
 
@@ -165,7 +165,7 @@ caused by a font-rendering tweak, a Material theme bump, or a logo recolor.
   baseline by `git checkout e2e/tests/slides-visual.spec.ts-snapshots/` and
   fix the underlying styling instead.
 
-### Scenario 10 — The QR code / link from slide 10 doesn't work
+### Scenario 10 — The QR code / link from slide 9 doesn't work
 
 **Symptom:** Audience can't reach your local /feedback page.
 
@@ -173,17 +173,15 @@ caused by a font-rendering tweak, a Material theme bump, or a logo recolor.
 - Take questions verbally. The audience came for the talk, not the gimmick.
 - Don't spend more than 30 seconds debugging the link in front of them.
 
-### Scenario 11 — Prompt 5 (`/simplify`) or Prompt 6 (`code-reviewer`) hangs
+### Scenario 11 — (removed) Prompts 5–7 are not run in the standard flow
 
-**Symptom:** No output for 30+ seconds after pasting Prompt 5 or Prompt 6
-on `demo-finished`.
-
-**Action:**
-- **Just skip.** The audience already saw the diff and a green test run —
-  the workflow story is intact without these two steps.
-- Say: *"Steps 4 and 5 of the workflow look like this in normal use. We've
-  already seen the result they verify, so let's keep moving."*
-- Continue to the coverage section / Slide 8. Do not retry.
+Earlier versions of this talk ran `/simplify`, `code-reviewer`, and a doc
+update prompt live on `demo-finished` in Phase 4. The current click-through
+flow does **not** invoke them — Slide 6 narrates that those steps ran on
+`demo-finished` and the audience moves on. If you choose to run them as
+optional bonus material, the recovery is simple: stop the prompt, say
+*"Slide 6 already shows what these steps produce — let's move on,"* and
+press → to Slide 7.
 
 ---
 
@@ -195,7 +193,7 @@ the recovery:
 | Drill | Trigger |
 |-------|---------|
 | Drill 1 | Disconnect Wi-Fi mid-Phase 3: prove you can fall back to local `git checkout demo-finished && npm run dev` and finish |
-| Drill 2 | Skip Phase 3 entirely: jump straight to the live URL on slide 7 after Slide 6, narrate as if dispatch finished |
+| Drill 2 | Skip Phase 3 entirely: jump straight to the live URL on slide 6 after Slide 5, narrate as if dispatch finished |
 | Drill 3 | Fail a test on purpose: temporarily break a validator, run `npm test`, recover |
 
 Practice the recovery 3 times. Then it's reflex.
@@ -204,15 +202,16 @@ Practice the recovery 3 times. Then it's reflex.
 
 ## Hard cuts (in order, when running over)
 
-If you reach Slide 7 past minute 21, do **all** of these in sequence:
+If you reach Slide 6 past minute 19, do these in order:
 
-1. **Skip Prompt 7 (docs update) first** — it's the cheapest cut, no
-   visible loss to the audience
-2. Skip Prompt 6 (code-reviewer subagent) next
-3. Skip Prompt 5 (`/simplify`) if still over
-4. Skip `npm run coverage` — just say "coverage is at 80%+"
-5. Trim Slide 10 (Conclusion) to 45 seconds — drop the "try it tomorrow" bullets, keep the takeaway and the "fast junior / senior" closer
-6. **Do not skip Slide 9 (Limits).** It's the credibility anchor.
+1. **Skip the optional `git diff` terminal moment** on Slide 6 — the slide
+   already carries the message
+2. Trim the demo-button walkthrough to 10 seconds (just click `/feedback`,
+   show it loads, come back)
+3. Trim Slide 7 to 30 seconds (read the bullets, move on)
+4. Trim Slide 9 (Conclusion) to 45 seconds — keep the takeaway and the
+   "fast junior / senior" closer
+5. **Do not skip Slide 8 (Limits).** It's the credibility anchor.
 
 ---
 

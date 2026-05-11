@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const TOTAL_SLIDES = 10;
+const TOTAL_SLIDES = 9;
 
 test.describe('slides visual regression', () => {
   // Disable animations and freeze the brand link so the screenshot is stable.

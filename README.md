@@ -64,7 +64,7 @@ The prepared prompts that drive the live demo are in
 | `npm run e2e` | Playwright (functional + visual regression) |
 | `npm run e2e:install` | One-time: install Chromium for Playwright |
 | `npm run coverage` | HTML coverage reports under `apps/web/coverage/` and `server/coverage/` |
-| `npm run results:refresh` | Regenerate Slide 7 numbers (run only on `demo-finished`) |
+| `npm run results:refresh` | Regenerate Slide 6 numbers (run only on `demo-finished`) |
 | `npm run preshow` | One-shot preflight before going live |
 | `npm run lint` | Lint all workspaces |
 | `npm run format` | Prettier across the repo |
@@ -80,8 +80,8 @@ mitto-ai-presentation/
 ├── apps/
 │   └── web/                   # Angular 21 app — slides + demo features
 │       ├── src/app/
-│       │   ├── slides/        # one component per slide (10 slides)
-│       │   ├── feedback/      # Audience Q&A demo feature (demo-finished branch)
+│       │   ├── slides/        # one component per slide (9 slides)
+│       │   ├── feedback/      # demo feature added on the `demo-finished` branch
 │       │   ├── core/
 │       │   └── shared/
 │       └── proxy.conf.json
@@ -97,7 +97,7 @@ mitto-ai-presentation/
 │   ├── tests/
 │   └── tests/slides-visual.spec.ts-snapshots/   # visual regression baselines
 ├── scripts/                   # maintenance and pre-show automation
-│   ├── refresh-results.mjs    # regenerate Slide 7 numbers from coverage
+│   ├── refresh-results.mjs    # regenerate Slide 6 numbers from coverage
 │   └── pre-show.sh            # 10-min preflight before going live
 ├── docs/
 │   ├── plans/                 # plan documents written during workflow step 2
@@ -118,7 +118,7 @@ changes, then commit the new PNGs.
   live agent flow (brainstorm → plan → dispatch) here — the agent sees a
   fresh repo without the Q&A feature, so the brainstorm questions are
   meaningful.
-- **`demo-finished`** — `main` + the full Audience Q&A feature with
+- **`demo-finished`** — `main` + the demo feature built end-to-end with
   tests. **This is the branch deployed at the live URL.** The audience
   sees the finished state on the live URL throughout the talk; no
   `git checkout` happens mid-demo.
@@ -151,7 +151,7 @@ Before going live, run from the repo root:
 npm run preshow
 ```
 
-It checks branch, working tree, ports, dependencies, slide-7 data freshness,
+It checks branch, working tree, ports, dependencies, slide-6 data freshness,
 runs all tests, and exits **READY TO PRESENT** or **NOT READY** with a
 specific list of fixes.
 

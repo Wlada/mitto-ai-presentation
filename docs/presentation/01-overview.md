@@ -32,9 +32,9 @@ controlled engineering process.
 |-------|---------|---------|
 | Intro + concept | 0–5 | Slides 1-3 |
 | Setup demo task | 5–9 | Slides 4-5, repo tour |
-| Live demo | 9–18 | Brainstorm → plan → dispatch → cut |
-| Pre-built result | 18–25 | Slide 6 (Results numbers), diff, code reviewer, tests, coverage |
-| Limits + Q&A | 25–30 | Slides 7-9 |
+| Live demo | 9–18 | Brainstorm → plan → dispatch → cut (we do not wait for subagents) |
+| Result + demo | 18–21 | Slide 6 narrative + click through the live `/feedback` page |
+| Limits + Q&A | 21–30 | Slides 7-9 |
 
 The deck is **9 slides** total. Slide 6 ("Results") shows live test and
 coverage numbers read from `apps/web/src/app/slides/slide-06-results/results.data.ts`,

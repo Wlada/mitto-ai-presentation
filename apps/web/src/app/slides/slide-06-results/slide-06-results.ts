@@ -11,54 +11,44 @@ import { RESULTS } from './results.data';
   template: `
     <section class="slide">
       <h1>What we produced</h1>
-      <p class="lead">
-        The same workflow, finished and committed. Numbers below are read from
-        this repo's coverage reports — refreshed with
-        <code>npm run results:refresh</code>.
-      </p>
-
-      <div class="cols">
-        <div class="col">
-          <h2>Commands</h2>
-          <pre>npm test         # {{ results.webTests }} web + {{ results.serverTests }} server unit/integration
-npm run e2e      # {{ results.e2eTests }} Playwright tests (live UI)
-npm run coverage # HTML reports under coverage/</pre>
-        </div>
-
-        <div class="col">
-          <h2>Results</h2>
-          <div class="stats">
-            <div class="stat">
-              <div class="num">{{ results.totalUnitTests }}</div>
-              <div class="label">unit + integration tests</div>
-            </div>
-            <div class="stat">
-              <div class="num">{{ results.serverCoverage ?? '—' }}%</div>
-              <div class="label">backend coverage</div>
-            </div>
-            <div class="stat">
-              <div class="num">{{ results.webCoverage ?? '—' }}%</div>
-              <div class="label">frontend coverage</div>
-            </div>
-            <div class="stat">
-              <div class="num">{{ results.e2eTests }}</div>
-              <div class="label">Playwright e2e</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="closing">
-        Numbers refreshed {{ results.generatedAt }} ·
-        diff with <code>git diff main..demo-finished --stat</code>
-      </p>
 
       <p class="cta">
-        <a mat-stroked-button color="primary" routerLink="/feedback">
+        <a mat-flat-button color="primary" routerLink="/feedback">
           <mat-icon>open_in_new</mat-icon>
           <span>Try the demo feature</span>
         </a>
       </p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="num">{{ results.totalUnitTests }}</div>
+          <div class="label">unit + integration tests</div>
+        </div>
+        <div class="stat">
+          <div class="num">{{ results.serverCoverage ?? '—' }}%</div>
+          <div class="label">backend coverage</div>
+        </div>
+        <div class="stat">
+          <div class="num">{{ results.e2eTests }}</div>
+          <div class="label">Playwright e2e</div>
+        </div>
+        <div class="stat">
+          <div class="num">{{ results.webCoverage ?? '—' }}%</div>
+          <div class="label">frontend coverage</div>
+        </div>
+      </div>
+
+      <div class="after">
+        <p class="after-lead">After writing the code, the agent also:</p>
+        <ul>
+          <li>Cleaned up the code</li>
+          <li>Reviewed it</li>
+          <li>Updated the docs</li>
+        </ul>
+        <p class="closing">
+          We can make these three steps standard in every task.
+        </p>
+      </div>
     </section>
   `,
   styles: [
@@ -67,22 +57,18 @@ npm run coverage # HTML reports under coverage/</pre>
         display: block;
       }
 
-      .cols {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-        align-items: start;
-        margin-bottom: 16px;
+      .cta {
+        margin: 0 0 24px;
       }
-
-      .col h2 {
-        margin-top: 0;
+      .cta mat-icon {
+        margin-right: 6px;
       }
 
       .stats {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
         gap: 12px;
+        margin-bottom: 28px;
       }
 
       .stat {
@@ -106,12 +92,27 @@ npm run coverage # HTML reports under coverage/</pre>
         margin-top: 4px;
       }
 
-      .cta { margin-top: 24px; }
-      .cta mat-icon { margin-right: 6px; }
+      .after-lead {
+        margin: 0 0 8px;
+        font-weight: 600;
+        color: var(--mitto-fg);
+      }
 
-      @media (max-width: 800px) {
-        .cols {
-          grid-template-columns: 1fr;
+      .after ul {
+        margin: 0 0 16px;
+        padding-left: 22px;
+        line-height: 1.7;
+      }
+
+      .closing {
+        margin: 0;
+        color: var(--mitto-muted);
+        font-style: italic;
+      }
+
+      @media (max-width: 900px) {
+        .stats {
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     `,

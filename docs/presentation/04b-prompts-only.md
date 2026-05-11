@@ -2,6 +2,11 @@
 
 > Audience-safe view: just the prompts to copy-paste, in order.
 > Speaker notes and timing live in `04-prepared-prompts.md`.
+>
+> **Standard flow uses Prompts 1–4 only.** Prompts 5–7 (Simplify, Review,
+> Doc update) are reference documentation of what ran on `demo-finished`;
+> Slide 6 narrates that they happened. Do not run them live unless you
+> explicitly have spare time and want to demonstrate.
 
 ---
 
@@ -78,7 +83,7 @@ Stop the running subagents — the live URL already shows the finished result.
 
 ---
 
-## 5 — Simplify
+## 5 — Simplify (reference / optional — not run live)
 
 ```text
 /simplify Look at the diff between main and demo-finished. Focus on the
@@ -90,7 +95,7 @@ wrappers. Apply small fixes inline; flag judgement calls.
 
 ---
 
-## 6 — Code review
+## 6 — Code review (reference / optional — not run live)
 
 ```text
 /superpowers:requesting-code-review Review the diff between main and
@@ -101,7 +106,7 @@ correctness, and anything a senior reviewer would flag.
 
 ---
 
-## 7 — Documentation update (optional, cut first)
+## 7 — Documentation update (reference / optional — not run live)
 
 ```text
 Look at the diff between main and demo-finished. Identify anything that

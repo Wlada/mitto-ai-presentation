@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
         <li>Writing tests</li>
         <li>Wiring up components, routes, services</li>
         <li>Cleaning up repetitive code</li>
-        <li>Reading unfamiliar code (without changing it)</li>
+        <li>Writing and updating docs</li>
       </ul>
     </section>
   `,

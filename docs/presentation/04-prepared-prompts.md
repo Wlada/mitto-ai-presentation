@@ -6,6 +6,17 @@
 > **Tip:** keep this file open in a side window during the demo. Use a
 > single-keystroke clipboard manager (Raycast, Alfred snippets, etc.) to paste
 > instantly without searching this document.
+>
+> ## Standard flow vs. reference prompts
+>
+> **Standard click-through flow uses Prompts 1–4 only** — brainstorm, plan,
+> dispatch, cut. After the cut, you narrate Slide 6 (which already says the
+> agent ran Simplify / Review / Document on `demo-finished`) and move on.
+>
+> **Prompts 5–7 are reference documentation** of what the workflow actually
+> did on `demo-finished`. They are useful if you have spare time and want
+> to demonstrate `/simplify` and `code-reviewer` against the real diff, but
+> they are **not part of the standard flow**. Skip them on the day.
 
 ---
 
@@ -58,10 +69,10 @@ exact workflow. The prompts below reproduce it.
 - After Prompt 4 (the planned cut), you don't `git checkout` anything —
   the live URL is already showing the finished state. You just shift
   focus from terminal back to the browser tab.
-- **Steps 4–6** (Prompts 5–7) optionally run on local `demo-finished`
-  if you want to demonstrate `/simplify` and `code-reviewer` against
-  real diff. A local `git checkout demo-finished` for that segment is
-  fine; the live URL on the projector stays unaffected.
+- **Steps 4–6** (Simplify, Review, Document) ran on `demo-finished` when
+  the feature was built. Slide 6 narrates that they happened. **You do
+  not run Prompts 5–7 in the standard flow.** They are kept below as
+  reference / optional bonus material only.
 
 ---
 
@@ -198,11 +209,17 @@ Stop the running subagents — the live URL already shows the finished result.
 
 ---
 
-## Post-result prompts (steps 4–6, executed live on `demo-finished`)
+## Reference / optional prompts (steps 4–6 — NOT used in standard flow)
 
-These run against the finished feature. The audience has already seen the
-diff and a green test run, so the workflow story is intact even if any of
-these stalls.
+> **Reminder:** Slide 6 already tells the audience that Simplify, Review,
+> and Document ran on `demo-finished`. The standard click-through flow
+> does **not** invoke these prompts live. They are kept here so you can
+> demonstrate them on demand (extra time, hands-on workshop, recorded
+> follow-up), and so that the prompts that actually built the deployed
+> feature are documented.
+>
+> If you decide to run them anyway: `git checkout demo-finished` locally
+> first; the live URL on the projector is unaffected.
 
 ### Prompt 5 — Simplify pass (workflow step 4)
 
@@ -297,8 +314,7 @@ the browser.
 
 ## Prompt timing summary
 
-Aligned to the 6-step workflow. Prompts 1–3 run live on `main`; Prompt 4
-is the cut; Prompts 5–7 run live on `demo-finished`.
+Standard flow uses Prompts 1–4 only. Prompts 5–7 are reference / optional.
 
 | Prompt | Workflow step | Slide / Moment | Approx. Time |
 |--------|---------------|----------------|--------------|
@@ -306,6 +322,6 @@ is the cut; Prompts 5–7 run live on `demo-finished`.
 | 2 — Move to plan | 2 — Plan | Brainstorm complete, ~12:00 | 1–2 min for plan to write |
 | 3 — Subagent dispatch | 3 — Execute | Plan visible, ~14:00 | 1–2 min for dispatch fan-out |
 | 4 — STOP and switch | (cut) | Task list shown, ~16:00 | <30s |
-| 5 — `/simplify` | 4 — Simplify | After diff + tests, ~20:30 | 1 min |
-| 6 — `code-reviewer` | 5 — Review | Right after Prompt 5, ~21:30 | 1–2 min |
-| 7 — Doc update | 6 — Document | Bonus, ~23:00 | 30–60s — **cut first** |
+| 5 — `/simplify` | 4 — Simplify | **Not run live** — reference only | — |
+| 6 — `code-reviewer` | 5 — Review | **Not run live** — reference only | — |
+| 7 — Doc update | 6 — Document | **Not run live** — reference only | — |

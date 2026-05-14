@@ -21,22 +21,28 @@ import { RESULTS } from './results.data';
 
       <div class="stats">
         <div class="stat">
-          <div class="num">{{ results.totalUnitTests }}</div>
-          <div class="label">unit + integration tests</div>
+          <div class="num">{{ results.featureUnitTests }}</div>
+          <div class="label">feature tests</div>
         </div>
         <div class="stat">
-          <div class="num">{{ results.serverCoverage ?? '—' }}%</div>
+          <div class="num">{{ results.featureServerCoverage ?? '—' }}%</div>
           <div class="label">backend coverage</div>
         </div>
         <div class="stat">
-          <div class="num">{{ results.e2eTests }}</div>
-          <div class="label">Playwright e2e</div>
+          <div class="num">{{ results.featureE2eTests }}</div>
+          <div class="label">feature e2e</div>
         </div>
         <div class="stat">
-          <div class="num">{{ results.webCoverage ?? '—' }}%</div>
+          <div class="num">{{ results.featureWebCoverage ?? '—' }}%</div>
           <div class="label">frontend coverage</div>
         </div>
       </div>
+
+      <p class="context">
+        Part of a {{ results.totalUnitTests }}-test codebase —
+        {{ results.serverCoverage ?? '—' }}% backend /
+        {{ results.webCoverage ?? '—' }}% frontend coverage app-wide.
+      </p>
 
       <div class="after">
         <p class="after-lead">After writing the code, the agent also:</p>
@@ -69,7 +75,13 @@ import { RESULTS } from './results.data';
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 12px;
-        margin-bottom: 28px;
+        margin-bottom: 12px;
+      }
+
+      .context {
+        margin: 0 0 20px;
+        font-size: 13px;
+        color: var(--mitto-muted);
       }
 
       .stat {

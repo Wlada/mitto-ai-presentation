@@ -8,6 +8,12 @@ export interface Results {
   readonly totalUnitTests: number;
   readonly webCoverage: number | null;
   readonly serverCoverage: number | null;
+  readonly featureWebTests: number;
+  readonly featureServerTests: number;
+  readonly featureE2eTests: number;
+  readonly featureUnitTests: number;
+  readonly featureWebCoverage: number | null;
+  readonly featureServerCoverage: number | null;
   readonly generatedAt: string;
 }
 
@@ -18,5 +24,11 @@ export const RESULTS: Results = {
   "totalUnitTests": 68,
   "webCoverage": 84,
   "serverCoverage": 89,
+  "featureWebTests": 21,
+  "featureServerTests": 30,
+  "featureE2eTests": 4,
+  "featureUnitTests": 51,
+  "featureWebCoverage": 94,
+  "featureServerCoverage": 100,
   "generatedAt": "2026-04-29"
 } as const;

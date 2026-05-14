@@ -50,18 +50,42 @@ function summariseCoverage(coverageFinalPath) {
   };
 }
 
-function countTests(specGlobRoots) {
+function countTests(specGlobRoots, pathFilter) {
   let total = 0;
   for (const root of specGlobRoots) {
     if (!existsSync(root)) continue;
     walk(root, (file) => {
       if (!file.endsWith('.spec.ts')) return;
+      if (pathFilter && !pathFilter(file)) return;
       const src = readFileSync(file, 'utf8');
       const matches = src.match(/^\s*(?:it|test)\s*\(/gm);
       if (matches) total += matches.length;
     });
   }
   return total;
+}
+
+const isFeaturePath = (p) => p.includes('feedback');
+
+function summariseCoverageFiltered(coverageFinalPath, pathFilter) {
+  if (!existsSync(coverageFinalPath)) return null;
+  const data = JSON.parse(readFileSync(coverageFinalPath, 'utf8'));
+  const lines = { covered: 0, total: 0 };
+  for (const [filePath, file] of Object.entries(data)) {
+    if (!pathFilter(filePath)) continue;
+    const lineMap = new Map();
+    for (const [stmtId, loc] of Object.entries(file.statementMap ?? {})) {
+      const line = loc.start.line;
+      const hits = file.s[stmtId] ?? 0;
+      lineMap.set(line, (lineMap.get(line) ?? 0) + hits);
+    }
+    for (const hits of lineMap.values()) {
+      lines.total += 1;
+      if (hits > 0) lines.covered += 1;
+    }
+  }
+  if (lines.total === 0) return null;
+  return Math.round((lines.covered / lines.total) * 1000) / 10;
 }
 
 import { execSync } from 'node:child_process';
@@ -103,6 +127,21 @@ const serverTests = countTests([join(repoRoot, 'server/src'), join(repoRoot, 'se
 const e2eTests =
   countPlaywrightTests(join(repoRoot, 'e2e')) || countTests([join(repoRoot, 'e2e/tests')]);
 
+const featureWebTests = countTests([join(repoRoot, 'apps/web/src')], isFeaturePath);
+const featureServerTests = countTests(
+  [join(repoRoot, 'server/src'), join(repoRoot, 'server/tests')],
+  isFeaturePath,
+);
+const featureE2eTests = countTests([join(repoRoot, 'e2e/tests')], isFeaturePath);
+const featureWebCoverage = summariseCoverageFiltered(
+  join(repoRoot, 'apps/web/coverage/web/coverage-final.json'),
+  (p) => p.includes('/feedback/'),
+);
+const featureServerCoverage = summariseCoverageFiltered(
+  join(repoRoot, 'server/coverage/coverage-final.json'),
+  isFeaturePath,
+);
+
 const generatedAt = new Date().toISOString().slice(0, 10);
 
 const out = {
@@ -112,6 +151,12 @@ const out = {
   totalUnitTests: webTests + serverTests,
   webCoverage: webCoverage ? Math.floor(webCoverage.lines) : null,
   serverCoverage: serverCoverage ? Math.floor(serverCoverage.lines) : null,
+  featureWebTests,
+  featureServerTests,
+  featureE2eTests,
+  featureUnitTests: featureWebTests + featureServerTests,
+  featureWebCoverage: featureWebCoverage !== null ? Math.floor(featureWebCoverage) : null,
+  featureServerCoverage: featureServerCoverage !== null ? Math.floor(featureServerCoverage) : null,
   generatedAt,
 };
 
@@ -125,6 +170,12 @@ export interface Results {
   readonly totalUnitTests: number;
   readonly webCoverage: number | null;
   readonly serverCoverage: number | null;
+  readonly featureWebTests: number;
+  readonly featureServerTests: number;
+  readonly featureE2eTests: number;
+  readonly featureUnitTests: number;
+  readonly featureWebCoverage: number | null;
+  readonly featureServerCoverage: number | null;
   readonly generatedAt: string;
 }
 

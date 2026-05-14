@@ -116,10 +116,6 @@ colleague's PR review.
   `npm run preshow` (or at minimum `npm test && npm run build`) and ship
   only on green. Render auto-deploys on push to `demo-finished`, so a
   broken push goes live in ~3 minutes.
-- Do not read `docs/setup/03-demo-finished-build.md` or
-  `docs/plans/2026-04-27-presentation-design.md`. Those files exist outside
-  the agent's scope; reading them during a live session would short-circuit
-  the workflow.
 
 ---
 

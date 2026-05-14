@@ -102,12 +102,8 @@ In `docs/presentation/`:
 | `05-fallback-plan.md` | Before each rehearsal | Reflexive recovery |
 | `06-rehearsal-checklist.md` | Now, then weekly | Stay on track |
 
-In `docs/plans/`:
-
-| File | What it is |
-|------|------------|
-| `2026-04-27-presentation-design.md` | Validated design from brainstorm |
-| `(others)` | Plan documents the agent writes during the live demo |
+During the live demo, the agent writes additional plan documents into
+`docs/plans/`. They are not committed; treat them as transient.
 
 ## Two branches, one URL
 

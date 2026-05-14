@@ -220,8 +220,10 @@ page for about 30 seconds — type a question, submit it, see it appear in
 the list, change the filter chip. Then click "Back to slide 6".
 
 **Then say:**
-> "68 unit and integration tests. 89% backend coverage, 84% frontend.
-> 16 Playwright tests covering the slides and the Q&A page."
+> "51 unit and integration tests for the feature. 100% backend coverage
+> on its code, 94% frontend, and 4 Playwright flows. Those are the numbers
+> for what you just saw built — sitting inside a 70-test codebase that's
+> 93% / 84% covered overall."
 
 > "And the agent didn't just write the code. It also cleaned it up,
 > reviewed its own work, and updated the docs. Those are three separate

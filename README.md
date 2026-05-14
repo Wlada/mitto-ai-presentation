@@ -169,6 +169,15 @@ specific list of fixes.
 
 ## License
 
-MIT — see [LICENSE](./LICENSE). Released as a learning resource alongside
-the talk; feel free to fork, adapt, or borrow patterns for your own
-Claude Code projects.
+Code in this repository is licensed under MIT — see [LICENSE](./LICENSE).
+Copyright belongs to Mitto AG (the work was produced as part of employment
+at Mitto). The MIT grant lets you fork, adapt, or borrow patterns for your
+own Claude Code projects.
+
+The Mitto logo, the name "Mitto", and any Mitto product names are
+trademarks of Mitto AG and are **not** covered by the MIT license. They
+appear in this repository as attribution for the talk and may not be
+reused to brand derivative works.
+
+Maintainer: Vladimir Bujanovic (Mitto). Questions about reuse beyond the
+MIT grant should go to Mitto AG.

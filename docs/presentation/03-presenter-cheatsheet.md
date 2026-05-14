@@ -225,9 +225,9 @@ the list, change the filter chip. Then click "Back to slide 6".
 
 > "And the agent didn't just write the code. It also cleaned it up,
 > reviewed its own work, and updated the docs. Those are three separate
-> steps in the workflow — Simplify, Review, Document — and we can ask for
-> them every time, or write them into `CLAUDE.md` so they happen on every
-> task."
+> steps in the workflow — Simplify, Review, Document — and they're already
+> written into `CLAUDE.md`, so they run on every non-trivial task without
+> us asking."
 
 > "Coverage isn't the goal, but it tells you the agent didn't skip tests."
 

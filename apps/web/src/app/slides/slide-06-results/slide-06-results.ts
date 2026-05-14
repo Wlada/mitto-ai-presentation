@@ -46,7 +46,8 @@ import { RESULTS } from './results.data';
           <li>Updated the docs</li>
         </ul>
         <p class="closing">
-          We can make these three steps standard in every task.
+          These three steps run on every non-trivial task — CLAUDE.md makes
+          them mandatory.
         </p>
       </div>
     </section>

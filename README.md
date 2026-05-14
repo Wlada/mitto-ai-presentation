@@ -158,7 +158,6 @@ specific list of fixes.
 ## Documentation
 
 - [Project context for AI agents](./CLAUDE.md)
-- [Presentation design](./docs/plans/2026-04-27-presentation-design.md)
 - [Repo setup guide](./docs/setup/01-repo-setup.md)
 - [How to write a CLAUDE.md for any repo](./docs/setup/02-claude-md-template.md)
 - [Deployment to Render + Cloudflare DNS](./docs/setup/04-deployment.md)

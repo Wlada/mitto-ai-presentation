@@ -88,9 +88,6 @@ main             ◄─── slides + scaffold + docs (presenter starts here)
 └─ demo-finished ◄─── + Q&A feature (presenter switches here at minute 18)
 ```
 
-To rebuild `demo-finished` from scratch (after re-doing the live workflow
-or fixing a bug), see `03-demo-finished-build.md`.
-
 ## Port assignments
 
 | Service | Port | Why this port |

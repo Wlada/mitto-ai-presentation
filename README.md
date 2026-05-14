@@ -169,4 +169,6 @@ specific list of fixes.
 
 ## License
 
-Internal demo project. Not for redistribution.
+MIT — see [LICENSE](./LICENSE). Released as a learning resource alongside
+the talk; feel free to fork, adapt, or borrow patterns for your own
+Claude Code projects.

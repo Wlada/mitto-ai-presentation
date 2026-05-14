@@ -146,7 +146,7 @@ After writing the code, the agent also:
   - Reviewed it
   - Updated the docs
 
-We can make these three steps standard in every task.
+These three steps run on every non-trivial task — CLAUDE.md makes them mandatory.
 ```
 
 Live numbers on this slide come from
@@ -156,7 +156,7 @@ Live numbers on this slide come from
 **Speaker notes:**
 - *"Here's what came out of this workflow — a working feature, with tests, in this repo. Let me show it."* Click the **Try the demo feature** button and walk through the `/feedback` page for ~10 seconds.
 - *"68 unit and integration tests, 89% backend coverage, 84% frontend, and 16 Playwright tests covering the slides and the Q&A page."*
-- *"And the agent didn't just write code. It also cleaned it up, reviewed its own work, and updated the docs. Those are three separate steps in the workflow — Simplify, Review, Document — and we can ask for them every time, or make them a standing rule in `CLAUDE.md` so they happen on every task."*
+- *"And the agent didn't just write code. It also cleaned it up, reviewed its own work, and updated the docs. Those are three separate steps in the workflow — Simplify, Review, Document — and they're already a standing rule in `CLAUDE.md`, so they run on every non-trivial task without us asking."*
 - *"Coverage is not the goal, but it's a signal the agent didn't skip tests."*
 - 60–90 seconds total.
 

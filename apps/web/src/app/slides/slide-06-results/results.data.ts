@@ -13,10 +13,10 @@ export interface Results {
 
 export const RESULTS: Results = {
   "webTests": 36,
-  "serverTests": 32,
-  "e2eTests": 16,
-  "totalUnitTests": 68,
+  "serverTests": 34,
+  "e2eTests": 15,
+  "totalUnitTests": 70,
   "webCoverage": 84,
-  "serverCoverage": 89,
-  "generatedAt": "2026-04-29"
+  "serverCoverage": 93,
+  "generatedAt": "2026-05-14"
 } as const;
